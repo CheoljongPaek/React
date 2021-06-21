@@ -1,0 +1,15 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+body {
+  overflow: hidden;
+}
+.zoom {
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+  background: red;
+  transform: 0.5s;
+}

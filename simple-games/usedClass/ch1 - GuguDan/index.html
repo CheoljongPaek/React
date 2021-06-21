@@ -14,25 +14,29 @@
           this.state = {
             first: Math.ceil(Math.random() * 9),
             second: Math.ceil(Math.random() * 9),
-            value: '',
+            value: 0,
             result: '',
           };
+          // this.t = undefined;
+          // this.onMouseDown1 = this.onMouseDown1(this);
+          // this.onMouseUp1 = this.onMouseUp1(this);
         }
-
+        /* funtions */
         onSubmit = (e) => {
           e.preventDefault();
           if (parseInt(this.state.value) === (this.state.first * this.state.second)) {
+            console.log('정답');
             this.setState((prevState) => {
-              console.log(prevState);
               return {
                 result: `${prevState.value} 정답이었습니다!`,
                 first: Math.ceil(Math.random() * 9),
                 second: Math.ceil(Math.random() * 9),
                 value: '',
-              } // submit -> setState -> re-render(setState 값 적용)
+              }
             });
             this.input.focus();
           } else {
+            console.log('오답');
             this.setState({
               result: `${this.state.value} 오답이었습니다!`,
               value: '',
@@ -43,13 +47,45 @@
 
         onChange = (e) => {
           this.setState({
-            value: e.target.value,
+            value: parseInt(e.target.value),
             result: ''
           });
         };
+        onMouseUp1 = (e) => {
+        };
+        onMouseDown1 = (e) => {
+          this.setState((prevState) => {
+            return {
+              value: prevState.value + 1,
+            }
+          });
+        }
+        onMouseUp2 = (e) => {
+        };
+        onMouseDown2 = (e) => {
+          this.setState((prevState) => {
+            return {
+              value: prevState.value -1,
+            }
+          });
+        }
+        
+        // onMouseUp1 = () => {
+        //   console.log('UP -> Clear');
+        //   clearTimeout(this.t);
+        // };
 
-        // input;
 
+        // onMouseDown1 = () => {
+        //   console.log('Down');
+        //   this.setState((prevState) => {
+        //     return {
+        //       value: prevState.value +1,
+        //     }
+        //   });
+        //   this.t = setTimeout(this.onMouseDown1, 100)
+        // }
+        /* funtions / */
         render() {
           return (
             <>
@@ -58,6 +94,10 @@
                 <input ref={(ref) => { this.input = ref; }} type="number" value={this.state.value} onChange={this.onChange} />
                 <button>입력!</button>
               </form> 
+              <div>
+                <button onMouseUp={this.onMouseUp1} onMouseDown={this.onMouseDown1}>↑</button>
+                <button onMouseUp={this.onMouseUp2} onMouseDown={this.onMouseDown2}>↓</button>
+              </div>
               <div>{this.state.result}</div>
             </>
           );

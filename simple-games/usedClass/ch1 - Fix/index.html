@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="theme-color" content="#000000">
+  <link rel="stylesheet" href="./styles.css">
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<title>React App</title>
+</head>
+
+<body>
+	<div id="root"></div>
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          zoom: 1
+        };
+        this.t = undefined;
+        this.start = 100;
+
+        this.onMouseDown = this.onMouseDown.bind(this);
+        this.repeat = this.repeat.bind(this);
+        this.zoom = this.zoom.bind(this);
+
+        // this.onMouseUp = this.onMouseUp.bind(this)
+        this.zoomOut = this.zoomOut.bind(this);
+        this.zoomOutRepeat = this.zoomOutRepeat.bind(this);
+        this.zoomOutDown = this.zoomOutDown.bind(this);
+
+        this.onMouseUp = this.onMouseUp.bind(this);
+      }
+
+      // ZOOM IN
+      onMouseDown() {
+        this.repeat();
+      }
+
+      repeat() {
+        this.zoom();
+        this.t = setTimeout(this.repeat, this.start);
+        this.start = this.start / 2;
+      }
+
+      zoom() {
+        this.setState({ zoom: this.state.zoom + 0.1 });
+      }
+
+      // ZOOM OUT
+
+      zoomOut() {
+        this.setState({ zoom: this.state.zoom - 0.1 });
+      }
+
+      zoomOutRepeat() {
+        this.zoomOut();
+        this.t = setTimeout(this.zoomOutRepeat, this.start);
+        this.start = this.start / 2;
+      }
+
+      zoomOutDown(e) {
+        e.preventDefault();
+        this.zoomOutRepeat();
+      }
+
+      // STOP ZOOMING
+      onMouseUp() {
+        clearTimeout(this.t);
+        this.start = 100;
+      }
+
+      render() {
+        return (
+          <div className="zoomControl">
+            <div
+              className="zoom"
+              style={{ transform: "scale(" + this.state.zoom + ")" }}
+            />
+            <button
+              className="zoomIn"
+              onMouseUp={this.onMouseUp}
+              onMouseDown={this.onMouseDown}
+            >
+              +
+            </button>
+            <button
+              className="zoomOut"
+              onMouseUp={this.onMouseUp}
+              onMouseDown={this.zoomOutDown}
+            >
+              -
+            </button>
+          </div>
+        );
+      }
+    }
+
+    const rootElement = document.getElementById("root");
+    ReactDOM.render(<App />, rootElement);
+
+  </script>
+</body>
+
+</html>
