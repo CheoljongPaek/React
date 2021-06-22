@@ -17,4 +17,10 @@ Day 2
   : state가 바뀌면 Functional Component자체가 다시 실행
   : !!!component는 class의 prev~ 같은 인자의 사용이 불가능하나?
 Day 3
-  - webpack 설정
+  - lecture\ch2: webpack 설정: webpack-dev-server의 hot reloading을 위해 
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "react-refresh": "^0.10.0",
+    두 개를 설치.
+  -simple-games/usedComponent/ch1/WordRelay
+  : 클래스와 컴포넌트 각각 사용해서 WordRelay 완성.
+  
