@@ -1,13 +1,38 @@
 const React = require('react');
-const { Component } = React;
+const { PureComponent } = React;
 
-class WordRelay extends React.Component {
+class Test extends PureComponent {
   state = {
     text: 'Hello, webpack',
-  }
+    number: 1,
+    boolean: true,
+    object: {},
+    array: [],
+  };
+
+  // shouldComponentUpdate(nextProps, nextState, nextContext) {
+  //   if (this.state.text !== nextState.text) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
+  onClick = () => {
+    this.setState({});
+  };
+
   render() {
-    return <h1>{this.state.text}</h1>
+    return(
+      <>
+        <button onClick={this.onClick}>클릭</button>
+        <div>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+        </div>
+      </>
+    ) 
   }
 }
 
-module.exports = WordRelay;
+module.exports = Test;

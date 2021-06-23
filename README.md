@@ -21,6 +21,11 @@ Day 3
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "react-refresh": "^0.10.0",
     두 개를 설치.
-  -simple-games/usedComponent/ch1/WordRelay
+  - simple-games/usedComponent/ch2/WordRelay
   : 클래스와 컴포넌트 각각 사용해서 WordRelay 완성.
-  
+Day 4
+  - simple-games/usedClass/ch3/NumberBaseball
+    : class에서 map과 props 사용
+    : rendering이 빈번한 문제가 있음. 해결책으로 class에서는 shouldComponentUpdate + React.component, React.purecomponent.
+      Hooks에서는 memo(memoization), 자식이 모두 purecomponent나 memo면 부모에도 적용할 수 있다.
+    : class에서 기존 ref를 createRef로 대체.
