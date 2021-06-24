@@ -5,6 +5,7 @@ const Try = require('./Try.jsx');
 function getNumbers() { //숫자 네 개를 겹치지 않고 랜덤하게 뽑는 함수
   const candidate = [1,2,3,4,5,6,7,8,9];
   const array = [];
+  console.log('클래스는 함수형과 다르게 이 함수의 렌더링 문제 없음');
   for (let i = 0; i < 4; i++) {
     const chosen = candidate.splice(Math.floor(Math.random() * (9 - i)), 1)[0];
     array.push(chosen);
@@ -71,7 +72,7 @@ class NumberBaseball extends PureComponent {
     }
   };
   onChangeInput = (e) => {
-    console.log(this.state.answer);
+    // console.log(this.state.answer);
     this.setState({
       value: e.target.value,
     });

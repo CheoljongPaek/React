@@ -5,6 +5,7 @@ const Try = require('./Try.jsx');
 function getNumbers() { //숫자 네 개를 겹치지 않고 랜덤하게 뽑는 함수
   const candidate = [1,2,3,4,5,6,7,8,9];
   const array = [];
+  console.log('함수 계속 렌더링에 포함 문제');
   for (let i = 0; i < 4; i++) {
     const chosen = candidate.splice(Math.floor(Math.random() * (9 - i)), 1)[0];
     array.push(chosen);
@@ -60,7 +61,7 @@ const NumberBaseball = memo(() => {
     }
   };
   const onChangeInput = (e) => {
-    console.log(answer);
+    // console.log(answer);
     setValue(e.target.value);
   };
   return (

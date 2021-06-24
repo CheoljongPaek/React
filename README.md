@@ -29,3 +29,13 @@ Day 4
     : rendering이 빈번한 문제가 있음. 해결책으로 class에서는 shouldComponentUpdate + React.component, React.purecomponent.
       Hooks에서는 memo(memoization), 자식이 모두 purecomponent나 memo면 부모에도 적용할 수 있다.
     : class에서 기존 ref를 createRef로 대체.
+Day 5
+  - simple-games/usedClass/ch4/ResponseCheck
+    : react 조건문은 삼항연산자로 표현. jsx에서는 태그 없음을 null, undefined, false으로 뜻함. 
+    : react 반복문은 map함수로 표현.
+    : 자식에서 부모 컴포넌트로 값을 전달하여 state값 변경. 
+      1: 부모가 컨트롤러로 setState를 담고있는 함수!를 자식에게 넘김(props를 통해서)
+      2: 받은 함수를 자식은 특정 조건 하에 사용.
+Day 6
+  - 
+    :
