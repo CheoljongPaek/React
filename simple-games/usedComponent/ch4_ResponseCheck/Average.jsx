@@ -1,7 +1,8 @@
 const React = require('react');
-const {  } = React;
+// const {  } = React;
 
 const Average = ({casetoChild, result}) => {
+  console.log(result);
   onClickReset = (e) => {
     e.preventDefault();
     casetoChild('waiting', '클릭해서 시작하세요', []);
