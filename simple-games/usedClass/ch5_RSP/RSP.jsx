@@ -1,6 +1,6 @@
 const React = require('react');
 const { PureComponent, createRef } = React;
-const Average = require('./Average.jsx');
+const Score = require('./Score.jsx');
 
 // client.jsx(부모)가 RSP(자식)을 렌더링시킴.(ReactDom.render(<RSP />, document.querySelector('#root'));)
 // Class인 경우 실행 순서: 
@@ -40,6 +40,7 @@ class RSP extends PureComponent {
       result: '',
       imgCoordX: '0',
       score: 0,
+      isClicked: false,
       //바위: 0 가위: -142 보: -284
     };
   }
@@ -77,34 +78,44 @@ class RSP extends PureComponent {
 
   };
 
-  onClickBtn = (choice) => {// 가위 바위 보 string
-    clearInterval(this.interval);
-    const myScore = scores[choice];
-    const cpuScore = scores[computerChoice(this.state.imgCoordX)];
-    const diff = myScore - cpuScore;
-    if (diff === 0) {
+  onClickBtn = (choice) => () => {// 가위 바위 보 string
+    console.log('컴퓨터: ', computerChoice(this.state.imgCoordX));
+    if (this.state.isClicked === false) {
+      clearInterval(this.interval);
+      const myScore = scores[choice];
+      const cpuScore = scores[computerChoice(this.state.imgCoordX)];
+      const diff = myScore - cpuScore;
+      if (diff === 0) {
+        this.setState({
+          result: '비겼습니다.',
+        });
+      } else if ([-1, 2].includes(diff)) {
+        this.setState((prevState) => {
+          return {
+            result: '이겼습니다!',
+            score: prevState.score +1,
+          };
+        });
+      } else {
+        this.setState((prevState) => {
+          return {
+            result: '졌습니다!',
+            score: prevState.score -1,
+          };
+        });
+      }
+      // 클릭시 setTimeout동안 클릭 비활성화
       this.setState({
-        result: '비겼습니다.',
+        isClicked: true,
       });
-    } else if ([-1, 2].includes(diff)) {
-      this.setState((prevState) => {
-        return {
-          result: '이겼습니다!',
-          score: prevState.score +1,
-        };
-      });
-    } else {
-      this.setState((prevState) => {
-        return {
-          result: '졌습니다!',
-          score: prevState.score -1,
-        };
-      });
+      setTimeout(() => {
+        this.setState({
+          isClicked: false,
+        });
+        this.interval = setInterval(this.changeHand, 300);
+      }, 2000)
+      // this.interval = setInterval(this.changeHand, 300) 
     }
-    setTimeout(() => {
-      this.interval = setInterval(this.changeHand, 300);
-    }, 2000)
-    // this.interval = setInterval(this.changeHand, 300)
   };
 
   render() {
@@ -112,13 +123,14 @@ class RSP extends PureComponent {
       <>
         <div id="computer" style={{backgroundPositionX: this.state.imgCoordX, backgroundPositionY: 0 }}></div>
         <div>
-          <button id="rock" className="btn" onClick={() => this.onClickBtn('바위')}>바위</button>
-          <button id="scissor" className="btn" onClick={() => this.onClickBtn('가위')}>가위</button>
-          <button id="paper" className="btn" onClick={() => this.onClickBtn('보')}>보</button>
+          <button id="rock" className="btn" onClick={this.onClickBtn('바위')}>바위</button>
+          <button id="scissor" className="btn" onClick={this.onClickBtn('가위')}>가위</button>
+          <button id="paper" className="btn" onClick={this.onClickBtn('보')}>보</button>
         </div>
         <div>
           <div>{this.state.result}</div>
-          <div>현재 {this.state.score}점</div>
+          {/* <div>현재 {this.state.score}점</div> */}
+          <Score score={this.state.score} />
         </div>
       </>
     ); 

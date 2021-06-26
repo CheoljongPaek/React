@@ -14,6 +14,7 @@ class ResponseCheck extends PureComponent {
   //endTime
 
   onClickScreen = () => {
+    console.log('1');
     if (this.state.state === "waiting") {
       this.setState({
         state: 'ready',

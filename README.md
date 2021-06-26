@@ -41,5 +41,13 @@ Day 5
 Day 6
   - simple-games/usedClass/ch5/RSP
     : webpack에서 css와 이미지 파일 처리.
-    : componentDidMount, componentDidUpdate, componentWillUnmount 학습.
-    : 그림이 멈춰있을 때 버튼 클릭시 액션 없게 만들기.
+    : Class 라이프사이클 componentDidMount, componentDidUpdate, componentWillUnmount 학습.
+    : 그림이 멈춰있을 때 버튼 클릭시 액션 없게 만들기 -> 완료
+    : 컴포넌트 분리
+    : 재시작시 마지막 사진하고는 다르게 사진 변경.
+  Day 6
+  - simple-games/usedClass/ch5/RSP
+    : Higher order function
+      함수 안에 파라미터를 넣어서 전달하려면 파라미터를 넣은 상태에서 한 번 실행되므로 함수로 한 번 더 감싼다. ' onClick={() => this.onClickBtn('바위')} '.
+    : Hooks 라이프사이클용의 useEffect 학습.
+    

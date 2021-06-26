@@ -1,0 +1,10 @@
+#computer {
+  width: 142px;
+  height: 200px;
+  background: url(./image1.jpg);
+  /* background-position: 0 0; */
+}
+
+#test {
+  font-size: 300px;
+}
