@@ -36,6 +36,8 @@ const RSP = () => {
     interval.current = setInterval(changeHand, 1000);
     console.log('deps가 빈 배열이면 useEffect함수는 이 라인까지 한 번만 실행됨');
     console.log('deps의 값으로 인해 useEffect 재실행시 return 실행 후 이 라인까지만 다시 실행');
+    //deps에 값이 있으면 componentDidMount와 componentDidUpdate 둘 역할 모두 수행.
+    //deps가 꼭 setstate일 필요는 없음. === 이런 비교도 가능.
     return () => { // componentWillUnmount 역할
       console.log('종료');
       clearInterval(interval.current);

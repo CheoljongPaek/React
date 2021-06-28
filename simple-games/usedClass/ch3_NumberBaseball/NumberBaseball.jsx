@@ -28,7 +28,7 @@ class NumberBaseball extends PureComponent {
       this.setState((prevState) => {
         return {
           result: '홈런!',
-          tries: [...prevState .tries, {try: this.state.value, result: '홈런!'}]
+          tries: [...prevState.tries, {try: this.state.value, result: '홈런!'}]
         }
       })
       alert('정답! 게임을 다시 시작합니다!');

@@ -1,15 +1,24 @@
 const React = require('react');
-const { useState, useRef, useEffect } = React;
+const { useState, useRef, useEffect, useMemo } = React;
 
 //hooks는 라이프사이클 대신 useEffect를 사용.
 
+function propagate(dot) {
+  const arr = Array(10).fill().map((v, i) => i + 1);
+  const randNum = arr.splice(Math.floor(Math.random()*arr.length), 1)[0];
+  console.log('함수 실행', arr, ' ',randNum);
+  return dot + randNum;
+};
+//timer 바뀔때마다 setDot 의 점이 하나씩 늘어나게.
 const Test = () => {
   const [imgCoordX, setImageCoordX] = useState('0');
   const [timer, setTimer] = useState(600);
   const [timer2, setTimer2] = useState(0);
+  const dots = useMemo(() => propagate('.'), []);
+  console.log('dots: ',dots);
+  const [dot, setDot] = useState(dots);
   const extraTime = useRef(100);
   const interval = useRef();
-
   useEffect(() => {
     Count();
     console.log('above return');
@@ -20,12 +29,13 @@ const Test = () => {
       clearInterval(interval.current);
       console.log('1');
     }
-  }, [timer]);
+  }, []);
 
   const Count = () => {
     console.log('2');
     // clearInterval(interval.current);
     interval.current = setInterval(()=>{
+      console.log('6');
       setTimer((prevTimer)=> {
         return prevTimer -= 1;
       });
@@ -35,6 +45,10 @@ const Test = () => {
   const onClickBtn = (choice) => () => {
     console.log(choice);
     if (choice === '바위') {
+      setDot((prevDot) => {
+        return propagate(prevDot);
+      });
+      clearInterval(interval.current);
       setImageCoordX('0px');
       Count();
     } else if (choice === '가위') {
@@ -61,6 +75,9 @@ const Test = () => {
       </div>
       <div>
         시간이 {timer2}초 흘렀습니다.
+      </div>
+      <div>
+        {dot}
       </div>
     </>
   ); 

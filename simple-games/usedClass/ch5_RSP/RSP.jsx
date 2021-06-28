@@ -40,13 +40,14 @@ class RSP extends PureComponent {
       result: '',
       imgCoordX: '0',
       score: 0,
-      isClicked: false,
+      // isClicked: false, // 화면에 영향 안 가니 수정필요.
       //바위: 0 가위: -142 보: -284
     };
   }
-
   interval;
+  isClicked;
   changeHand = () => {
+    console.log('1');
     if (this.state.imgCoordX === rspCoords.바위) {
       this.setState({
         imgCoordX: rspCoords.가위,
@@ -60,11 +61,12 @@ class RSP extends PureComponent {
         imgCoordX: rspCoords.바위,
       });
     }
-  }
+  };
   //비동기 관리!!!!!!!
   //렌더가 처음 시작했을때 실행, rerendering에는 영향 X, 비동기 요청을 많이 함.
   componentDidMount() {
     this.interval = setInterval(this.changeHand, 1000);
+    this.isClicked = false;
   };
 
   //리렌더링 후에 실행.
@@ -80,7 +82,7 @@ class RSP extends PureComponent {
 
   onClickBtn = (choice) => () => {// 가위 바위 보 string
     console.log('컴퓨터: ', computerChoice(this.state.imgCoordX));
-    if (this.state.isClicked === false) {
+    if (this.isClicked === false) {
       clearInterval(this.interval);
       const myScore = scores[choice];
       const cpuScore = scores[computerChoice(this.state.imgCoordX)];
@@ -105,16 +107,14 @@ class RSP extends PureComponent {
         });
       }
       // 클릭시 setTimeout동안 클릭 비활성화
-      this.setState({
-        isClicked: true,
-      });
+      // this.setState({
+      //   isClicked: true,
+      // });
+      this.isClicked = true;
       setTimeout(() => {
-        this.setState({
-          isClicked: false,
-        });
-        this.interval = setInterval(this.changeHand, 300);
-      }, 2000)
-      // this.interval = setInterval(this.changeHand, 300) 
+        this.isClicked = false;
+        this.interval = setInterval(this.changeHand, 1000);
+      }, 2000); 
     }
   };
 

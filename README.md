@@ -45,9 +45,14 @@ Day 6
     : 그림이 멈춰있을 때 버튼 클릭시 액션 없게 만들기 -> 완료
     : 컴포넌트 분리
     : 재시작시 마지막 사진하고는 다르게 사진 변경.
-  Day 6
-  - simple-games/usedClass/ch5/RSP
-    : Higher order function
-      함수 안에 파라미터를 넣어서 전달하려면 파라미터를 넣은 상태에서 한 번 실행되므로 함수로 한 번 더 감싼다. ' onClick={() => this.onClickBtn('바위')} '.
-    : Hooks 라이프사이클용의 useEffect 학습.
-    
+Day 6
+- simple-games/usedClass/ch5/RSP
+  : Higher order function
+    함수 안에 파라미터를 넣어서 전달하려면 파라미터를 넣은 상태에서 한 번 실행되므로 함수로 한 번 더 감싼다. ' onClick={() => this.onClickBtn('바위')} '.
+  : Hooks 라이프사이클용의 useEffect 학습.
+Day 7
+- simple-games/usedClass/ch6/Lotto
+  :
+- simple-games/usedComponent/ch6/Lotto
+  : useMemo는 복잡한 함수 결과값을 기억할 때, useRef는 일반 값을 기억할 때 사용. 컴포넌트 특성상 리렌더링시 컴포넌트가 전부 다시 실행되기에 함수도 다시 실행. 이러한 중복 실행을 막기 위해 useMemo로 함수 값을 기억해서 사용한다.
+  : useMemo는 함수의 결과 값, useCallback은 함수 자체를 기억한다. 복습필요.
