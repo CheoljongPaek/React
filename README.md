@@ -56,3 +56,11 @@ Day 7
 - simple-games/usedComponent/ch6/Lotto
   : useMemo는 복잡한 함수 결과값을 기억할 때, useRef는 일반 값을 기억할 때 사용. 컴포넌트 특성상 리렌더링시 컴포넌트가 전부 다시 실행되기에 함수도 다시 실행. 이러한 중복 실행을 막기 위해 useMemo로 함수 값을 기억해서 사용한다.
   : useMemo는 함수의 결과 값, useCallback은 함수 자체를 기억한다. 복습필요.
+
+  Day 8
+- practice/case1
+  :hooks 복습
+
+  Day 9
+- simple-games/usedComponent/ch7/TicTacToe
+  : TicTaeToe > Table > Tr > Td 구조에서 클릭시 Td의 데이터가 변화해야한다. useReducer 학습.

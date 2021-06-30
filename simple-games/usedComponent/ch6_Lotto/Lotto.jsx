@@ -66,7 +66,7 @@ const Lotto = () => {
   //언제나 onClickRedo가 실행되면 [],null,false가 나오니 상관없지만
   //setWinNumbers의 값은 새로 실행되는 getWinNumbers에 맞춰 변화되어야하니
   //deps에는 변화하는 state 값인 winNumbers를 넣어야한다.
-
+  //컴포넌트에 넣는 이벤트 함수들은 모두 useCallback사용.
   return (
       <>
         <div>당첨 숫자</div>

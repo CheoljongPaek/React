@@ -9,7 +9,7 @@ someExpensiveComputation = (x) => {
 
 function Example() {
   const [count, setCount] = useState(0);
-  const [state, seState] = useState(() => {
+  const [state, setState] = useState(() => {
     console.log('첫렌더링시에만 시행1');
     const initialState = someExpensiveComputation(2);
     return initialState;
@@ -34,14 +34,20 @@ function Example() {
     };
   }, [count]);
 
-  const onClickBtn = () => {
+  const onClickBtn = useCallback(() => {
     console.log('click', count); // 1
     setCount((prevCount) => {
-      console.log('set', count); // 2
+      console.log('prevCount: ',prevCount,'count: ', count); // 2
       return prevCount + 1  // 1,2,3 이후 마지막에 setCount의 state 갱신.
     });
-    console.log('3', count); // 3
-  };
+    console.log('a');
+    setState((prevState) => {
+      console.log('prevState: ', prevState, 'state: ', state);
+      return prevState*2
+    });
+    console.log('b');
+  }, []);
+  //useCallback(()=>{...}, []) empty deps일 때, 안에서 사용하는 state는 초기 값과 같게 가고, setState()를 통해 return한 값은 useCallback 함수 이후의 로직에 쓰인다.
 
   const onClickBtn2 = () => {
     setTimeout(() => {
@@ -63,6 +69,7 @@ function Example() {
   //           바뀐 state변수 값으로 return 값인 jsx가 render 이후 useEffect실행. setState(...) -> component 로직(useEffect 등은 x) 실행 -> render -> useEffect
   //리액트는 useEffect 안의 함수인 effect가 수행되는 시점에 이미 DOM이 업데이트(렌더링 또는 리렌더링)이 업데이트되었음을 보장한다.
   //즉, render나 rerender 이후 useEffect가 실행된다. 또한 render 이후 다음 effect가 수행되기 전에 이전 effect는 정리된다.
+  //useEffect 두번째 인자인 배열 안의 값이 변화하면 effect가 재실행되니, effect함수 안에서 참조되는 모든 값은 deps에 드러나야한다.
   //
   //리렌더링시, 여러개의 useEffect의 return 값들이 먼저 묶어서 실행되고(for unsubscribe) 이 후 return 위의 로직들이! 처음 useEffect hook부터 다음 useEffect hook까지 실행된다.
   //setState 안에 prevState를 가진 함수를 전달할 수 있는데 이 경우 prevCount를 가진 함수의 return 전에 내가 원하는 로직들을 사용할 수 있다는 장점이 있다.
