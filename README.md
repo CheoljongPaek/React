@@ -64,3 +64,12 @@ Day 7
   Day 9
 - simple-games/usedComponent/ch7/TicTacToe
   : TicTaeToe > Table > Tr > Td 구조에서 클릭시 Td의 데이터가 변화해야한다. useReducer 학습.
+  
+  Day 10
+- simple-games/usedComponent/ch7/TicTacToe
+  : useReducer은 useState와 같이 비동기적으로 작동 -> render -> useEffect로 앞서 비동기적으로 처리된 값들을 이용해서 이어나감.
+- 최적화
+  : 최하위 자식들부터 memo 적용해보고 반복문이 있는 경우에는 특히 적용하는게 좋다.
+  : memo가 도움이 안 될 때, useMemo를 적용하는 방법도 있다.
+   **Tr.jsx 주석표시 해놓음. table에도 적용 가능.
+   컴포넌트 자체를 기억하기 위해 useMemo를 사용한다.
