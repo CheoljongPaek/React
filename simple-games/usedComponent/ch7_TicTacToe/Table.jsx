@@ -1,6 +1,6 @@
 const React = require('react');
 const { PureComponent, Component, memo } = React;
-const Tr = require('./Tr')
+const Tr = require('./Tr');
 
 const Table = memo(({ tableData, dispatch }) => {
   console.log('tableData: ', tableData);
