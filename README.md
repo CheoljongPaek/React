@@ -82,3 +82,6 @@ Day 7
     2-1. 잇는 순서는 세로, 가로 순서이다.
     2-2. 제자리 클릭도 가능하게 만든다.
   : dispatch가 연속해서 사용할 때 순서는, 각각의 dispatch가 return되어서 모든 state가 업데이트 되면, 렌더 후 이펙트.
+  Day 12
+- personal-project/games/track-it
+  : useEffect 실행은 child먼저, 그 다음 parent이다.

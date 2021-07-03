@@ -11,7 +11,6 @@ const NumberChoice = ({ dispatch }) => {
     console.log('submit form');
     e.preventDefault();
     if (number >=4 && number <= 12) {
-      console.log('dispatch');
       dispatch({type: 'SET_NUMBER', tableSetNumber: number});
       
       const newRow = Array(number).fill();

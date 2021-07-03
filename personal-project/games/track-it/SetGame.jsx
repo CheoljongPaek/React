@@ -13,6 +13,7 @@ const initialState = {
   tableSetNumber: -1,
   recentCell: [-1, -1],
   recentCells: [],
+  clicked: false,
   turn: "odd",
 }
 
@@ -43,8 +44,6 @@ const reducer = (state, action) => {
       tableData[action.row] = [...tableData[action.row]];
       tableData[action.row][action.cell] = state.turn;
 
-      // const recentCells = [...state.recentCells];
-      // recentCells[recentCells.length-1] = state.recentCell
       return {
         ...state,
         tableData,
@@ -52,10 +51,21 @@ const reducer = (state, action) => {
         turn: state.turn === 'odd' ? 'even' : 'odd',
       }
     }
+    case 'CONNECT_CELLS': {
+      console.log('CONNECT_CELLS: ', state);
+      console.log(state.tableData[state.recentCells[0][0]][state.recentCells[0][1]]);
+    }
+
     case 'SET_RECENTCELLS': {
       //'CLICK_CELL' 이후 state가 변경되었으니 recentcells에 recentcell 넣기
+
+      if (state.recentCells.length === 2) {
+        ///////
+      }
+
       const recentCells = [...state.recentCells];
-      recentCells.push(state.recentCell);//useCallback deps에 더블클릭 불가하게 -> 제자리 클릭도 가능하게
+
+      recentCells.push(state.recentCell);
       return {
         ...state,
         recentCells,
@@ -71,12 +81,9 @@ const SetGame = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { tableSetNumber, recentCells } = state;
   useEffect(() => {
-    // effect
     console.log('useEffect state: ', state);
-    //여기부터!@!@@
-    //state.recentCells.length가 짝수일때 두 셀 가로 세로 줄 모두 칠하게
     if (recentCells.length !== 0 && recentCells.length % 2 === 0) {
-      console.log('k');
+      dispatch({type: 'CONNECT_CELLS'});
     }
     return () => {
       // cleanup
@@ -90,7 +97,7 @@ const SetGame = () => {
         {tableSetNumber === -1 
           ? <NumberChoice dispatch = {dispatch}  />
           : <div id="tableContainer">
-              <Table dispatch = {dispatch} tableData={state.tableData} />
+              <Table dispatch = {dispatch} tableData={state.tableData} state={state} />
             </div>}
       </div>
     </>
