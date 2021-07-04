@@ -85,3 +85,10 @@ Day 7
   Day 12
 - personal-project/games/track-it
   : useEffect 실행은 child먼저, 그 다음 parent이다.
+  Day 13
+- personal-project/games/track-it
+  : useEffect 안에서 useReducer의 dispatch를 하면 state 변경 후 리렌더링이 일어난다. 리렌더링을 최소화 시키기 위해 이 사용은 피하는중.
+- simple-games/usedComponent/ch8/MineSearch
+  : useReduce는 state가 비동기적, redux는 state가 동기적으로 바뀐다.
+  : Context API: usereduce를 사용할때 dispatch를 하위 컴포넌트에 계속 보내는 문제 해결.
+  : 천천히, 최적화 중간중간 진행하면서 이어나가자!

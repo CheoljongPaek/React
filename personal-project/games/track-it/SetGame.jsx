@@ -51,19 +51,13 @@ const reducer = (state, action) => {
         turn: state.turn === 'odd' ? 'even' : 'odd',
       }
     }
-    case 'CONNECT_CELLS': {
-      console.log('CONNECT_CELLS: ', state);
-      console.log(state.tableData[state.recentCells[0][0]][state.recentCells[0][1]]);
-    }
-
     case 'SET_RECENTCELLS': {
-      //'CLICK_CELL' 이후 state가 변경되었으니 recentcells에 recentcell 넣기
+      //'CLICK_CELL' 이후 state가 변경되었으니 recentcells에 recentcell 넣기      
+      let recentCells = [...state.recentCells];
 
       if (state.recentCells.length === 2) {
-        ///////
+        recentCells = [];
       }
-
-      const recentCells = [...state.recentCells];
 
       recentCells.push(state.recentCell);
       return {
@@ -81,10 +75,7 @@ const SetGame = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { tableSetNumber, recentCells } = state;
   useEffect(() => {
-    console.log('useEffect state: ', state);
-    if (recentCells.length !== 0 && recentCells.length % 2 === 0) {
-      dispatch({type: 'CONNECT_CELLS'});
-    }
+    console.log('SetGame useEffect nothing');
     return () => {
       // cleanup
     };
@@ -97,7 +88,7 @@ const SetGame = () => {
         {tableSetNumber === -1 
           ? <NumberChoice dispatch = {dispatch}  />
           : <div id="tableContainer">
-              <Table dispatch = {dispatch} tableData={state.tableData} state={state} />
+              <Table dispatch = {dispatch} tableData={state.tableData} state={state} recentCells={state.recentCells} />
             </div>}
       </div>
     </>
