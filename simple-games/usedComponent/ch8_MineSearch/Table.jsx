@@ -1,12 +1,17 @@
 const React = require('react');
-const { useState, useRef, useEffect, useMemo ,useCallback, useReducer, memo } = React;
+// const { TableContext } = require('./MineSearch');
+const { useState, useContext, useRef, useEffect, useMemo ,useCallback, useReducer, memo } = React;
 const Tr = require('./Tr');
+import {TableContext} from './MineSearch';
 
 const Table = () => {
+  console.log(TableContext);
+  const { tableData } = useContext(TableContext);
+  console.log(tableData);
   return (
-    <div>
-      Table
-    </div>
+    <table>
+      {Array(tableData.length).fill().map((tr, i) => <Tr />)}
+    </table>
   )
 }
 

@@ -1,10 +1,12 @@
 const React = require('react');
-const { useState, useRef, useEffect, useMemo ,useCallback, useReducer, memo } = React;
+const { useState, useContext, useRef, useEffect, useMemo ,useCallback, useReducer, memo } = React;
+const MineSearch = require('./MineSearch');
 
 const Form = () => {
   const [row, setRow] = useState(10);
   const [cell, setCell] = useState(10);
   const [mine, setMine] = useState(20);
+  const { dispatch } = useContext(MineSearch.TableContext)
   
   const onChangeRow = useCallback((e) => {
     setRow(e.target.value)
@@ -16,8 +18,8 @@ const Form = () => {
     setMine(e.target.value)
   },[]);
   const onClickBtn = useCallback(() => {
-
-  },[]);
+    dispatch({ type: 'START_GAME', row, cell, mine });
+  },[row, cell, mine]);
   return (
     <div>
       <input type="number" placeholder="세로" value={row} onChange={onChangeRow}/>
