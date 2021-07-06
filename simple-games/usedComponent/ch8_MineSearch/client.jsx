@@ -1,8 +1,6 @@
 import './style.css'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import MineSearch from './MineSearch';
 
-const React = require('react');
-const ReactDom = require('react-dom');
-
-const MineSearch = require('./MineSearch');
-
-ReactDom.render(<MineSearch />, document.querySelector('#root'));
+ReactDOM.render(<MineSearch />, document.querySelector('#root'));

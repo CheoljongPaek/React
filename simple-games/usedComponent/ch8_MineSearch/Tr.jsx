@@ -1,16 +1,17 @@
-const React = require('react');
-const { TableContext } = require('./MineSearch');
-const { useState, useContext, useRef, useEffect, useMemo ,useCallback, useReducer, memo } = React;
-const Td = require('./Td');
+import React, { useContext, memo } from 'react';
+import Td from './Td';
+import { TableContext } from './MineSearch';
 
-const Tr = () => {
+const Tr = memo(({ rowIndex }) => {
   const { tableData } = useContext(TableContext);
 
   return (
     <tr>
-      {tableData[0] && Array(tableData[0].length).fill().map((td, i) => <Td />)}
+      {tableData[0] && Array(tableData[0].length).fill().map((td, i) =>
+        <Td rowIndex={rowIndex} cellIndex={i} />
+      )}
     </tr>
   )
-}
+});
 
-module.exports = Tr;
+export default Tr;

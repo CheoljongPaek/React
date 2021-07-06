@@ -92,3 +92,7 @@ Day 7
   : useReduce는 state가 비동기적, redux는 state가 동기적으로 바뀐다.
   : Context API: usereduce를 사용할때 dispatch를 하위 컴포넌트에 계속 보내는 문제 해결.
   : 천천히, 최적화 중간중간 진행하면서 이어나가자!
+  Day 14
+- simple-games/usedComponent/ch8/MineSearch
+  : useContext가 initialize하는 방법과, reducer state 값을 받는 방식을 이해.
+  : 특정 행동시 -> reducer action 또는 state 변화로 인한 -> rendering을 어떻게 다루는지 파악.

@@ -1,12 +1,11 @@
-const React = require('react');
-const { useState, useContext, useRef, useEffect, useMemo ,useCallback, useReducer, memo } = React;
-const MineSearch = require('./MineSearch');
+import React, { useState, useCallback, useContext, memo } from 'react';
+import { START_GAME, TableContext } from './MineSearch';
 
 const Form = () => {
   const [row, setRow] = useState(10);
   const [cell, setCell] = useState(10);
   const [mine, setMine] = useState(20);
-  const { dispatch } = useContext(MineSearch.TableContext)
+  const { dispatch } = useContext(TableContext)
   
   const onChangeRow = useCallback((e) => {
     setRow(e.target.value)
@@ -18,7 +17,7 @@ const Form = () => {
     setMine(e.target.value)
   },[]);
   const onClickBtn = useCallback(() => {
-    dispatch({ type: 'START_GAME', row, cell, mine });
+    dispatch({ type: START_GAME, row, cell, mine });
   },[row, cell, mine]);
   return (
     <div>
@@ -30,4 +29,4 @@ const Form = () => {
   )
 };
 
-module.exports = Form;
+export default Form;
