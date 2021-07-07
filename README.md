@@ -96,3 +96,7 @@ Day 7
 - simple-games/usedComponent/ch8/MineSearch
   : useContext가 initialize하는 방법과, reducer state 값을 받는 방식을 이해.
   : 특정 행동시 -> reducer action 또는 state 변화로 인한 -> rendering을 어떻게 다루는지 파악.
+  Day 15
+- simple-games/usedComponent/ch8/MineSearch
+  : Td.jsx 파일에서 jsx를 리턴하는 부분에 값을 저장하는 useMemo를 사용함으로써 최적화.
+  : memo는 다음 렌더링이 일어날 때 props의 변화가 없다면 그대로 재사용한다.
