@@ -100,3 +100,8 @@ Day 7
 - simple-games/usedComponent/ch8/MineSearch
   : Td.jsx 파일에서 jsx를 리턴하는 부분에 값을 저장하는 useMemo를 사용함으로써 최적화.
   : memo는 다음 렌더링이 일어날 때 props의 변화가 없다면 그대로 재사용한다.
+- personal-project/games/case2/... (mineSearch 복습)
+  : state, useReducer, useContext 관계
+  : 다른 컴포넌트에서 useContext로 가져온 데이터는 수정하지 않는다.
+  : a컴포넌트에서 b컴포넌트를 수정하고 싶으면 useContext로 가져온 b컴포넌트의 벨류들을 참고해서(수정X) dispatch({...action})를 한 다음, b컴포넌트 내부에서 action을 처리하면서 벨류들을 수정한다.
+  (1). dispatch가 일어났을때.
