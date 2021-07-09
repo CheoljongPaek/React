@@ -105,3 +105,18 @@ Day 7
   : 다른 컴포넌트에서 useContext로 가져온 데이터는 수정하지 않는다.
   : a컴포넌트에서 b컴포넌트를 수정하고 싶으면 useContext로 가져온 b컴포넌트의 벨류들을 참고해서(수정X) dispatch({...action})를 한 다음, b컴포넌트 내부에서 action을 처리하면서 벨류들을 수정한다.
   (1). dispatch가 일어났을때.
+  ----------------------------------------------------------------
+  Day 16
+- sleact/mylecture
+  : clone coding react typescript
+  : webpack dev server와 react hooks를 이용한 개발.
+  : 폴더 구조는 
+    1. pages: 서비스 되는 페이지
+    2. components: 짜잘한 레이아웃
+    3. layouts: 공통 레이아웃
+  : 코드 스플리팅을 통해서 필요한 페이지들만 불러온다. 처음에는 페이지 단위로 구분.
+    @loadable/component
+    @types/loadable__component -D
+    로그인페이지에 있을때는 회원가입페이지를 불러올 필요가 없다.
+  : css in js 방식으로 emotions를 사용한다.
+    @emotion/react @emotion/styled @emotion/babel-plugin
