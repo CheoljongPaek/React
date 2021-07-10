@@ -1,4 +1,4 @@
-Day 1
+# Day 1
 - lecture\ch1: practice with plain js, not using jsx and webpack.
   : babel이 jsx의 문법(<.../>)을 createElement 으로 변경해줌.
 - simple-games/usedClass/ch1/GuguDan
@@ -9,28 +9,28 @@ Day 1
   : !!!클릭으로 숫자 조절하는 기능 추가, 더 수정할 것: 버튼을 꾹 누르면 계속 증가/ 터치 -> 
   https://stackoverflow.com/questions/50162522/cant-call-setstate-on-a-component-that-is-not-yet-mounted
   : HTML properties = class -> className , for -> htmlFor
-Day 2
+# Day 2
   - Day 1 프로젝트에 press and hold 기능 참고할 프로젝트 ch1-Fix 생성
   - simple-games/usedComponent/ch1/GuguDan
   : Hooks(... Functional Component)를 사용. GuguDan을 hooks로 변환.
   : Hooks는 DOM 접근 방식으로 useRef를 사용.
   : state가 바뀌면 Functional Component자체가 다시 실행
   : !!!component는 class의 prev~ 같은 인자의 사용이 불가능하나?
-Day 3
+# Day 3
   - lecture\ch2: webpack 설정: webpack-dev-server의 hot reloading을 위해 
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "react-refresh": "^0.10.0",
     두 개를 설치.
   - simple-games/usedComponent/ch2/WordRelay
   : 클래스와 컴포넌트 각각 사용해서 WordRelay 완성.
-Day 4
+# Day 4
   - simple-games/usedClass/ch3/NumberBaseball
     : class에서 map과 props 사용
     : rendering이 빈번한 문제가 있음. 해결책으로 class에서는 shouldComponentUpdate + React.component, React.purecomponent.
       Hooks에서는 memo(memoization), 자식이 모두 purecomponent나 memo면 부모에도 적용할 수 있다.
     : class에서 기존 ref를 createRef로 대체.
     : Hooks에서는 DOM에 직접 접근할 때 useRef사용(1).
-Day 5
+# Day 5
   - simple-games/usedClass/ch4/ResponseCheck
     : react 조건문은 삼항연산자로 표현. jsx에서는 태그 없음을 null, undefined, false으로 뜻함. 
     : react 반복문은 map함수로 표현.
@@ -38,34 +38,34 @@ Day 5
       1: 부모가 컨트롤러로 setState를 담고있는 함수!를 자식에게 넘김(props를 통해서)
       2: 받은 함수를 자식은 특정 조건 하에 사용.
     : useRef는 mutable(값이 변경) 하지만 !화면에는 영향을 주지 않고 싶을 때! 사용(2).
-Day 6
+# Day 6
   - simple-games/usedClass/ch5/RSP
     : webpack에서 css와 이미지 파일 처리.
     : Class 라이프사이클 componentDidMount, componentDidUpdate, componentWillUnmount 학습.
     : 그림이 멈춰있을 때 버튼 클릭시 액션 없게 만들기 -> 완료
     : 컴포넌트 분리
     : 재시작시 마지막 사진하고는 다르게 사진 변경.
-Day 6
+# Day 6
 - simple-games/usedClass/ch5/RSP
   : Higher order function
     함수 안에 파라미터를 넣어서 전달하려면 파라미터를 넣은 상태에서 한 번 실행되므로 함수로 한 번 더 감싼다. ' onClick={() => this.onClickBtn('바위')} '.
   : Hooks 라이프사이클용의 useEffect 학습.
-Day 7
+# Day 7
 - simple-games/usedClass/ch6/Lotto
   :
 - simple-games/usedComponent/ch6/Lotto
   : useMemo는 복잡한 함수 결과값을 기억할 때, useRef는 일반 값을 기억할 때 사용. 컴포넌트 특성상 리렌더링시 컴포넌트가 전부 다시 실행되기에 함수도 다시 실행. 이러한 중복 실행을 막기 위해 useMemo로 함수 값을 기억해서 사용한다.
   : useMemo는 함수의 결과 값, useCallback은 함수 자체를 기억한다. 복습필요.
 
-  Day 8
+# Day 8
 - practice/case1
   :hooks 복습
 
-  Day 9
+# Day 9
 - simple-games/usedComponent/ch7/TicTacToe
   : TicTaeToe > Table > Tr > Td 구조에서 클릭시 Td의 데이터가 변화해야한다. useReducer 학습.
   
-  Day 10
+# Day 10
 - simple-games/usedComponent/ch7/TicTacToe
   : useReducer은 useState와 같이 비동기적으로 작동 -> render -> useEffect로 앞서 비동기적으로 처리된 값들을 이용해서 이어나감.
 - 최적화
@@ -73,7 +73,7 @@ Day 7
   : memo가 도움이 안 될 때, useMemo를 적용하는 방법도 있다.
    **Tr.jsx 주석표시 해놓음. table에도 적용 가능.
    컴포넌트 자체를 기억하기 위해 useMemo를 사용한다.
-  Day 11
+# Day 11
 - personal-project/games/track-it
   : context api를 배우기 전 개인 프로젝트.
   : 1. input에 입력한 수만큼의 표가 화면에 표시된다.
@@ -82,21 +82,21 @@ Day 7
     2-1. 잇는 순서는 세로, 가로 순서이다.
     2-2. 제자리 클릭도 가능하게 만든다.
   : dispatch가 연속해서 사용할 때 순서는, 각각의 dispatch가 return되어서 모든 state가 업데이트 되면, 렌더 후 이펙트.
-  Day 12
+# Day 12
 - personal-project/games/track-it
   : useEffect 실행은 child먼저, 그 다음 parent이다.
-  Day 13
+# Day 13
 - personal-project/games/track-it
   : useEffect 안에서 useReducer의 dispatch를 하면 state 변경 후 리렌더링이 일어난다. 리렌더링을 최소화 시키기 위해 이 사용은 피하는중.
 - simple-games/usedComponent/ch8/MineSearch
   : useReduce는 state가 비동기적, redux는 state가 동기적으로 바뀐다.
   : Context API: usereduce를 사용할때 dispatch를 하위 컴포넌트에 계속 보내는 문제 해결.
   : 천천히, 최적화 중간중간 진행하면서 이어나가자!
-  Day 14
+# Day 14
 - simple-games/usedComponent/ch8/MineSearch
   : useContext가 initialize하는 방법과, reducer state 값을 받는 방식을 이해.
   : 특정 행동시 -> reducer action 또는 state 변화로 인한 -> rendering을 어떻게 다루는지 파악.
-  Day 15
+# Day 15
 - simple-games/usedComponent/ch8/MineSearch
   : Td.jsx 파일에서 jsx를 리턴하는 부분에 값을 저장하는 useMemo를 사용함으로써 최적화.
   : memo는 다음 렌더링이 일어날 때 props의 변화가 없다면 그대로 재사용한다.
@@ -106,7 +106,7 @@ Day 7
   : a컴포넌트에서 b컴포넌트를 수정하고 싶으면 useContext로 가져온 b컴포넌트의 벨류들을 참고해서(수정X) dispatch({...action})를 한 다음, b컴포넌트 내부에서 action을 처리하면서 벨류들을 수정한다.
   (1). dispatch가 일어났을때.
   ----------------------------------------------------------------
-  Day 16
+# Day 16
 - sleact/mylecture
   : clone coding react typescript
   : webpack dev server와 react hooks를 이용한 개발.
@@ -120,3 +120,31 @@ Day 7
     로그인페이지에 있을때는 회원가입페이지를 불러올 필요가 없다.
   : css in js 방식으로 emotions를 사용한다.
     @emotion/react @emotion/styled @emotion/babel-plugin
+  : 웹팩데브서버의 historyApiFallback을 통해 주소의 변경에 따른 다른 웹 변경들을
+    적용한다.
+# Day 16
+- sleact/mylecture/hooks/useInput.ts
+- sleact/mylecture/pages/SignUp/index.tsx
+  : Custum hook
+  : 프론트와 백엔드 주소가 다를 때, 원래 프론트가 백엔드에 요청을 보내지 못한다.
+    (CORS 문제 발생)
+    웹팩데브서버에서는 proxy 프로퍼티를 설정해서 changeOrigin을 할 수 있다.
+    백엔드 측에서 cors 미들웨어를 통과할때 설정으로도 CORS 문제 해결이 가능하다.
+      proxy: {
+      '/api/': {
+        target: 'http://localhost:3095',
+        changeOrigin: true,
+      },
+    '프론트엔드에서 /api/로 보내는 요청은 주소를 3095로 바꿔서 보낸 걸로 취급.'
+  : 비동기 요청에서 setState들은 비동기 요청 전에 초기화(로딩 단계).
+  : 새로 고침 있는 링크 태그 a 대신 react-router-dom의 Link를 사용한다.
+  - sleact/mylecture/pages/Login/index.tsx
+  : 주로 get 요청에 대한 데이터를 swr이 저장을함.
+    login은 post요청인데 어떻게 해결? get 요청을 한 번 더 보내자!
+    내가 로그인 했으니 내 로그인 정보를 서버에 요청
+    const {} = useSWR('http://localhost:3095/api/users', fetcher);
+    useSWR은 주소를 fetcher 함수에 넘겨주는 역할정도만 함.
+    utils/ 폴더에 fetcher함수 직접 구현.
+    fetcher함수는 주소를 매개변수로 사용.
+    fetcher에서 리턴하는 값이 {} 안에 들어간다.
+    
