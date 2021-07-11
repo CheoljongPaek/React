@@ -7,7 +7,7 @@ import { Link, Redirect } from 'react-router-dom';
 import useSWR from 'swr';
 
 const LogIn = () => {
-  const {data, error} = useSWR('http://localhost:3095/api/users', fetcher);
+  const {data, error, revalidate, mutate} = useSWR('http://localhost:3095/api/users', fetcher);
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
   const [logInError, setLogInError] = useState(false);
@@ -24,6 +24,8 @@ const LogIn = () => {
           },
         )
         .then((response) => {
+          console.log(response);
+          mutate(response.data, false);
         })
         .catch((error) => {
           setLogInError(error.response?.data?.statusCode === 401);
@@ -31,10 +33,22 @@ const LogIn = () => {
     },
     [email, password],
   );
+  
+  if (data === undefined) {
+    console.log('data is undefined');
+    return <div>로딩중...</div>
+  }
+  // 0.0x초간 data가 undefined 였다가 data에 값이 확인 되면서 리렌더링.
+  
+  if (data) {    
+    console.log('data exists');
+    return <Redirect to="/workspace/channel" />
+  }
 
   return (
     <div id="container">
       <Header>Sleact</Header>
+      {console.log('LOGIN RENDER')}
       <Form onSubmit={onSubmit}>
         <Label id="email-label">
           <span>이메일 주소</span>

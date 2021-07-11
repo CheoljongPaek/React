@@ -122,7 +122,7 @@
     @emotion/react @emotion/styled @emotion/babel-plugin
   : 웹팩데브서버의 historyApiFallback을 통해 주소의 변경에 따른 다른 웹 변경들을
     적용한다.
-# Day 16
+# Day 16-17
 - sleact/mylecture/hooks/useInput.ts
 - sleact/mylecture/pages/SignUp/index.tsx
   : Custum hook
@@ -139,7 +139,7 @@
   : 비동기 요청에서 setState들은 비동기 요청 전에 초기화(로딩 단계).
   : 새로 고침 있는 링크 태그 a 대신 react-router-dom의 Link를 사용한다.
   - sleact/mylecture/pages/Login/index.tsx
-  : 주로 get 요청에 대한 데이터를 swr이 저장을함.
+  : 주로 get 요청에 대한 데이터를 swr이 저장을함.(reqct query 같은)
     login은 post요청인데 어떻게 해결? get 요청을 한 번 더 보내자!
     내가 로그인 했으니 내 로그인 정보를 서버에 요청
     const {} = useSWR('http://localhost:3095/api/users', fetcher);
@@ -147,4 +147,31 @@
     utils/ 폴더에 fetcher함수 직접 구현.
     fetcher함수는 주소를 매개변수로 사용.
     fetcher에서 리턴하는 값이 {} 안에 들어간다.
-    
+  : 백엔드 app.js에서 CORS문제는 해결했지만
+    프론트와 백엔드 서버 주소가 다르면 cookie가 전달이 안 된다.
+    쿠키 공유를 위해 axios config에 { withCredentials: true }를 전달. post는 세번째 get에서는 두번째.
+  : 쿠키는 백엔드에서 생성한다. 생성된 쿠키를 브라우저(프론트엔드)에 기억하게한다.
+  : 프론트엔드에서는 한번 기억한 쿠키를 매 요청마다 백엔드로 보내준다.
+# Day 18
+- sleact/mylecture/layouts/Workspace
+- sleact/mylecture/pages/Channel
+  : Channel의 jsx를 컴포넌트 Workspace로 둘러싸면 Workspace의 children props는
+    그 jsx가 된다. 템플릿같은.
+  : layouts/App.tsx 가 메인페이지이다.
+  : useSWR의 revalidate는 서버에 요청을 보내서 데이터를 가져온다.
+    mutate는 서버에 요청 보내는 것 없이 데이터를 수정한다.
+    mutate 첫인자는 데이터, 두번째 인자는 shouldRevalidate<boolean>이고
+    두번째 인자는 바뀐 데이터가 제대로 들어갔는지 확인하는 역할이다.
+    다시말해, 서버요청 없이 데이터를 바꿨다가 나중에 서버한테 점검을 하는 역할.
+  : useSWR은 비동기 요청이나 get요청에만 한정된 도구가 아니다.
+    fetcher를 다양하게 만들어서 그때그때 서버에서 오는 데이터를 번형한 리턴값으로
+    프론트에 저장하자.
+  : gravatar로 이미지 무작위 생성. npm 사이트에서 TS붙어있으면 내장 타입스크립트,
+    DT가 붙어있으면 @types 따로 다운받아야함. 없으면 직접 타입 지정.
+  : 중첩라우터
+    <Switch> <Route /> </Switch> 라우터 안에서 또 라우터가 있게 하는 방법을
+    중첩라우터라 부른다. 이때 같은 계층적인 경로에 있어야한다.
+    app.jsx에서 /workspace path를 갖고, component인 Workspace를 화면에 띄울때,
+    그 컴포넌트 안에 있는 라우터가 다시 실행.
+  - sleact\mylecture\components\Menu\index.tsx
+  : props의 기본값 설정.
