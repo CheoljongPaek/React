@@ -175,3 +175,14 @@
     그 컴포넌트 안에 있는 라우터가 다시 실행.
   - sleact\mylecture\components\Menu\index.tsx
   : props의 기본값 설정.
+# Day 18
+  - sleact/mylecture/layouts/Workspace
+  - sleact\mylecture\components\Modal\index.tsx
+  : 재사용성의 여부에 따라 컴포넌트화 시킨다.
+    Modal 이나 Menu같이 재사용성이 높으면 컴포넌트로 만들어 layout에 조건에 따라 넣고 뺀다.
+  : submit form 뒤에 인풋창들은 비워야한다.
+  - npm i react-toastify
+  : 성공이나 에러 등의 message를 사용자에게 몇 초간 보여주는 인터페이스.
+  - sleact\mylecture\components\CreateChannelModal\index.tsx
+  : children props로 안 받으면 VFC 타입, 받으면 FC 타입.
+  : return이 hooks보다 무조건 아래 있어야한다. 관련 에러: Invalid hook call.
