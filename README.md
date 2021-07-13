@@ -186,3 +186,18 @@
   - sleact\mylecture\components\CreateChannelModal\index.tsx
   : children props로 안 받으면 VFC 타입, 받으면 FC 타입.
   : return이 hooks보다 무조건 아래 있어야한다. 관련 에러: Invalid hook call.
+# Day 19
+  - sleact/mylecture/layouts/Workspace
+  - sleact\mylecture\components\Modal\index.tsx
+  : 프론트에서는 라우터의 주소 설계가 중요하다.
+    "/workspace/:workspace" 콜론 앞은 특수한 역할.(파라미터) 사용자가 자유롭게
+    값을 바꿀 수 있다. /workspace/test 이것도 저 주소에 해당된다.
+  : setStat의 매개변수는 flag: 로 타입한다.
+    ex) interface Props {
+          setShowCreateChannelModal: (flag: boolean) => void;
+        }
+  - sleact\mylecture\components\DMList\index.tsx
+  : react-router-dom jsx 태그인 Link의 to 프로퍼티는 a href와 같은 역할.
+    NavLink는 activeClass를 추가하여 둘 수 있다. 현재 주소와 NavLink to의
+    주소가 같으면 activeClass(예제에서는 Name)이 적용된다. 
+  : react-router의 { useParams }를 import해서 url의 params를 가져온다.
