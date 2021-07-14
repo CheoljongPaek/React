@@ -27,6 +27,10 @@ const InviteWorkspaceModal: VFC<Props> = ({ show, onCloseModal, setShowInviteCha
     }
   );
   //GET: ${workspace} 내부의 멤버 목록을 가져온다.
+  /*
+  MySQL 살펴보면서 데이터베이스와 프론트의 상호작용 파악하기.
+  
+  */
   const { revalidate: revalidateMember } = useSWR<IUser[]>(
     userData ? `/api/workspaces/${workspace}/members` : null,
     fetcher,

@@ -201,3 +201,10 @@
     NavLink는 activeClass를 추가하여 둘 수 있다. 현재 주소와 NavLink to의
     주소가 같으면 activeClass(예제에서는 Name)이 적용된다. 
   : react-router의 { useParams }를 import해서 url의 params를 가져온다.
+# Day 20
+  - sleact\mylecture\components\ChatBox\index.tsx
+  : dm & channel 메세지 보내기 둘 다에 적용될 component 만들기.
+    둘 다에서 쓰이기 위해 props로 올려줌.
+  : 채팅을 서버에 보내고 swr을 통해서 서버에 저장된 채팅을 다시 받음.
+  : 에러 error 나면 deps에 잘 넣었는지 확인 무조건!
+  
