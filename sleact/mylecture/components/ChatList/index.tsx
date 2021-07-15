@@ -1,14 +1,20 @@
 // import Chat from '@components/Chat';
 import { ChatZone, Section, StickyHeader } from './styles';
 import { IDM, IChat } from '@typings/db';
-import React, { useCallback, forwardRef, RefObject, MutableRefObject } from 'react';
+import React, { useCallback, forwardRef, RefObject, MutableRefObject, VFC } from 'react';
+import Chat from '@components/Chat';
 // import { Scrollbars } from 'react-custom-scrollbars';
 
-const ChatList = () => {
+interface Props {
+  chatData?: IDM[];
+}
 
+const ChatList: VFC<Props> = ({ chatData }) => {
   return (
     <ChatZone>
-      <Section>section</Section>
+      {chatData?.map((chat) => (
+        <Chat key={chat.id} data={chat} />
+      ))}
     </ChatZone>
   )
 };

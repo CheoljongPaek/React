@@ -1,10 +1,11 @@
-import React, { FC, useState, useCallback } from 'react';
+import React, { FC, useState, useCallback, useEffect } from 'react';
 import { CollapseButton } from './styles';
 import { useParams } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import useSWR from 'swr';
 import fetcher from '@utils/fetcher';
 import { IUser, IUserWithOnline } from '@typings/db';
+import useSocket from '@hooks/useSocket';
 
 const DMList: FC = () => {
   const { workspace } = useParams<{ workspace?: string }>();
@@ -16,12 +17,23 @@ const DMList: FC = () => {
     userData ? `/api/workspaces/${workspace}/members` : null,
     fetcher,
   );
-
+  const [socket] = useSocket(workspace);
   const [channelCollapse, setChannelCollapse] = useState(false);
+  const [onlineList, setOnlineList] = useState<number[]>([]);
 
   const toggleChannelCollapse = useCallback(() => {
     setChannelCollapse((prev) => !prev);
   }, []);
+
+  useEffect(() => {
+    socket?.on('onlineList', (data: number[]) => {
+      setOnlineList(data);
+    });
+
+    return () => {
+      socket?.off('onlineList');
+    };
+  }, [socket])
 
 
 
@@ -40,8 +52,7 @@ const DMList: FC = () => {
       <div>
         {!channelCollapse &&
           memberData?.map((member) => {
-            // const isOnline = onlineList.includes(member.id);
-            const isOnline = true;
+            const isOnline = onlineList.includes(member.id);
             return (
               <NavLink 
                 key={member.id} 

@@ -207,4 +207,23 @@
     둘 다에서 쓰이기 위해 props로 올려줌.
   : 채팅을 서버에 보내고 swr을 통해서 서버에 저장된 채팅을 다시 받음.
   : 에러 error 나면 deps에 잘 넣었는지 확인 무조건!
-  
+# Day 21
+  - WebSocket 실시간으로 서버와 데이터를 주고 받을 때 사용.
+  : 지금까지는 프론트에서 서버로 요청을 보내고 서버에서 프론트로 응답을 보내는 단방향 방식을 사용.
+    프론트에서는 실시간으로 데이터를 받아 오기 위해 주기적으로 요청을 보냈어야 함.(폴링방식)
+    WebSocket은 한 번만 프론트와 서버를 연결해놓으면 양방향으로 데이터를 주고받음이 가능하다.
+    훅에다가 socket.io를 연결해보자!
+  : socket io는 계층이 있다. 네임스페이스와 룸. 슬랙의 워크스페이스를 네임스페이스로, 채널을 룸으로. 
+  : typescript에서 빈객체나 빈배열은 타이핑을 해야한다.
+    -> const sockets: { [key: string]: SocketIOClient.Socket } = {};
+  : http 선요청 없이 websocket만 사용하라고 요청.
+    -> sockets[workspace] = io.connect(`${backUrl}/ws-${workspace}`, {
+    transports: ['websocket']});
+  - sleact\mylecture\layouts\Workspace\index.tsx
+  : socket을 콘솔찍으면 나오는 receiveBuffer 와 sendBuffer.
+    정상이면 둘 다 비어있다.
+  : network 창의 websocket 메세지에서 주황색 화살표는 서버에서 클라이언트로,
+    초록색은 클라이언트에서 서버로 전송되는 데이터이다.
+    2,3,2,3, 나오는 숫자는 핑퐁이라고 해서 연결이 잘 유지되나 socket.io의
+    확인 방식이다.
+    
