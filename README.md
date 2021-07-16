@@ -226,4 +226,10 @@
     초록색은 클라이언트에서 서버로 전송되는 데이터이다.
     2,3,2,3, 나오는 숫자는 핑퐁이라고 해서 연결이 잘 유지되나 socket.io의
     확인 방식이다.
-    
+# Day 22
+  - sleact\mylecture\components\ChatBox\styles.tsx
+  : emotion 확장 방법.
+    export const MentionsTextarea = styled(MentionsInput)`...`
+  : 정규표현식에서 +는 하나 이상(최대한 찾기), +?는 하나 이상(최소한 찾기)이다. 
+  : [].concat(...chatData).reverse() -> 빈 배열에 concat을 하면 새 배열을 만든다. 또는 스프레드 [...chatData]. 불변성을 위해
+  
