@@ -232,4 +232,10 @@
     export const MentionsTextarea = styled(MentionsInput)`...`
   : 정규표현식에서 +는 하나 이상(최대한 찾기), +?는 하나 이상(최소한 찾기)이다. 
   : [].concat(...chatData).reverse() -> 빈 배열에 concat을 하면 새 배열을 만든다. 또는 스프레드 [...chatData]. 불변성을 위해
-  
+# Day 23
+  : reverse infinite scrolling은 스크롤이 맨 위에 올라갔나 감지부터 해야한다.
+  : import userSWR, { useSWRInfinite } from 'swr'; 은 index(여기서는 페이지수)를 갖고있는 함수이다.
+  - sleact\mylecture\pages\DirectMessage\index.tsx
+  : 메세지를 보내고 서버와 데이터를 주고 받아 딜레이가 생긴다. optimistic ui로 해결.
+    optimistic ui는 서버쪽으로 갔다오지 않기 때문에 임의로 데이터를 미리 만들어내야한다.
+    
