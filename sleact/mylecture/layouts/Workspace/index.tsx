@@ -46,6 +46,7 @@ const Workspace: VFC = () => {
     userData? `/api/workspaces/${workspace}/channels` : null, 
     fetcher,
   );
+  
   //워크스페이스 멤버 데이터
   const {data: memberData } = useSWR<IUser[]>(
     userData ? `/api/workspaces/${workspace}/members` : null,
