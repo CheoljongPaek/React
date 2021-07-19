@@ -1,15 +1,24 @@
 const express = require('express');
+const path = require('path');
 const app = express();
-const port = process.env.PORT || 5000;
+const api = require('./routes/index');
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const port = process.env.PORT || 3005;
 
-app.get('/express_backend', (req, res) => { //Line 9
-  res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Line 10
-});
+app.use('/api', api);
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Example app listening at http://localhost:${port}`);
 });
+
+// app.use(express.static(path.join(__dirname, '../front/build')));
+
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../front/build/index.html'))
+// })
+
+
+// app.listen(port, () => {
+//   console.log(`Example app listening at http://localhost:${port}`)
+// });
+

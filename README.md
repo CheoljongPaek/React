@@ -238,7 +238,9 @@
   - sleact\mylecture\pages\DirectMessage\index.tsx
   : 메세지를 보내고 서버와 데이터를 주고 받아 딜레이가 생긴다. optimistic ui로 해결.
     optimistic ui는 서버쪽으로 갔다오지 않기 때문에 임의로 데이터를 미리 만들어내야한다.
-# Day 24
-  - nodebird\back
-  : express 백엔드 시작.
+# Day 24 <New Project>
+  - nodebird
+  : cra 첫 사용.
+  1. npm: create-react-app [folder name] 이후 run eject로 숨겨진 설정파일이 든 config와 scripts 폴더를 생성. 이 때 package.json 파일의 모든 dependency와 babel, jest 설정 코드가 드러남.
+  2. 
   
