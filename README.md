@@ -242,5 +242,12 @@
   - nodebird
   : cra 첫 사용.
   1. npm: create-react-app [folder name] 이후 run eject로 숨겨진 설정파일이 든 config와 scripts 폴더를 생성. 이 때 package.json 파일의 모든 dependency와 babel, jest 설정 코드가 드러남.
-  2. 
+  2. 1번 루트 삭제. eject은 나중에 써보자!
+# Day 25
+  - nodebird
+  : cra typescript template으로 생성후 백엔드 express와 연동하기 위해 proxy 설정.
+  : 개발의 편리함을 위해 craco로 절대 경로 설정.
+  : fontawesome으로 필요한 그림 선택.
+  : css in js로 emotion을 적용.
+    글로벌하게 쓰일 팔레트 styles 파일에 만들고 tsconfig.json에 절대경로 설정.
   
