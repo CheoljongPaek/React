@@ -2,7 +2,7 @@ import '@emotion/react'
 
 declare module '@emotion/react' {
 
-  interface Palette {
+  interface PagePalette {
     first: string,
     second: string,
     thrid: string,
@@ -11,7 +11,7 @@ declare module '@emotion/react' {
   }
 
   export interface Theme {
-    pageColor: Palette
+    pageColor: PagePalette
     mq: {
       laptop: string
       tablet: string

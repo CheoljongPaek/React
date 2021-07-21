@@ -250,4 +250,6 @@
   : fontawesome으로 필요한 그림 선택.
   : css in js로 emotion을 적용.
     글로벌하게 쓰일 팔레트 styles 파일에 만들고 tsconfig.json에 절대경로 설정.
-  
+# Day 26
+  - nodebird
+  : 주소 전환시 css 애니메이션을 보여주며 리액트의 장점을 활용할 수 있는 방법 강구.
