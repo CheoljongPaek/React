@@ -253,3 +253,14 @@
 # Day 26
   - nodebird
   : 주소 전환시 css 애니메이션을 보여주며 리액트의 장점을 활용할 수 있는 방법 강구.
+  : css만 활용할시 텍스트를 화면 밖으로 숨기는 트릭을 써야함.
+    필요한 데이터만 주소 바뀔시 불러오자.
+    애니메이션은 주소 바뀐 후 새로 생성된 텍스트를 화면 밖에서 안으로 옮겨와도 된다?
+# Day 27
+  : react에서 애니메이션과 제스쳐를 쉽게 다루게 해주는
+    framer-motion을 시도.
+  : React Router로 렌더링하는 컴포넌트에 prop 전달을 하기 위해
+    ```<Route path='/education'
+        render={() => <Education education={data} />}/>```
+    component prop 대신 render prop을 사용.
+  : framer-motion과 react-progressive-image 천천히 살펴보기.

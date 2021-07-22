@@ -5,17 +5,30 @@ interface PageProps {
   id: string
 }
 
+export const Container = styled.div`
+  font-family: 'open sans', 'lato', 'helvetica', sans-serif;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  #t23:target .title{
+    transform: scale(0.1);
+    transition-delay: .25s;
+  }
+`;
+
 export const LinkContainer = styled.ul`
   position: fixed;
   z-index: 1;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  height: 280px;
-  width: 10%;
-  padding: 0;
-  text-align: center;
+  margin: 0;
+  padding: 40px;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50%;
+
   & a {
     & svg {
       margin: 30px 0;
@@ -60,11 +73,15 @@ export const Page = styled.div<PageProps>`
     transform: ${props => props.id === "p1" ? "translateX(10%) !important;" : "translateX(360%)"};
     transition: all .5s cubic-bezier(.25, 1, .5, 1.25);
     color: #fff;
-    font-size: 32px;
     display: block;
     .title {
       font-size: 38px;
+      display: block;
       line-height: 2;
+    }
+    .disc {
+      font-size: 13px;
+      display: block;
     }
   }
 `;

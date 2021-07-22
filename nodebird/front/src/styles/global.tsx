@@ -6,8 +6,8 @@ const style = css`
     height: 100%;
     margin: 0;
     padding: 0;
-    transition: all .6s cubic-bezier(.5, .2, .2, 1.1);
-    color: #fff;
+    // transition: all .6s cubic-bezier(.5, .2, .2, 1.1);
+    color: #000;
     overflow: hidden; 
   }
 
