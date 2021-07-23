@@ -264,3 +264,6 @@
         render={() => <Education education={data} />}/>```
     component prop 대신 render prop을 사용.
   : framer-motion과 react-progressive-image 천천히 살펴보기.
+# Day 28
+  : 스크롤 다운이 안 되는 이유 파악하기.
+    css remove scrollbar 검색해보기.

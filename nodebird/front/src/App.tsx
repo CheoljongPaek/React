@@ -40,8 +40,9 @@ function App() {
     <div className="App">
       <Router>
         <Header />
-        <Route render={({location}) => (          
-          <AnimatePresence initial={false} exitBeforeEnter>
+        <Route render={({location}) => (  
+          // initial={false}        
+          <AnimatePresence  exitBeforeEnter>
             <Switch location={location} key={location.pathname}>
               <Route
                 exact

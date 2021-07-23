@@ -21,7 +21,7 @@ body:before {
   width: 300%;
 }
 body.no-scroll {
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 }
 @keyframes grain {
   0%, 100% {

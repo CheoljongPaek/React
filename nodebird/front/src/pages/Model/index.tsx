@@ -7,25 +7,17 @@ import ScrollForMore from "@components/scrollForMore";
 const transition = { duration: 1.4, ease: [0.6, 0.01, -0.05, 0.9] };
 
 const firstName = {
-  initial: {
-    y: 0,
-  },
   animate: {
-    y: 0,
     transition: {
       delayChildren: 0.6,
-      staggerChildren: 0.04,
+      staggerChildren: 0.4,
       staggerDirection: -1,
     },
   },
 };
 
 const lastName = {
-  initial: {
-    y: 0,
-  },
   animate: {
-    y: 0,
     transition: {
       delayChildren: 0.6,
       staggerChildren: 0.04,
@@ -37,11 +29,12 @@ const lastName = {
 const letter = {
   initial: {
     y: 400,
+    opacity: 0,
   },
   animate: {
     y: 0,
-    // transition: { duration: 1, ...transition },
-    transition: { ...transition, duration: 1 },
+    opacity: 1,
+    transition: { ...transition, duration: 1.2 },
   },
 };
 
@@ -58,10 +51,12 @@ interface HomeProps {
 const Model: VFC<HomeProps> = ({ imageDetails }) => {
   const { scrollYProgress } = useViewportScroll();
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-
+  console.log(scale);
   const [canScroll, setCanScroll] = useState(false);
-
-  useEffect(() => {
+  
+  useEffect(() => {    
+    console.log(canScroll);
+    
     if (canScroll === false) {
       document.querySelector("body")?.classList.add("no-scroll");
     } else {
@@ -147,14 +142,14 @@ const Model: VFC<HomeProps> = ({ imageDetails }) => {
               </motion.div>
             </motion.div>
           </div>
-          {/* <ScrollForMore /> */}
+          <ScrollForMore />
         </div>
       </div>
       <div className='detailed-information'>
         <div className='container'>
           <div className='row'>
             <h2 className='title'>
-              The insiration behind the artwork & <br /> what it means.
+              The insiration behind the artwork <br /> what it means.
             </h2>
             <p>
               Contrary to popular belief, Lorem Ipsum is not simply random text.
