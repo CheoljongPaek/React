@@ -1,6 +1,6 @@
 import React, { useEffect, useState, VFC } from "react";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
-
+import '../../App.css'
 //Components
 import ScrollForMore from "@components/scrollForMore";
 //Ease
@@ -9,8 +9,8 @@ const transition = { duration: 1.4, ease: [0.6, 0.01, -0.05, 0.9] };
 const firstName = {
   animate: {
     transition: {
-      delayChildren: 0.6,
-      staggerChildren: 0.4,
+      delayChildren: 0.4,
+      staggerChildren: 0.04,
       staggerDirection: -1,
     },
   },
@@ -50,7 +50,7 @@ interface HomeProps {
 
 const Model: VFC<HomeProps> = ({ imageDetails }) => {
   const { scrollYProgress } = useViewportScroll();
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
   console.log(scale);
   const [canScroll, setCanScroll] = useState(false);
   
@@ -119,7 +119,7 @@ const Model: VFC<HomeProps> = ({ imageDetails }) => {
                 }}
                 animate={{
                   y: 0,
-                  width: "100%",
+                  width: "85%",
                   height: window.innerWidth > 1440 ? 800 : 400,
                   transition: { delay: 0.2, ...transition },
                 }}
@@ -129,13 +129,13 @@ const Model: VFC<HomeProps> = ({ imageDetails }) => {
                   whileHover='hover'
                   transition={transition}>
                   <motion.img
-                    src={require("../../images/yasmeen.webp").default}
+                    src={require("../../images/cat-standing.JPG").default}
                     alt='an image'
-                    style={{ scale: scale }}
                     initial={{ scale: 1.0 }}
+                    style={{ scale: scale }}
                     animate={{
                       transition: { delay: 0.2, ...transition },
-                      y: window.innerWidth > 1440 ? -1200 : -600,
+                      y: window.innerWidth > 1440 ? -360 : -180,
                     }}
                   />
                 </motion.div>

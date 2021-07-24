@@ -1,6 +1,6 @@
 // import React, { useEffect } from 'react';
 // import axios from 'axios';
-import './App.css';
+// import './App.css';
 // import './App.scss';
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import loadable from '@loadable/component';

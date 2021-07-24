@@ -266,4 +266,8 @@
   : framer-motion과 react-progressive-image 천천히 살펴보기.
 # Day 28
   : 스크롤 다운이 안 되는 이유 파악하기.
-    css remove scrollbar 검색해보기.
+    -> global style의 html, body {width & height 100%} 삭제고려.
+    motion value의 progress를 망가트리는 이유가 될 수 있음.
+    진행하다 재확인. -> scrollYProgress 적용을 위해 삭제해야함.
+  : 스크롤바 커스텀하기.
+  : 컴포넌트화 + 각 컴포넌트 스타일링하기.

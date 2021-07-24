@@ -2,6 +2,7 @@ import React, { VFC } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ProgressiveImage from 'react-progressive-image';
+import styled from '@emotion/styled';
 
 const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
 
@@ -14,9 +15,14 @@ interface HomeProps {
   imageDetails: imageProps,
   image?: string
 }
+const MContainer = styled.main`
+  
+  & .container {
+    
+  }
+`;
 
 const Home: VFC<HomeProps> = ({ imageDetails, image }) => {
-  
   return (
     <>
       <main>
@@ -33,8 +39,8 @@ const Home: VFC<HomeProps> = ({ imageDetails, image }) => {
                 <div className='frame'>
                   <Link to={`/model/yasmeen-tariq`}>
                     <ProgressiveImage
-                      src={require("../../images/yasmeen.webp").default}
-                      placeholder={require("../../images/compressed-image.jpg").default}>
+                      src={require("../../images/cat-standing.JPG").default}
+                      placeholder={require("../../images/cat-standing-compressed.JPG").default}>
                       {(src: string) => (
                         <motion.img
                           src={src}
