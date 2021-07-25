@@ -1,16 +1,12 @@
-// import React, { useEffect } from 'react';
-// import axios from 'axios';
-// import './App.css';
-// import './App.scss';
+import './App.css';
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import loadable from '@loadable/component';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import Home from '@pages/Home';
-import Model from '@pages/Model';
 import {AnimatePresence} from 'framer-motion';
-import Header from "@components/header"
+import Header from "@components/Header"
+import { imageProps } from '@typings/db';
 
 library.add(fab, fas);
 
@@ -19,23 +15,14 @@ const LogIn = loadable(() => import('@pages/Login'));
 const SignUp = loadable(() => import('@pages/SignUp'));
 const PageNotFound = loadable(() => import('@pages/PageNotFound'));
 
+const Home = loadable(() => import('@pages/Home'));
+const Model = loadable(() => import('@pages/Model'));
+
 function App() {
-
-  // useEffect(() => {
-  //   console.log('axios');
-  //   axios.get('/api/test');
-  // }, []);
-
-  interface imageProps {
-    width: number
-    height: number
-  };
-
   const imageDetails: imageProps = {
     width: 524,
     height: 650,
   };
-
   return (
     <div className="App">
       <Router>

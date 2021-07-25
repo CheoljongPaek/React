@@ -271,3 +271,12 @@
     진행하다 재확인. -> scrollYProgress 적용을 위해 삭제해야함.
   : 스크롤바 커스텀하기.
   : 컴포넌트화 + 각 컴포넌트 스타일링하기.
+# Day 29
+  : 기본: const MContainer = styled.main`...`
+    framer-motion: const Info = styled(motion.div) `...`
+  : 각 컴포넌트나 페이지마다 emotion 적용, body같은 배경은 emotion global로
+    저장했지만 느린 로딩시 적용도 시간이 걸림. 기본 배경 설정으로 App.tsx에
+    App.css을 임포트함.
+  : Menu modal 만들기 + framer-motion 부품 만들기 진행.
+  : 타입 FC와 VFC는 권장을 안 하니 타입스크립트 칫싯 읽으면서 도전하기.
+  

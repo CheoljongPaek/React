@@ -4,12 +4,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@emotion/react';
 import theme from '@styles/theme';
-import GlobalStyle from '@styles/global'
+import ResetStyle from '@styles/global/reset'
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
+      <ResetStyle />
       <App />
     </ThemeProvider>
   </React.StrictMode>,

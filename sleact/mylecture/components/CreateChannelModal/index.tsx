@@ -14,7 +14,6 @@ interface Props {
   onCloseModal: () => void;
   setShowCreateChannelModal: (flag: boolean) => void;
 }
-
 const CreateChannelModal: VFC<Props> = ({ show, onCloseModal, setShowCreateChannelModal }) => {
   const [newChannel, onChangeNewChannel, setNewChannel] = useInput('');
   const { workspace, channel } = useParams<{ workspace: string; channel: string }>();
