@@ -10,7 +10,8 @@ body {
   color: #1e1f13;
 }
 body:before {
-  animation: grain 8s steps(10) infinite;
+  /* animation: grain 8s steps(10) infinite; */
+  animation: 8s steps(10) infinite;
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/paper-pattern.png");
   content: "";
   height: 300%;

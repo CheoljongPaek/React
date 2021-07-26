@@ -279,4 +279,7 @@
     App.css을 임포트함.
   : Menu modal 만들기 + framer-motion 부품 만들기 진행.
   : 타입 FC와 VFC는 권장을 안 하니 타입스크립트 칫싯 읽으면서 도전하기.
-  
+# Day 30
+  : react-custom-scrollbars의 props인 renderTrack... 으로
+    스크롤시 버튼 svg 사라지게 만들기.
+    또한, menu 밖으로 마우스가 나가면 menu 컴포넌트 해제.

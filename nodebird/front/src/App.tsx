@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import loadable from '@loadable/component';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -7,6 +7,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import {AnimatePresence} from 'framer-motion';
 import Header from "@components/Header"
 import { imageProps } from '@typings/db';
+import Menu from '@components/Menu';
 
 library.add(fab, fas);
 
@@ -26,7 +27,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Route render={({location}) => (  
           // initial={false}        
           <AnimatePresence  exitBeforeEnter>
@@ -40,6 +41,11 @@ function App() {
                 exact
                 path='/model/:id'
                 render={() => <Model imageDetails={imageDetails} />}
+              />
+              <Route
+                exact
+                path='/test/menu/1'
+                render={() => <Menu/>}
               />
             </Switch>
           </AnimatePresence>
