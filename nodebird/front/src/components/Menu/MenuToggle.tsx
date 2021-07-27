@@ -5,14 +5,9 @@ import MenuStyle from "@styles/global/menu"
 import Navigation from '@components/Navigation';
 // import useDimensions from "react-use-dimensions";
 const Path = (props: JSX.IntrinsicAttributes & SVGMotionProps<SVGPathElement> & React.RefAttributes<SVGPathElement>) => {
-  const { scrollYProgress } = useViewportScroll();
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-
-  
   return (
     <>
       <motion.path
-        style={{opacity: opacity}}
         fill="transparent"
         strokeWidth="3"
         stroke="hsl(0, 0%, 18%)"
@@ -24,11 +19,16 @@ const Path = (props: JSX.IntrinsicAttributes & SVGMotionProps<SVGPathElement> & 
   );
 };
 
+interface customStyleProps {
+  opacity: string;
+}
+
 interface ToggleProps {
+  customStyle: customStyleProps
   toggle: () => void
 }
 
-const MenuToggle = ({ toggle }: ToggleProps) => {
+const MenuToggle = ({ customStyle, toggle }: ToggleProps) => {
   const { scrollYProgress } = useViewportScroll()
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.3]);
   
@@ -36,7 +36,7 @@ const MenuToggle = ({ toggle }: ToggleProps) => {
   
   return (
     <>
-      <button onMouseEnter={toggle} onClick={toggle}>
+      <button style={customStyle} onMouseEnter={toggle} onClick={toggle}>
         <svg width="23" height="23" viewBox="0 0 23 23">
           <Path
             variants={{
@@ -45,10 +45,12 @@ const MenuToggle = ({ toggle }: ToggleProps) => {
             }}
           />
           <Path
-            d="M 2 9.423 L 20 9.423"
+            // d="M 2 9.423 L 20 9.423"
             variants={{
-              closed: { opacity: 1 },
-              open: { opacity: 0 }
+              closed: { d: "M 2 9.423 L 20 9.423" },
+              open: { d: "M 0 0 L 0 0" }
+              // closed: { opacity: 1 },
+              // open: { opacity: 0 }
             }}
             transition={{ duration: 0.1 }}
           />

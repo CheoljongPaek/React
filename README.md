@@ -283,3 +283,9 @@
   : react-custom-scrollbars의 props인 renderTrack... 으로
     스크롤시 버튼 svg 사라지게 만들기.
     또한, menu 밖으로 마우스가 나가면 menu 컴포넌트 해제.
+  : menu items가 화면에 부딪히거나 밖으로 나가면 흐리게 설정.
+# Day 31
+  : MenuItem 컴포넌트는 부모 컴포넌트인 Navigation에서 map으로 생성되기에
+    props값이 변경될 경우 리렌더링이 map 함수 반복만큼 발생.
+    그래서 상태 관리를 부모 컴포넌트에서 실행.
+    items 각각의 height를 배열이나 오브젝트에 넣기를 고려.
