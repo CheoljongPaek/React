@@ -15,7 +15,6 @@ const Path = (props: JSX.IntrinsicAttributes & SVGMotionProps<SVGPathElement> & 
         {...props}
       />  
     </>
-
   );
 };
 
@@ -29,11 +28,6 @@ interface ToggleProps {
 }
 
 const MenuToggle = ({ customStyle, toggle }: ToggleProps) => {
-  const { scrollYProgress } = useViewportScroll()
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.3]);
-  
-  
-  
   return (
     <>
       <button style={customStyle} onMouseEnter={toggle} onClick={toggle}>
@@ -48,7 +42,7 @@ const MenuToggle = ({ customStyle, toggle }: ToggleProps) => {
             // d="M 2 9.423 L 20 9.423"
             variants={{
               closed: { d: "M 2 9.423 L 20 9.423" },
-              open: { d: "M 0 0 L 0 0" }
+              open: { d: "M 11 9.423 L 11 9.423" }
               // closed: { opacity: 1 },
               // open: { opacity: 0 }
             }}

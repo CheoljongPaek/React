@@ -1,5 +1,4 @@
-import React, { useLayoutEffect, useRef, useState, memo, useCallback } from "react";
-import { DetailedInformation } from './styles' 
+import React, { useRef, useState, memo, useCallback, useEffect } from "react";
 import { motion, useCycle } from 'framer-motion';
 import MenuStyle from "@styles/global/menu"
 import Navigation from '@components/Navigation';
@@ -36,23 +35,41 @@ interface positionValues {
   scrollLeft: number;
   scrollTop: number;
 }
+
 const Menu = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [scrollToBottom, setScrollToBottom] = useState(1);
   const containerRef = useRef(null);
+  const gather = useRef<Array<number | undefined>>(Array(25));
   const height = 550;
+  const itemCounts = useRef(25);
 
   const scrollFrame = (values: positionValues) => {
-    // console.log('scrollFrame: ', values.top);  
-    setScrollToBottom(1-values.top)
-    // console.log(scrollToBottom);
-    
-    // const color = values.top * 255;
-    // const customStyle = {
-    //   backgroundColor: `rgb(${color}, ${color}, ${color})`
-    // };
-    // console.log(customStyle);
-  }
+    setScrollToBottom(1 - values.top);    
+  };
+
+  const detectTouch = useCallback(() => {
+    console.log('detectTouch');
+    for (let i = 0; i < Math.round(itemCounts.current/2); i++) {      
+      const itemHeight = document.getElementById(`MenuItem${i}`)?.getBoundingClientRect().top;
+      if (itemHeight && itemHeight > 0) {
+        gather.current[i] = 1;
+        document.getElementById(`MenuItem${i}`)!.style.opacity = "1";
+      } else {
+        gather.current[i] = -1;
+        document.getElementById(`MenuItem${i}`)!.style.opacity = "0.15";
+      }
+    }
+    for (let i = Math.round(itemCounts.current/2); i < itemCounts.current; i++) {      
+      const itemBottom = document.getElementById(`MenuItem${i}`)?.getBoundingClientRect().bottom;
+      if (itemBottom && itemBottom < window.innerHeight -20) {
+        document.getElementById(`MenuItem${i}`)!.style.opacity = "1";
+      } else {
+        document.getElementById(`MenuItem${i}`)!.style.opacity = "0.15";
+      }
+    }    
+  }, []);
+
   const customStyle = {
     opacity: `${scrollToBottom}`
   }
@@ -65,8 +82,7 @@ const Menu = () => {
     
   }
   const scrollStop = () => {
-    console.log('scrollStop');
-    
+    detectTouch();
   }
   
   return (
@@ -78,13 +94,12 @@ const Menu = () => {
         custom={height}
         ref={containerRef}
         className="menu"
-        // style={customStyle}
       >
         <motion.div className="background" variants={sidebar} />
-        {/* {isOpen && <Navigation/>} */}
         {isOpen && 
         <Scrollbars 
           onScrollFrame={scrollFrame}
+          onScrollStop={scrollStop}
           autoHide 
           id="scrollbars"
         >

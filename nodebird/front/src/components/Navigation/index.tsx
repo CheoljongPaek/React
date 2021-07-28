@@ -22,10 +22,15 @@ const Navigation = () => {
 
   
   useEffect(() => {
-    const height0 = document.getElementById('MenuItem0')?.scrollHeight;
-    const height24 = document.getElementById('MenuItem24')?.scrollHeight;
-    console.log(height0);
-    console.log(height24);
+    // const height0 = document.getElementById('MenuItem0')?.getBoundingClientRect();
+    // const height24 = document.getElementById('MenuItem24')?.getBoundingClientRect();
+    // const window1 = window.screen;
+    // console.log(height0);
+    // console.log(height24);
+    // console.log(window1);
+    // console.log();
+    
+    
     
   }, [])
 

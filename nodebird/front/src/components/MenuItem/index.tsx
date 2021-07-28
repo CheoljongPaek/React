@@ -1,5 +1,8 @@
 import { memo, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from 'react-router-dom';
+// import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
+import {FontAwesomeIcon as Fa} from '@fortawesome/react-fontawesome'
 
 const variants = {
   open: {
@@ -26,8 +29,35 @@ interface ItemProps {
 }
 
 const MenuItem = ({ itemHeight, i }: ItemProps) => {
-  const style = { border: `2px solid ${colors[i%5]}` };
-  console.log('menuItems count');
+  let style = {border: '0px', color: 'black'};
+  const iconStyle = { color: `${colors[Math.floor(i/5)]}` };
+
+  let index = ` `;
+  let title = '';
+  switch (i / 5) {
+    case 0:
+      title = "첫번째!";
+      break;
+    case 1:
+      title = "두번째!";
+      break;
+    case 2:
+      title = "세번째!";
+      break;
+    case 3:
+      title = "네번째!";
+      break;
+    case 4:
+      title = "다섯번째!";
+      break;
+    default:
+      style = { border: `2px solid ${colors[Math.floor(i/5)]}`, color: 'black' }
+      index = `\xa0${i}.\xa0`
+  }
+
+  if (i === 1) {
+    title += "WhoAmI"
+  }
 
   
   return (
@@ -37,8 +67,10 @@ const MenuItem = ({ itemHeight, i }: ItemProps) => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
-      <div className="icon-placeholder" style={style} />
-      <div className="text-placeholder" style={style} />
+      <Fa icon="check" size="3x" style={iconStyle}/>
+      <Link to = {`./${title}`}>
+        <div className="text-placeholder" style={style}>{index + title}</div>
+      </Link>
     </motion.li>
   );
 }
