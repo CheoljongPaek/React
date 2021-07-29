@@ -295,3 +295,9 @@
 # Day 33
   : toggle을 상위컴포넌트인 menu에서 관리하게 하고 menu modal 자체를 부품으로써
     사용하게 만든다.
+# Day 34
+  : router를 먼저 구상해놓을걸... 다음 프로젝트부터는 구상부터 하자.
+  : whoami라는 프로젝트로 라우터간 이동에 framer 사용.
+  : css in js를 위해 emotion 사용.
+  Base.tsx의 emotion화부터.
+

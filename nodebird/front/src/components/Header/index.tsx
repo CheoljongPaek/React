@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { CircleMenu, HContainer, Logo } from './styles';
-import Square from '@components/multisquare'
+// import Square from '@components/Multisquare'
 
 const Header = () => {
   return (

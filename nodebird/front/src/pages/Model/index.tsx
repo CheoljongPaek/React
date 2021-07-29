@@ -1,4 +1,4 @@
-import React, { useEffect, useState, VFC } from "react";
+import React, { memo, useEffect, useState, VFC } from "react";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 import ScrollForMore from "@components/scrollForMore";
 import DetailedInfo from "@components/DetailedInfo";
@@ -41,7 +41,9 @@ const letter = {
 const FirstName = 'Yasmeen';
 const SecondName = 'Tariq';
 
-const Model: VFC<HomeProps> = ({ imageDetails }) => {
+const Model: VFC<HomeProps> = ({ location, imageDetails }) => {
+  console.log(location);
+  
   const { scrollYProgress } = useViewportScroll();
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
   const [canScroll, setCanScroll] = useState(false);
@@ -144,4 +146,4 @@ const Model: VFC<HomeProps> = ({ imageDetails }) => {
   );
 };
 
-export default Model;
+export default memo(Model);

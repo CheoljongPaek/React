@@ -4,6 +4,9 @@ import MenuStyle from "@styles/global/menu"
 import Navigation from '@components/Navigation';
 import MenuToggle from './MenuToggle';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { Route, Switch } from 'react-router';
+import DetailedInfo from '@components/DetailedInfo';
+import { Nav } from './styles';
 // import useDimensions from "react-use-dimensions";
 
 const sidebar = {
@@ -45,7 +48,7 @@ const Menu = () => {
   const itemCounts = useRef(25);
 
   const scrollFrame = (values: positionValues) => {
-    setScrollToBottom(1 - values.top);    
+    // setScrollToBottom(1 - values.top);    
   };
 
   const detectTouch = useCallback(() => {
@@ -84,11 +87,17 @@ const Menu = () => {
   const scrollStop = () => {
     detectTouch();
   }
+  if (isOpen) {
+    console.log('1');
+  } else {
+    console.log('2');
+    //here
+  }
   
   return (
     <>
       <MenuStyle />
-      <motion.nav
+      <Nav
         initial={false}
         animate={isOpen ? "open" : "closed"}
         custom={height}
@@ -106,7 +115,11 @@ const Menu = () => {
           <Navigation/>
         </Scrollbars>}
         <MenuToggle customStyle={customStyle} toggle={() => toggleOpen()} />
-      </motion.nav>
+      </Nav>
+      <Switch>
+        <Route path="/test/menu/whoami" component={DetailedInfo} />
+        {/* <Route path="/workspace/2" component={Multisquare} /> */}
+      </Switch>
     </>
   );
 };

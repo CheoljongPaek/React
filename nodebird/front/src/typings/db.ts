@@ -1,9 +1,12 @@
+import * as H from "history";
+
 export interface imageProps {
   width: number
   height: number
 };
 
 export interface HomeProps {
+  location: H.Location
   imageDetails: imageProps,
   image?: string
 }

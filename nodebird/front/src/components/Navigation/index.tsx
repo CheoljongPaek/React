@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import MenuItem from '@components/MenuItem';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { ItemList } from '@components/Menu/styles';
 
 const itemIds = Array(25).fill('').map((v,i) => i);
 
@@ -36,11 +37,11 @@ const Navigation = () => {
 
   return (
     <>
-      <motion.ul variants={variants}>
+      <ItemList variants={variants}>
         {itemIds.map(i => (
           <MenuItem itemHeight={itemHeight} i={i} key={i} />
         ))}
-      </motion.ul>
+      </ItemList>
     </>
   )
 };

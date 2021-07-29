@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from 'react-router-dom';
 // import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
 import {FontAwesomeIcon as Fa} from '@fortawesome/react-fontawesome'
+import { Item } from '@components/Menu/styles';
 
 const variants = {
   open: {
@@ -32,7 +33,7 @@ const MenuItem = ({ itemHeight, i }: ItemProps) => {
   let style = {border: '0px', color: 'black'};
   const iconStyle = { color: `${colors[Math.floor(i/5)]}` };
 
-  let index = ` `;
+  let index = ``;
   let title = '';
   switch (i / 5) {
     case 0:
@@ -52,26 +53,28 @@ const MenuItem = ({ itemHeight, i }: ItemProps) => {
       break;
     default:
       style = { border: `2px solid ${colors[Math.floor(i/5)]}`, color: 'black' }
-      index = `\xa0${i}.\xa0`
+      index = `\xa0${i - Math.floor(i/5)}.\xa0`
   }
 
   if (i === 1) {
-    title += "WhoAmI"
+    title += "WhoAmI";
+  } else if(i === 6) {
+    title += "Check";
   }
 
   
   return (
-    <motion.li
+    <Item
       id={`MenuItem${i}`}
       variants={variants}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
-      <Fa icon="check" size="3x" style={iconStyle}/>
-      <Link to = {`./${title}`}>
+      {(i % 5 !== 0) || <Fa icon="check" size="3x" style={iconStyle}/>}
+      <Link to = {`./${title.toLowerCase()}`}>
         <div className="text-placeholder" style={style}>{index + title}</div>
       </Link>
-    </motion.li>
+    </Item>
   );
 }
 

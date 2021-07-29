@@ -28,23 +28,21 @@ function App() {
     <div className="App">
       <Router>
         {/* <Header /> */}
-        <Route render={({location}) => (  
+        <Route render={({location, match}) => (  
           // initial={false}        
           <AnimatePresence  exitBeforeEnter>
             <Switch location={location} key={location.pathname}>
-              <Route
+              {/* <Route
                 exact
                 path='/'
                 render={() => <Home imageDetails={imageDetails} />}
-              />
+              /> */}
               <Route
-                exact
                 path='/model/:id'
-                render={() => <Model imageDetails={imageDetails} />}
+                render={() => <Model location={location} imageDetails={imageDetails} />}
               />
               <Route
-                exact
-                path='/test/menu/1'
+                path='/test/menu/:title'
                 render={() => <Menu/>}
               />
             </Switch>

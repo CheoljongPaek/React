@@ -1,32 +1,53 @@
-import React from "react";
+import Base from '@components/WhoAmI/Base';
+import Home from '@components/WhoAmI/Home';
+import Order from '@components/WhoAmI/Order';
+import Toppings from '@components/WhoAmI/Toppings';
+import React, { memo, useState } from "react";
+import { Route, Switch } from 'react-router';
 import { DetailedInformation } from './styles' 
+import WhoamiStyle from "@styles/global/whoami"
+
+interface pizzaProps {
+  base: string;
+  toppings: Array<string>
+}
 
 const DetailedInfo = () => {
+  console.log('detailedInfo');
+  const [pizza, setPizza] = useState<pizzaProps>({ base: "", toppings : [] });
+  const addBase = (base: string) => {
+    setPizza({ ...pizza, base });
+  }
+  const addTopping = (topping: string) => {
+    let newToppings;
+    if (!pizza.toppings.includes(topping)) {
+      newToppings = [...pizza.toppings, topping];
+    } else {
+      newToppings = pizza.toppings.filter(item => item !== topping);
+    }
+    setPizza({ ...pizza, toppings: newToppings });
+  }
+
   return (
-    <DetailedInformation className='detailed-information'>
-      <div className='container'>
-        <div className='row'>
-          <h2 className='title'>
-            The insiration behind the artwork <br /> what it means.
-          </h2>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin
-            professor at Hampden-Sydney College in Virginia, looked up one of
-            the more obscure Latin words, consectetur, from a Lorem Ipsum
-            passage, and going through the cites of the word in classical
-            literature, discovered the undoubtable source. Lorem Ipsum comes
-            from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et
-            Malorum" (The Extremes of Good and Evil) by Cicero, written in 45
-            BC. This book is a treatise on the theory of ethics, very popular
-            during the Renaissance. The first line of Lorem Ipsum, "Lorem
-            ipsum dolor sit amet..", comes from a line in section 1.10.32.
-          </p>
-        </div>
-      </div>
-    </DetailedInformation>
+    <>
+      <WhoamiStyle />
+      <Switch>
+        <Route
+          path='/test/menu/whoami/base'
+          render={() => <Base addBase={addBase} pizza={pizza} />}
+        />
+        <Route path="/test/menu/whoami/toppings">
+          {/* <Toppings addTopping={addTopping} pizza={pizza} /> */}
+        </Route>
+        <Route path="/test/menu/whoami/order">
+          {/* <Order pizza={pizza} /> */}
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </>
   );
 };
 
-export default DetailedInfo;
+export default memo(DetailedInfo);
