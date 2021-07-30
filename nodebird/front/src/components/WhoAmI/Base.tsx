@@ -1,6 +1,10 @@
-import React, { memo, useState } from "react";
+import { PizzaContext } from '@components/DetailedInfo';
+import React, { memo, useContext, useState } from "react";
+import { useCallback } from 'react';
 import { Route, Switch } from 'react-router';
 import { Link } from 'react-router-dom';
+import Header from './Header';
+import { BaseContainer, Btn, List, ListContainer } from './styles';
 
 interface pizzaProps {
   base: string;
@@ -13,31 +17,38 @@ interface BaseProps {
 }
 
 //addBase props는 상위 컴포넌트 state 값을 변경.
-const Base = ({addBase, pizza}:BaseProps) => {
+const Base = () => {
+  const { pizza, dispatch } = useContext(PizzaContext);
   const bases = ['Classic', 'Thin & Crispy', 'Thick Crust'];
+  // dispatch({ type: CLICK_MINE, row: rowIndex, cell: cellIndex });
+
+  const onClickBaseBtn = useCallback(() => {
+    
+  }, [])
 
   return (
     <>
-      <div className="base container">
+      <Header />
+      <BaseContainer className="base container">
         <h3>Step 1: Choose Your Base</h3>
-        <ul>
+        <ListContainer>
           {bases.map(base => {
             let spanClass = pizza.base === base ? 'active' : '';
             return (
-              <li key={base} onClick={() => addBase(base)}>
+              <List key={base} onClick={onClickBaseBtn}>
                 <span className={spanClass}>{ base }</span>
-              </li>
+              </List>
             )
           })}
-        </ul>
-        {pizza.base && (
+          {pizza.base && (
           <div className="next">
-            <Link to="/test/menu/whoami/base">
-              <button>Next</button>
+            <Link to="/test/menu/whoami/toppings">
+              <Btn>Next</Btn>
             </Link>
           </div>
-        )}
-      </div>
+          )}
+        </ListContainer>
+      </BaseContainer>
     </>
   );
 };

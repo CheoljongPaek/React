@@ -40,7 +40,7 @@ export const HomeTitle = styled.h2`
   margin-bottom: 30px;
 `;
 
-export const HomeBtn = styled.button`
+export const Btn = styled.button`
   color: white;
   padding: 15px 30px;
   font-size: 1em;
@@ -50,3 +50,58 @@ export const HomeBtn = styled.button`
   margin: 40px auto 0;
   background: transparent;
 `;
+
+/* Base */
+export const BaseContainer = styled.div`
+  text-align: center;
+  max-width: 300px;
+  margin: 100px auto 40px;
+  & h3 {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+`;
+
+/* Toppings */
+export const ToppingsContainer = styled.div`
+  text-align: center;
+  max-width: 300px;
+  margin: 100px auto 40px;
+  & h3 {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+`;
+
+//
+export const ListContainer = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+export const List = styled.li`
+  & span {
+    opacity: 0.8;
+  }
+  & span:hover {
+    font-weight: bold;
+  }
+  & span.active {
+    opacity: 1;
+    font-weight: bold;
+  }
+  & span.active::before {
+    content: '>';
+    position: relative;
+    top: -2px;
+    margin-right: 6px;
+    transform: scale(0.8, 1);
+    display: inline-block;
+  }
+`;
+export const OrderParagraph = styled.p`
+  margin: 20px auto;
+`

@@ -300,4 +300,5 @@
   : whoami라는 프로젝트로 라우터간 이동에 framer 사용.
   : css in js를 위해 emotion 사용.
   Base.tsx의 emotion화부터.
-
+# Day
+  : context api with typescript로 데이터를 상위 컴포넌트에서 관리.

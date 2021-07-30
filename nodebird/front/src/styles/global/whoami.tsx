@@ -1,11 +1,14 @@
 import { Global, css } from '@emotion/react'
 
 const style = css`
+  /* fonts */
+  // import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&display=swap');
+
   body, ul, h1, h2, h3, p, button, a, div{
     margin: 0;
     padding: 0;
     color: white;
-    font-family: 'Quicksand';
+    font-family: 'Open Sans Condensed', sans-serif;
     letter-spacing: 2px;
     list-style-type: none;
     text-decoration: none;
@@ -32,6 +35,10 @@ const style = css`
   .container{
     max-width: 300px;
     margin: 100px auto 40px;
+  }
+  .container li{
+    padding: 10px;
+    cursor: pointer;
   }
 `
 
