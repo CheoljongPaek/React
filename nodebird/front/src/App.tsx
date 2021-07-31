@@ -1,5 +1,5 @@
 // import './App.css';
-import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
+import { Switch, BrowserRouter as Router, Route, RouteComponentProps } from 'react-router-dom';
 import loadable from '@loadable/component';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
@@ -8,6 +8,8 @@ import {AnimatePresence} from 'framer-motion';
 import Header from "@components/Header"
 import { imageProps } from '@typings/db';
 import Menu from '@components/Menu';
+import WhoAmI from '@components/WhoAmI/WhoAmI';
+import { SampleProvider } from '@contextapi/menuapi';
 
 library.add(fab, fas);
 
@@ -28,26 +30,31 @@ function App() {
     <div className="App">
       <Router>
         {/* <Header /> */}
-        <Route render={({location, match}) => (  
-          // initial={false}        
-          <AnimatePresence  exitBeforeEnter>
-            <Switch location={location} key={location.pathname}>
+        {/* <Route render={({location, match, history}) => (  
+          <AnimatePresence initial={false} exitBeforeEnter> */}
+            <Switch>
               {/* <Route
                 exact
                 path='/'
                 render={() => <Home imageDetails={imageDetails} />}
               /> */}
-              <Route
+              {/* <Route
                 path='/model/:id'
                 render={() => <Model location={location} imageDetails={imageDetails} />}
-              />
-              <Route
-                path='/test/menu/:title'
-                render={() => <Menu/>}
-              />
+              /> */}
+              <Route exact path="/menu/whoami/:title">
+                <SampleProvider>
+                  <WhoAmI location={location} match={match} history={history}/>
+                </SampleProvider>
+              </Route>
+              <Route 
+                path="/menu/whoami/:title"
+                render={(props) => <SampleProvider>
+                  <WhoAmI {...props} />
+                </SampleProvider>} />
             </Switch>
-          </AnimatePresence>
-        )} />
+          {/* </AnimatePresence>
+        )} /> */}
       </Router>
 
       {/* <Router>

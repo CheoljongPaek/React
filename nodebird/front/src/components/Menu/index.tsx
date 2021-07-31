@@ -5,7 +5,6 @@ import Navigation from '@components/Navigation';
 import MenuToggle from './MenuToggle';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Route, Switch } from 'react-router';
-import DetailedInfo from '@components/DetailedInfo';
 import { Nav } from './styles';
 // import useDimensions from "react-use-dimensions";
 
@@ -116,10 +115,9 @@ const Menu = () => {
         </Scrollbars>}
         <MenuToggle customStyle={customStyle} toggle={() => toggleOpen()} />
       </Nav>
-      <Switch>
+      {/* <Switch>
         <Route path="/test/menu/whoami" component={DetailedInfo} />
-        {/* <Route path="/workspace/2" component={Multisquare} /> */}
-      </Switch>
+      </Switch> */}
     </>
   );
 };

@@ -1,23 +1,20 @@
-import React, { memo, useState } from "react";
-import { Route, Switch } from 'react-router';
+import React, { memo } from "react";
 import { Link } from 'react-router-dom';
 import Header from './Header';
-import { BaseContainer, Btn, List, ListContainer, ToppingsContainer } from './styles';
+import { Btn, List, ListContainer, ToppingsContainer } from './styles';
+import { useCallback } from 'react';
+import { useSampleDispatch, useSampleState } from '@contextapi/menuapi';
 
-interface pizzaProps {
-  base: string;
-  toppings: Array<string>
-}
+const Toppings = () => {
+  const state = useSampleState();
+  const dispatch = useSampleDispatch();
 
-interface ToppingsProps {
-  addTopping: (topping: string) => void;
-  pizza: pizzaProps;
-}
-
-const Toppings = ({ addTopping, pizza }: ToppingsProps) => {
-  console.log('pizza: ', pizza);
-  
   let toppings = ['mushrooms', 'peppers', 'onions', 'olives', 'extra cheese', 'tomatoes'];
+
+  const onClickToppingsBtn = useCallback((e) => {
+    dispatch({ type: 'ADD_TOPPINGS', topping: e.target.innerText })
+  }, [dispatch]);
+
   return (
     <>
       <Header />
@@ -25,14 +22,14 @@ const Toppings = ({ addTopping, pizza }: ToppingsProps) => {
         <h3>Step 1: Choose Your Base</h3>
         <ListContainer>
           {toppings.map(topping => {
-            let spanClass = pizza.toppings.includes(topping) ? 'active' : '';
+            let spanClass = state.pizza.toppings.includes(topping) ? 'active' : '';
             return (
-              <List key={topping} onClick={() => addTopping(topping)}>
+              <List key={topping} onClick={onClickToppingsBtn}>
                 <span className={spanClass}>{ topping }</span>
               </List>
             )
           })}
-          {pizza.toppings && (
+          {state.pizza.toppings && (
           <div className="next">
             <Link to="/test/menu/whoami/order">
               <Btn>Next</Btn>

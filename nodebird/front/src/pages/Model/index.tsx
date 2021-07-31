@@ -1,7 +1,6 @@
 import React, { memo, useEffect, useState, VFC } from "react";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 import ScrollForMore from "@components/scrollForMore";
-import DetailedInfo from "@components/DetailedInfo";
 import {SContainer, Details, FullName, ThumbnailSingle} from './styles';
 import { HomeProps } from '@typings/db';
 import ModelStyle from "@styles/global/model"
@@ -107,8 +106,8 @@ const Model: VFC<HomeProps> = ({ location, imageDetails }) => {
                 <ThumbnailSingle
                   initial={{
                     y: "-50%",
-                    width: imageDetails.width,
-                    height: imageDetails.height,
+                    width: imageDetails?.width,
+                    height: imageDetails?.height,
                   }}
                   animate={{
                     y: 0,
@@ -140,7 +139,6 @@ const Model: VFC<HomeProps> = ({ location, imageDetails }) => {
             <ScrollForMore />
           </div>
         </div>
-        <DetailedInfo />
       </SContainer>
     </>
   );

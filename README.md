@@ -300,5 +300,10 @@
   : whoami라는 프로젝트로 라우터간 이동에 framer 사용.
   : css in js를 위해 emotion 사용.
   Base.tsx의 emotion화부터.
-# Day
+# Day 35
   : context api with typescript로 데이터를 상위 컴포넌트에서 관리.
+    하지만 라우트로 url이 변경될 시 값 저장이 안 되는 건 마찬가지이다.
+    useswr로 데이터 관리 시작.
+# Day 36
+  : App.tsx의 라우터의 구조 변경 필요. Switch를 Route로 감싸지 말지만
+    또한 RouteComponentProps 사용도 고려해야한다.

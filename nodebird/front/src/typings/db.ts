@@ -1,4 +1,6 @@
 import * as H from "history";
+// import { RouteComponentProps } from 'react-router-dom';
+
 
 export interface imageProps {
   width: number
@@ -9,6 +11,23 @@ export interface HomeProps {
   location: H.Location
   imageDetails: imageProps,
   image?: string
+}
+// export interface RouteComponentProps<P> {
+//   match: match<P>;
+//   location: H.Location;
+//   history: H.History;
+//   staticContext?: any;
+// }
+
+export interface match<P> {
+  params: P;
+  isExact: boolean;
+  path: string;
+  url: string;
+}
+export interface urlHistory<P> {
+  match: match<P>;
+  location: H.Location
 }
 /* example
 export interface IUser {

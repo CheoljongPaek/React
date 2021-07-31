@@ -9,7 +9,8 @@
       "@hooks/*": ["hooks/*"],
       "@typings/*": ["typings/*"],
       "@styles/*": ["styles/*"],
-      "@images/*": ["images/*"]
+      "@images/*": ["images/*"],
+      "@contextapi/*": ["contextapi/*"]
     }
   }
 }
