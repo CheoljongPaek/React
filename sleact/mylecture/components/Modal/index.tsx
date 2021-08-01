@@ -7,6 +7,8 @@ interface Props {
   onCloseModal: () => void;
 }
 
+//<Modal show={showCreateWorkspaceModal} onCloseModal={onCloseModal}>
+
 const Modal: FC<Props> = ({children, show, onCloseModal}) => {
   const stopPropagation = useCallback((e) => {
     e.stopPropagation();

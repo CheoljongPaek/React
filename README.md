@@ -307,3 +307,9 @@
 # Day 36
   : App.tsx의 라우터의 구조 변경 필요. Switch를 Route로 감싸지 말지만
     또한 RouteComponentProps 사용도 고려해야한다.
+    라우터가 다른 주소를 계속 통과하면서 path가 마지막 주소로 뜬 거 아닌지 확인필요.
+    **
+# Day 37
+  : dimmer과 children사이에 stopPropagtion을 가진 태그를 배치.
+  : 모달의 x토글버튼도 Navigation 컴포넌트에 포함되게 만들것.
+  모달로 감싸니 framer motion 안 되는 이유 찾기.

@@ -9,8 +9,11 @@ import Menu from '@components/Menu';
 import { RouteComponentProps } from 'react-router-dom';
 import { useEffect } from 'react';
 
+interface MatchParams {
+  title: string;
+}
 
-const WhoAmI = ({location, match, history}:RouteComponentProps) => {
+const WhoAmI = ({location, match, history}:RouteComponentProps<MatchParams>) => {
 
   console.log('location: ', location);
   console.log('match: ', match);
@@ -20,21 +23,31 @@ const WhoAmI = ({location, match, history}:RouteComponentProps) => {
     console.log('match: ', match);
   }, [])
 
+  // let a;
+  // if (match.params.title === "base") {
+  //   a = <Base />
+  // } else if(match.params.title === "toppings") {
+  //   a = <Toppings />
+  // } else if(match.params.title === "order") {
+  //   a = <Order />
+  // }
+
   return (
     <>
       <WhoamiStyle />
       <Menu />
+      {/* {a} */}
       <Switch>
         <Route path="/menu/whoami/base">
-            <Base />
+          <Base />
         </Route>
         <Route path="/menu/whoami/toppings">
-            <Toppings />
+          <Toppings />
         </Route>
         <Route path="/menu/whoami/order">
           <Order />
         </Route> 
-        <Route exact path="/">
+        <Route path="/menu/whoami/main">
           <Home />
         </Route>
       </Switch>

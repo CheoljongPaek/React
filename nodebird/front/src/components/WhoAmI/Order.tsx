@@ -6,6 +6,8 @@ import { OrderParagraph } from './styles';
 
 
 const Order = () => {
+  console.log('Order');
+  
   const state = useSampleState();
   const dispatch = useSampleDispatch();
   

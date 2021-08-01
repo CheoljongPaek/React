@@ -30,8 +30,8 @@ function App() {
     <div className="App">
       <Router>
         {/* <Header /> */}
-        {/* <Route render={({location, match, history}) => (  
-          <AnimatePresence initial={false} exitBeforeEnter> */}
+        {/* <Route render={({location, match, history}) => (   */}
+          <AnimatePresence exitBeforeEnter>
             <Switch>
               {/* <Route
                 exact
@@ -42,19 +42,19 @@ function App() {
                 path='/model/:id'
                 render={() => <Model location={location} imageDetails={imageDetails} />}
               /> */}
-              <Route exact path="/menu/whoami/:title">
-                <SampleProvider>
-                  <WhoAmI location={location} match={match} history={history}/>
-                </SampleProvider>
-              </Route>
+
+              
+              
               <Route 
                 path="/menu/whoami/:title"
-                render={(props) => <SampleProvider>
+                render={(props) => 
+                <SampleProvider>
                   <WhoAmI {...props} />
-                </SampleProvider>} />
+                </SampleProvider>} 
+              />
             </Switch>
-          {/* </AnimatePresence>
-        )} /> */}
+          </AnimatePresence>
+        {/* )} /> */}
       </Router>
 
       {/* <Router>

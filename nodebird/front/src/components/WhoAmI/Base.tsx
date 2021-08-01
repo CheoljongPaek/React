@@ -18,6 +18,8 @@ interface BaseProps {
 
 //addBase props는 상위 컴포넌트 state 값을 변경.
 const Base = () => {
+  console.log('Base');
+  
   const state = useSampleState();
   const dispatch = useSampleDispatch();
 
@@ -45,7 +47,7 @@ const Base = () => {
           })}
           {state.pizza.base && (
           <div className="next">
-            <Link to="/test/menu/whoami/toppings">
+            <Link to="/menu/whoami/toppings">
               <Btn>Next</Btn>
             </Link>
           </div>

@@ -5,7 +5,8 @@ import Header from './Header';
 import { Btn, HomeContainer, HomeTitle } from './styles';
 
 const Home = () => {
-
+  console.log('Home');
+  
   return (
     <>
       <Header />
@@ -13,7 +14,7 @@ const Home = () => {
         <HomeTitle>
           Welcome to Pizza Joint
         </HomeTitle>
-        <Link to="/test/menu/whoami/base">
+        <Link to="/menu/whoami/base">
           <Btn>
             Create Your Pizza
           </Btn>

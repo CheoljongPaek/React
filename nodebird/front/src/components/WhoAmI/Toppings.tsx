@@ -6,6 +6,8 @@ import { useCallback } from 'react';
 import { useSampleDispatch, useSampleState } from '@contextapi/menuapi';
 
 const Toppings = () => {
+  console.log('Toppings');
+  
   const state = useSampleState();
   const dispatch = useSampleDispatch();
 
@@ -31,7 +33,7 @@ const Toppings = () => {
           })}
           {state.pizza.toppings && (
           <div className="next">
-            <Link to="/test/menu/whoami/order">
+            <Link to="/menu/whoami/order">
               <Btn>Next</Btn>
             </Link>
           </div>
