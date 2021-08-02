@@ -8,6 +8,7 @@ import WhoamiStyle from "@styles/global/whoami";
 import Menu from '@components/Menu';
 import { RouteComponentProps } from 'react-router-dom';
 import { useEffect } from 'react';
+import Header from './Header';
 
 interface MatchParams {
   title: string;
@@ -17,11 +18,6 @@ const WhoAmI = ({location, match, history}:RouteComponentProps<MatchParams>) => 
 
   console.log('location: ', location);
   console.log('match: ', match);
-  // console.log('history: ', history);
-  useEffect(() => {
-    console.log('location: ', location);
-    console.log('match: ', match);
-  }, [])
 
   // let a;
   // if (match.params.title === "base") {
@@ -36,7 +32,7 @@ const WhoAmI = ({location, match, history}:RouteComponentProps<MatchParams>) => 
     <>
       <WhoamiStyle />
       <Menu />
-      {/* {a} */}
+      <Header />
       <Switch>
         <Route path="/menu/whoami/base">
           <Base />

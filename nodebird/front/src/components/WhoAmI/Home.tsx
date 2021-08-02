@@ -1,21 +1,46 @@
-import React, { memo, useState } from "react";
-import { Route, Switch } from 'react-router';
+import React, { memo } from "react";
 import { Link } from 'react-router-dom';
-import Header from './Header';
 import { Btn, HomeContainer, HomeTitle } from './styles';
+import { motion } from 'framer-motion';
+
+const btnVariants = {
+  hover: {
+    scale: 1.1,
+    textShadow: "0px 0px 8px rgb(255,255,255)",
+    boxShadow: "0px 0px 8px rgb(255,255,255)",
+    transition: {
+      duration: 0.25,
+      yoyo: Infinity
+    }
+  },
+  // visible: {
+  //   x: [0, -20, 20, -20, 20, 0],
+  //   transition: {
+  //     delay: 2,
+  //   }
+  // }
+}
 
 const Home = () => {
   console.log('Home');
   
   return (
     <>
-      <Header />
-      <HomeContainer className="home container">
-        <HomeTitle>
+      <HomeContainer 
+        className="home container"
+        initial={{opacity: 0}}
+        animate={{opacity: 1}} 
+        transition={{delay: 1.5, duration: 1.5 }}
+      >
+        <HomeTitle animate={{}}>
           Welcome to Pizza Joint
         </HomeTitle>
         <Link to="/menu/whoami/base">
-          <Btn>
+          <Btn
+            variants={btnVariants}
+            // animate="visible"
+            whileHover="hover"
+          >
             Create Your Pizza
           </Btn>
         </Link>

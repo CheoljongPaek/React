@@ -313,3 +313,5 @@
   : dimmer과 children사이에 stopPropagtion을 가진 태그를 배치.
   : 모달의 x토글버튼도 Navigation 컴포넌트에 포함되게 만들것.
   모달로 감싸니 framer motion 안 되는 이유 찾기.
+# Day 38
+  : tween(default), duration / spring, stiffness

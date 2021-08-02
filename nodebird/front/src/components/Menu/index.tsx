@@ -11,25 +11,6 @@ import Modal from '@components/Modal/Modal';
 
 
 
-const sidebar = {
-  open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
-    transition: {
-      type: "spring",
-      stiffness: 20,
-      restDelta: 2
-    }
-  }),
-  closed: {
-    clipPath: "circle(30px at 40px 40px)",
-    transition: {
-      delay: 0,
-      type: "spring",
-      stiffness: 400,
-      damping: 40
-    }
-  }
-};
 interface positionValues {
   top: number;
   left: number;
@@ -52,6 +33,27 @@ const Menu = () => {
   const scrollFrame = (values: positionValues) => {
     // setScrollToBottom(1 - values.top);    
   };
+
+  
+const sidebar = {
+  open: (height = 1000) => ({
+    clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
+    transition: {
+      type: "spring",
+      stiffness: 20,
+      restDelta: 2
+    }
+  }),
+  closed: {
+    clipPath: "circle(30px at 40px 40px)",
+    transition: {
+      delay: 0,
+      type: "spring",
+      stiffness: 400,
+      damping: 40
+    }
+  }
+};
 
   const detectTouch = useCallback(() => {
     console.log('detectTouch');

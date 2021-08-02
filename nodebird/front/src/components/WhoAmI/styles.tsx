@@ -18,7 +18,7 @@ export const HeaderContainer = styled.div`
   }
 `;
 
-export const HeaderTitle = styled.div`
+export const HeaderTitle = styled(motion.div)`
   flex-grow: 1;
   margin-left: 20px;
   font-size: 0.6em;
@@ -29,18 +29,18 @@ export const HeaderTitle = styled.div`
 `;
 
 /* Home */
-export const HomeContainer = styled.div`
+export const HomeContainer = styled(motion.div)`
   text-align: center;
   max-width: 800px;
   margin: 100px auto 40px;
 `;
 
-export const HomeTitle = styled.h2`
+export const HomeTitle = styled(motion.h2)`
   font-size: 2em;
   margin-bottom: 30px;
 `;
 
-export const Btn = styled.button`
+export const Btn = styled(motion.button)`
   color: white;
   padding: 15px 30px;
   font-size: 1em;
@@ -52,7 +52,7 @@ export const Btn = styled.button`
 `;
 
 /* Base */
-export const BaseContainer = styled.div`
+export const BaseContainer = styled(motion.div)`
   text-align: center;
   max-width: 300px;
   margin: 100px auto 40px;
@@ -64,7 +64,7 @@ export const BaseContainer = styled.div`
 `;
 
 /* Toppings */
-export const ToppingsContainer = styled.div`
+export const ToppingsContainer = styled(motion.div)`
   text-align: center;
   max-width: 300px;
   margin: 100px auto 40px;
@@ -82,7 +82,7 @@ export const ListContainer = styled.ul`
   align-items: flex-start;
 `;
 
-export const List = styled.li`
+export const List = styled(motion.li)`
   & span {
     opacity: 0.8;
   }
@@ -102,6 +102,6 @@ export const List = styled.li`
     display: inline-block;
   }
 `;
-export const OrderParagraph = styled.p`
+export const OrderParagraph = styled(motion.p)`
   margin: 20px auto;
 `

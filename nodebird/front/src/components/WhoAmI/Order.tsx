@@ -1,9 +1,34 @@
 import { useSampleDispatch, useSampleState } from '@contextapi/menuapi';
 import React, { memo, useState } from "react";
-import { Route, Switch } from 'react-router';
+import { motion } from 'framer-motion';
 import { OrderParagraph } from './styles';
 
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    x: '100vw'
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: 'spring', 
+      mass: 0.4,
+      damping: 8,
+      when: "beforeChildren",
+      staggerChildren: 0.4
+    }
+  }
+};
 
+const childVariants = {
+  hidden: {
+    opacity: 0
+  },
+  visible: {
+    opacity: 1,
+  }
+}
 
 const Order = () => {
   console.log('Order');
@@ -12,11 +37,24 @@ const Order = () => {
   const dispatch = useSampleDispatch();
   
   return (
-    <div className="container order">
+    <motion.div 
+      className="container order"
+      variants={containerVariants}
+      initial= "hidden"
+      animate= "visible"
+    >
       <h2>Thank you for your order :)</h2>
-      <OrderParagraph>You ordered a {state.pizza.base} pizza with:</OrderParagraph>
-      {state.pizza.toppings.map(topping => <div key={topping}>{topping}</div>)}
-    </div>
+      <OrderParagraph
+        variants={childVariants}
+      >
+        You ordered a {state.pizza.base} pizza with:
+      </OrderParagraph>
+      <motion.div
+        variants={childVariants}
+      >
+        {state.pizza.toppings.map(topping => <div key={topping}>{topping}</div>)}
+      </motion.div>
+    </motion.div>
   )
 };
 

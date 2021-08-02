@@ -2,6 +2,7 @@ import React, { memo, useState } from "react";
 import { Route, Switch } from 'react-router';
 import { Link } from 'react-router-dom';
 import { HeaderContainer, HeaderTitle } from './styles';
+import { motion } from 'framer-motion';
 
 const Header = () => {
   
@@ -20,7 +21,12 @@ const Header = () => {
           />
         </svg>
       </div>
-      <HeaderTitle className="title">
+      <HeaderTitle 
+        className="title"
+        initial={{ y: -250 }}
+        animate={{ y: -10 }}
+        transition={{ delay: 0.2, type: 'spring', stiffness: 120}}
+      >
         <h1>Pizza Joint</h1>
       </HeaderTitle>
     </HeaderContainer>
