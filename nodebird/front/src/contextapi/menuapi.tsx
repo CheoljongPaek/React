@@ -25,7 +25,7 @@ const initialState = {
 // 리듀서
 const ADD_BASE = 'ADD_BASE';
 const ADD_TOPPINGS = 'ADD_TOPPINGS';
-const reducer = (state: State, action: Action):State => {
+const reducer = (state: State, action: Action):State => {  
   switch (action.type) {
     case ADD_BASE:
       const pizza = {...state.pizza};

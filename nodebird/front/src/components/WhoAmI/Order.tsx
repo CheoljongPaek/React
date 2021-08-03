@@ -1,6 +1,6 @@
 import { useSampleDispatch, useSampleState } from '@contextapi/menuapi';
 import React, { memo, useState } from "react";
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { OrderParagraph } from './styles';
 
 const containerVariants = {
@@ -17,6 +17,12 @@ const containerVariants = {
       damping: 8,
       when: "beforeChildren",
       staggerChildren: 0.4
+    }
+  },
+  exit: {
+    x: '-100vw',
+    transition: {
+      ease: 'easeInOut'
     }
   }
 };
@@ -42,8 +48,11 @@ const Order = () => {
       variants={containerVariants}
       initial= "hidden"
       animate= "visible"
+      exit="exit"
     >
+
       <h2>Thank you for your order :)</h2>
+
       <OrderParagraph
         variants={childVariants}
       >

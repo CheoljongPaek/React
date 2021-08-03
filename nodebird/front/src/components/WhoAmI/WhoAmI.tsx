@@ -3,50 +3,43 @@ import Home from '@components/WhoAmI/Home';
 import Order from '@components/WhoAmI/Order';
 import Toppings from '@components/WhoAmI/Toppings';
 import React, { memo, VFC } from "react";
-import { Route, Switch } from 'react-router';
+import { Route, Switch, useLocation } from 'react-router';
 import WhoamiStyle from "@styles/global/whoami";
 import Menu from '@components/Menu';
-import { RouteComponentProps } from 'react-router-dom';
-import { useEffect } from 'react';
 import Header from './Header';
+import {AnimatePresence} from 'framer-motion';
 
-interface MatchParams {
-  title: string;
-}
 
-const WhoAmI = ({location, match, history}:RouteComponentProps<MatchParams>) => {
-
-  console.log('location: ', location);
-  console.log('match: ', match);
-
-  // let a;
-  // if (match.params.title === "base") {
-  //   a = <Base />
-  // } else if(match.params.title === "toppings") {
-  //   a = <Toppings />
-  // } else if(match.params.title === "order") {
-  //   a = <Order />
-  // }
+const WhoAmI = () => {
+  const location = useLocation();
+  console.log('locationkey2: ', location.key);
+// locationkey1:  yp5ltp
+// locationkey2:  pbwfgh
+// 0.1s
+// locationkey2:  yp5ltp
 
   return (
     <>
       <WhoamiStyle />
-      <Menu />
+      {/* <Menu /> */}
       <Header />
-      <Switch>
-        <Route path="/menu/whoami/base">
-          <Base />
-        </Route>
-        <Route path="/menu/whoami/toppings">
-          <Toppings />
-        </Route>
-        <Route path="/menu/whoami/order">
-          <Order />
-        </Route> 
-        <Route path="/menu/whoami/main">
-          <Home />
-        </Route>
-      </Switch>
+      <AnimatePresence exitBeforeEnter>
+        <Switch location={location} key={location.key}>
+          <Route path="/menu/whoami/base">
+            <Base />
+          </Route>
+          <Route path="/menu/whoami/toppings">
+            <Toppings />
+          </Route>
+          <Route path="/menu/whoami/order">
+            <Order />
+          </Route> 
+          <Route path="/menu/whoami/main">
+            <Home />
+          </Route>
+        </Switch>
+      </AnimatePresence>
+
     </>
   );
 };
