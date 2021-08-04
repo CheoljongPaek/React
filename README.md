@@ -315,3 +315,11 @@
   모달로 감싸니 framer motion 안 되는 이유 찾기.
 # Day 38
   : tween(default), duration / spring, stiffness
+# Day 39
+  : component unmout시 AnimatePresence까지 포함되어 사라지면 안 된다.
+    ```
+    <AnimatePresence exitBeforeEnter>
+      {show && (...component)          
+    )}
+    ```
+  exit할 때 effect 왜 안 나오지...

@@ -1,12 +1,12 @@
 import React, { useRef, useState, memo, useCallback, useEffect } from "react";
-import { motion, useCycle } from 'framer-motion';
+import { AnimatePresence, motion, useCycle } from 'framer-motion';
 import MenuStyle from "@styles/global/menu"
 import Navigation from '@components/Navigation';
-import MenuToggle from './MenuToggle';
+import ModalBtn from '../SidebarModal/ModalBtn';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Route, Switch } from 'react-router';
 import { Nav } from './styles';
-import Modal from '@components/Modal/Modal';
+import Modal from '@components/SidebarModal/Modal';
 // import useDimensions from "react-use-dimensions";
 
 
@@ -30,11 +30,6 @@ const Menu = () => {
   const height = 550;
   const itemCounts = useRef(25);
 
-  const scrollFrame = (values: positionValues) => {
-    // setScrollToBottom(1 - values.top);    
-  };
-
-  
 const sidebar = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
@@ -89,60 +84,17 @@ const sidebar = {
     console.log('onClickModalDimmer');
   }, []);
   if (isOpen) {
-    console.log('1');
+    console.log('modal opened');
   } else {
-    console.log('2');
-    //here
+    console.log('modal closed');
   }
   
   return (
     <>
       <MenuStyle />
-      {/* {isOpen && 
-            <div className="modalDimmer" onClick={onClickModalDimmer}>
-            <Nav
-              initial={false}
-              animate={isOpen ? "open" : "closed"}
-              custom={height}
-              ref={containerRef}
-              className="menu"
-            >
-              <motion.div className="background" variants={sidebar} />
-              {isOpen && 
-              <Scrollbars 
-                onScrollFrame={scrollFrame}
-                onScrollStop={scrollStop}
-                autoHide 
-                id="scrollbars"
-              >
-                <Navigation/>
-              </Scrollbars>}
-              <MenuToggle customStyle={customStyle} toggle={() => toggleOpen()} />
-            </Nav>
-          </div>
-      }
-      {!isOpen &&
-                <Nav
-                initial={false}
-                animate={isOpen ? "open" : "closed"}
-                custom={height}
-                ref={containerRef}
-                className="menu"
-              >
-                <motion.div className="background" variants={sidebar} />
-                {isOpen && 
-                <Scrollbars 
-                  onScrollFrame={scrollFrame}
-                  onScrollStop={scrollStop}
-                  autoHide 
-                  id="scrollbars"
-                >
-                  <Navigation/>
-                </Scrollbars>}
-                <MenuToggle customStyle={customStyle} toggle={() => toggleOpen()} />
-              </Nav>
-      } */}
-      {/* <div className="modalDimmer" onClick={onClickModalDimmer}>
+        <button onClick={() => toggleOpen()}>aaaaaaaaabuttonaaaaaaaaaaa</button>
+      <Modal show={isOpen} toggle={toggleOpen} />
+      {/* <AnimatePresence exitBeforeEnter>
         <Nav
           initial={false}
           animate={isOpen ? "open" : "closed"}
@@ -153,37 +105,26 @@ const sidebar = {
           <motion.div className="background" variants={sidebar} />
           {isOpen && 
           <Scrollbars 
-            onScrollFrame={scrollFrame}
             onScrollStop={scrollStop}
             autoHide 
             id="scrollbars"
           >
             <Navigation/>
           </Scrollbars>}
-          <MenuToggle customStyle={customStyle} toggle={() => toggleOpen()} />
+          <ModalBtn toggle={() => toggleOpen()} />
         </Nav>
-      </div> */}
-      <Modal show={isOpen} onCloseModal={toggleOpen}>
-        <Nav
-          initial={false}
-          animate={isOpen ? "open" : "closed"}
-          custom={height}
-          ref={containerRef}
-          className="menu"
-        >
-          <motion.div className="background" variants={sidebar} />
-          {isOpen && 
-          <Scrollbars 
-            onScrollFrame={scrollFrame}
+      </AnimatePresence> */}
+        {/* <Navigation/> */}
+        {/* <Scrollbars 
             onScrollStop={scrollStop}
             autoHide 
             id="scrollbars"
           >
             <Navigation/>
-          </Scrollbars>}
-          <MenuToggle customStyle={customStyle} toggle={() => toggleOpen()} />
-        </Nav>
-      </Modal>
+          </Scrollbars> */}
+                    {/* {isOpen && 
+              <Navigation/>
+            } */}
     </>
   );
 };

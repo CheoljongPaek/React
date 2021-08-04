@@ -21,24 +21,19 @@ const Home = loadable(() => import('@pages/Home'));
 const Model = loadable(() => import('@pages/Model'));
 
 function App() {
-  const location = useLocation();
-  console.log('locationkey1: ', location.key);
   
   return (
     <div className="App">
-      {/* <AnimatePresence exitBeforeEnter> */}
       <Menu />
-
-        <Switch>
-          <Route 
-            path="/menu/whoami/:title"
-            render={(props) => 
-            <SampleProvider>
-              <WhoAmI />
-            </SampleProvider>} 
-          />
-        </Switch>
-      {/* </AnimatePresence> */}
+      <Switch>
+        <Route 
+          path="/menu/whoami/:title"
+          render={(props) => 
+          <SampleProvider>
+            <WhoAmI />
+          </SampleProvider>} 
+        />
+      </Switch>
     </div>
   );
 }

@@ -32,6 +32,7 @@ export const Btn = styled(motion.button)`
   height: 50px;
   border-radius: 50%;
   background: transparent;
+  z-index: 300
 `;
 
 export const ItemList = styled(motion.ul)`

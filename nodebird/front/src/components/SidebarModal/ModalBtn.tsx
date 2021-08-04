@@ -1,8 +1,8 @@
 import React, { memo, useCallback, useLayoutEffect, useRef, useState } from "react";
-import { motion, SVGMotionProps, useCycle, useMotionValue, useTransform, useViewportScroll } from 'framer-motion';
+import { AnimatePresence, motion, SVGMotionProps, useCycle, useMotionValue, useTransform, useViewportScroll } from 'framer-motion';
 import MenuStyle from "@styles/global/menu"
 import Navigation from '@components/Navigation';
-import { Btn } from './styles';
+import { Btn } from '../Menu/styles';
 // import useDimensions from "react-use-dimensions";
 const Path = (props: JSX.IntrinsicAttributes & SVGMotionProps<SVGPathElement> & React.RefAttributes<SVGPathElement>) => {
   return (
@@ -18,26 +18,29 @@ const Path = (props: JSX.IntrinsicAttributes & SVGMotionProps<SVGPathElement> & 
   );
 };
 
-interface customStyleProps {
-  opacity: string;
-}
-
 interface ToggleProps {
-  customStyle: customStyleProps
+  show: boolean,
   toggle: () => void
 }
 
 
-const MenuToggle = ({ customStyle, toggle }: ToggleProps) => {
+const ModalBtn = ({ show, toggle }: ToggleProps) => {
+  console.log('hmm', show);
+  
   const stopPropagation = useCallback((e) => {
     e.stopPropagation();
   }, []);
 
   return (
     <>
-      {/* <CreateModal onClick={onCloseModal}> */}
-        <div onClick={stopPropagation}>
-          <Btn style={customStyle} onMouseEnter={toggle} onClick={toggle}>
+    <AnimatePresence exitBeforeEnter>
+        <motion.div 
+          onClick={stopPropagation}
+          initial="closed"
+          animate={show ? "open" : "closed"}
+          exit="closed"
+        >
+          <Btn onMouseEnter={toggle} onClick={toggle}>
             <svg width="23" height="23" viewBox="0 0 23 23">
               <Path
                 variants={{
@@ -46,12 +49,9 @@ const MenuToggle = ({ customStyle, toggle }: ToggleProps) => {
                 }}
               />
               <Path
-                // d="M 2 9.423 L 20 9.423"
                 variants={{
                   closed: { d: "M 2 9.423 L 20 9.423" },
                   open: { d: "M 11 9.423 L 11 9.423" }
-                  // closed: { opacity: 1 },
-                  // open: { opacity: 0 }
                 }}
                 transition={{ duration: 0.1 }}
               />
@@ -63,10 +63,10 @@ const MenuToggle = ({ customStyle, toggle }: ToggleProps) => {
               />
             </svg>
           </Btn>
-        </div>
-      {/* </CreateModal> */}
+        </motion.div>
+        </AnimatePresence>
     </>
   );
 };
 
-export default memo(MenuToggle);
+export default memo(ModalBtn);

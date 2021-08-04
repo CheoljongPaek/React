@@ -2,6 +2,7 @@ import { useSampleDispatch, useSampleState } from '@contextapi/menuapi';
 import React, { memo, useState } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { OrderParagraph } from './styles';
+import { useEffect } from 'react';
 
 const containerVariants = {
   hidden: {
@@ -38,9 +39,19 @@ const childVariants = {
 
 const Order = () => {
   console.log('Order');
-  
+    //   dispatch({ type: 'ADD_TOPPINGS', topping: e.target.innerText })
+
   const state = useSampleState();
   const dispatch = useSampleDispatch();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      console.log('dispatch');
+      
+      dispatch({ type: 'ADD_POPMODAL' })
+    }, 3000);
+    return () => clearTimeout(timeout);
+  }, [dispatch])
   
   return (
     <motion.div 

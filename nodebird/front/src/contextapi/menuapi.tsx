@@ -4,14 +4,22 @@ interface pizzaProps {
   base: string;
   toppings: Array<string>
 }
+
+interface popModalProps {
+  showModal: boolean,
+  // setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+}
 //상태를 위한 타입
 type State = {
   pizza: pizzaProps;
+  popModal: popModalProps
 }
 //액션을 위한 타입
 type Action =
   | { type: 'ADD_BASE'; base: string; }
-  | { type: 'ADD_TOPPINGS'; topping: string };
+  | { type: 'ADD_TOPPINGS'; topping: string }
+  | { type: 'ADD_POPMODAL'; }
+  | { type: 'REMOVE_POPMODAL'; }
 //디스패치를 위한 타입
 type SampleDispatch = Dispatch<Action>;
 //Context 만들기
@@ -19,12 +27,15 @@ const SampleStateContext = createContext<State | null>(null);
 const SampleDispatchContext = createContext<SampleDispatch | null>(null);
 
 const initialState = {
-  pizza: { base: "", toppings : [] }
+  pizza: { base: "", toppings : [] },
+  popModal: { showModal: false }
 }
 
 // 리듀서
 const ADD_BASE = 'ADD_BASE';
 const ADD_TOPPINGS = 'ADD_TOPPINGS';
+const ADD_POPMODAL = 'ADD_POPMODAL';
+const REMOVE_POPMODAL = 'REMOVE_POPMODAL';
 const reducer = (state: State, action: Action):State => {  
   switch (action.type) {
     case ADD_BASE:
@@ -49,6 +60,21 @@ const reducer = (state: State, action: Action):State => {
         pizza: pizza2
       }
   
+    case ADD_POPMODAL:
+      const popModal = {...state.popModal}
+      popModal.showModal = true;
+      return {
+        ...state,
+        popModal
+      }
+
+    case REMOVE_POPMODAL:
+      const popModal2 = {...state.popModal}
+      popModal2.showModal = false;
+      return {
+        ...state,
+        popModal: popModal2
+      }  
     default:
       console.log('action failed');
       return {
@@ -59,8 +85,6 @@ const reducer = (state: State, action: Action):State => {
 
 export function SampleProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  console.log(state);
 
   return (
     <SampleStateContext.Provider value={state}>
