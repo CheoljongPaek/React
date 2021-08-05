@@ -9,6 +9,7 @@ import { imageProps } from '@typings/db';
 import WhoAmI from '@components/WhoAmI/WhoAmI';
 import { SampleProvider } from '@contextapi/menuapi';
 import Menu from '@components/Menu';
+import SignLogin from '@components/SignLogin';
 
 library.add(fab, fas);
 
@@ -31,6 +32,13 @@ function App() {
           render={(props) => 
           <SampleProvider>
             <WhoAmI />
+          </SampleProvider>} 
+        />
+        <Route 
+          path="/menu/signlogin/:title"
+          render={(props) => 
+          <SampleProvider>
+            <SignLogin />
           </SampleProvider>} 
         />
       </Switch>

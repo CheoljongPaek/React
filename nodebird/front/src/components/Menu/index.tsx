@@ -92,39 +92,7 @@ const sidebar = {
   return (
     <>
       <MenuStyle />
-        <button onClick={() => toggleOpen()}>aaaaaaaaabuttonaaaaaaaaaaa</button>
       <Modal show={isOpen} toggle={toggleOpen} />
-      {/* <AnimatePresence exitBeforeEnter>
-        <Nav
-          initial={false}
-          animate={isOpen ? "open" : "closed"}
-          custom={height}
-          ref={containerRef}
-          className="menu"
-        >
-          <motion.div className="background" variants={sidebar} />
-          {isOpen && 
-          <Scrollbars 
-            onScrollStop={scrollStop}
-            autoHide 
-            id="scrollbars"
-          >
-            <Navigation/>
-          </Scrollbars>}
-          <ModalBtn toggle={() => toggleOpen()} />
-        </Nav>
-      </AnimatePresence> */}
-        {/* <Navigation/> */}
-        {/* <Scrollbars 
-            onScrollStop={scrollStop}
-            autoHide 
-            id="scrollbars"
-          >
-            <Navigation/>
-          </Scrollbars> */}
-                    {/* {isOpen && 
-              <Navigation/>
-            } */}
     </>
   );
 };

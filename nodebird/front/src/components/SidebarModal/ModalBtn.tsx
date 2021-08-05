@@ -33,20 +33,18 @@ const ModalBtn = ({ show, toggle }: ToggleProps) => {
 
   return (
     <>
-    <AnimatePresence exitBeforeEnter>
-        <motion.div 
-          onClick={stopPropagation}
-          initial="closed"
-          animate={show ? "open" : "closed"}
-          exit="closed"
-        >
-          <Btn onMouseEnter={toggle} onClick={toggle}>
+      <AnimatePresence exitBeforeEnter>
+        {/* <div onClick={stopPropagation}> */}
+          <Btn onClick={toggle}>
             <svg width="23" height="23" viewBox="0 0 23 23">
               <Path
                 variants={{
                   closed: { d: "M 2 2.5 L 20 2.5" },
                   open: { d: "M 3 16.5 L 17 2.5" }
                 }}
+                initial="closed"
+                animate={show ? "open" : "closed"}
+                exit="closed"
               />
               <Path
                 variants={{
@@ -54,17 +52,23 @@ const ModalBtn = ({ show, toggle }: ToggleProps) => {
                   open: { d: "M 11 9.423 L 11 9.423" }
                 }}
                 transition={{ duration: 0.1 }}
+                initial="closed"
+                animate={show ? "open" : "closed"}
+                exit="closed"
               />
               <Path
                 variants={{
                   closed: { d: "M 2 16.346 L 20 16.346" },
                   open: { d: "M 3 2.5 L 17 16.346" }
                 }}
+                initial="closed"
+                animate={show ? "open" : "closed"}
+                exit="closed"
               />
             </svg>
           </Btn>
-        </motion.div>
-        </AnimatePresence>
+        {/* </div> */}
+      </AnimatePresence>
     </>
   );
 };

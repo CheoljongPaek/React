@@ -27,3 +27,13 @@ export const Nav = styled(motion.nav)`
       background: #fff;
     }
 `;
+
+export const CircleEffect = styled(motion.div)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  background: #fff;
+  z-index: 51;
+`

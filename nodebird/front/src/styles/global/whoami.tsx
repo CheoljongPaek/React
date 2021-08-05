@@ -14,8 +14,10 @@ const style = css`
     text-decoration: none;
   }
   body{
-    background: rgb(100,0,123);
-    background: radial-gradient(circle, rgba(100,0,123,1) 0%, rgba(62,20,86,1) 100%);
+    // background: rgb(100,0,123);
+    // background: radial-gradient(circle, rgba(100,0,123,1) 0%, rgba(62,20,86,1) 100%);
+    // background: #f5a911;
+    background: radial-gradient(circle, #ff6600 0%, #ffb300 100%);
     overflow: hidden;
   }
 

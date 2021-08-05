@@ -33,10 +33,14 @@ const Modal = () => {
   const state = useSampleState();
   const dispatch = useSampleDispatch();
 
+  const resetPizzaState = () => {
+    dispatch({ type: 'RESET_PIZZA' })
+  }
+
   return (
     <AnimatePresence exitBeforeEnter>
       {state.popModal.showModal && (
-        <Backdrop className="backdrop"
+        <Backdrop className="popbackdrop"
           variants={backdrop}
           initial="hidden"
           animate="visible"
@@ -49,7 +53,7 @@ const Modal = () => {
           >
             <p>Want to make another pizza?</p>
             <Link to="/menu/whoami/main">
-              <button>Start Again</button>
+              <button onClick={resetPizzaState}>Start Again</button>
             </Link>
           </PopModal>
         </Backdrop>

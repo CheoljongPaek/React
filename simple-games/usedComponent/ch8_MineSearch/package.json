@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --env development"
+    "dev": "webpack serve --env development",
+    "start": "webpack-dev-server"
   },
   "author": "CJ Paek",
   "license": "MIT",

@@ -1,7 +1,7 @@
 import ModalBtn from '@components/SidebarModal/ModalBtn';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useCallback, FC, useState } from 'react';
-import { Backdrop, Nav } from './styles';
+import { Backdrop, CircleEffect, Nav } from './styles';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Navigation from '@components/Navigation';
 
@@ -17,13 +17,13 @@ const backdrop = {
   hidden: {
     opacity: 0,
     transition: {
-      duration: 0.2
+      duration: 0.5
     }
   }
 }
 
 const sidebar = {
-  open: (height = 1000) => ({
+  visible: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
     transition: {
       type: "spring",
@@ -31,7 +31,7 @@ const sidebar = {
       restDelta: 2
     }
   }),
-  closed: {
+  hidden: {
     clipPath: "circle(30px at 40px 40px)",
     transition: {
       delay: 0,
@@ -44,30 +44,46 @@ const sidebar = {
 
 const Modal:FC<Props> = ({children, show, toggle}) => {
   const stopPropagation = useCallback((e) => {
+    console.log('modal stoppropagation');
+    
     e.stopPropagation();
   }, []);
   
   return (
-    <AnimatePresence exitBeforeEnter>
-      <ModalBtn show={show} toggle={toggle}/>
-    {show && (
-      <Backdrop onClick={toggle}
-        variants={backdrop}
+    <AnimatePresence>
+      <ModalBtn show={show} toggle={toggle} key="modalBtn1"/>
+      <CircleEffect
+        className="circleEffect" 
+        variants={sidebar} 
+        key="circlebgr1" 
         initial="hidden"
-        animate="visible"
+        animate={show ? "visible" : "hidden"}
         exit="hidden"
+      />
+      {show && (
+      <Backdrop onClick={toggle}
+      variants={backdrop}
+      initial="hidden"
+      animate={show ? "visible" : "hidden"}
+      exit="hidden"
+      key="backdrop1"
       >
-        <Nav>
-          <Scrollbars>
-          <div className="background" />
-          <div onClick={stopPropagation}>
-              {/* {children} */}
-              <Navigation />
-          </div>
+        <CircleEffect
+          className="circleEffect" 
+          variants={sidebar} 
+          key="circlebgr2"
+          initial="hidden"
+          animate={show ? "visible" : "hidden"}
+          exit="hidden"
+        />
+        <Nav onClick={stopPropagation}>
+          <Scrollbars universal>
+          {/* <div className="background" /> */}
+            <Navigation />
           </Scrollbars>
         </Nav>
       </Backdrop>            
-    )}
+      )}
   </AnimatePresence>
   )
 };

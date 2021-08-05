@@ -322,4 +322,10 @@
       {show && (...component)          
     )}
     ```
-  exit할 때 effect 왜 안 나오지...
+  exit할 때 effect 왜 안 나오지...toggle 문제부터 확인
+  바로 꺼질 때 문제는 unmount가 안 되어서 그런건가?
+  크롬 Components의 경고와 에러 활용.
+
+  propagation...
+  다음은 하얀원: 왜 2200 백그라운드 유지?
+  circleeffect를 backdrop와 비교해 위치지정.

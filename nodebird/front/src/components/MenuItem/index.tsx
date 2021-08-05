@@ -59,7 +59,7 @@ const MenuItem = ({ itemHeight, i }: ItemProps) => {
   if (i === 1) {
     title += "WhoAmI";
   } else if(i === 6) {
-    title += "Check";
+    title += "SignLogin";
   }
 
   
