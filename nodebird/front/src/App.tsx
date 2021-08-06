@@ -8,8 +8,9 @@ import {AnimatePresence} from 'framer-motion';
 import { imageProps } from '@typings/db';
 import WhoAmI from '@components/WhoAmI/WhoAmI';
 import { SampleProvider } from '@contextapi/menuapi';
+import { SampleProvider as SignloginProvider } from '@contextapi/signloginapi';
 import Menu from '@components/Menu';
-import SignLogin from '@components/SignLogin';
+import SignLoginRoutes from '@components/SignLogin/routes';
 
 library.add(fab, fas);
 
@@ -37,9 +38,9 @@ function App() {
         <Route 
           path="/menu/signlogin/:title"
           render={(props) => 
-          <SampleProvider>
-            <SignLogin />
-          </SampleProvider>} 
+          <SignloginProvider>
+            <SignLoginRoutes />
+          </SignloginProvider>} 
         />
       </Switch>
     </div>
