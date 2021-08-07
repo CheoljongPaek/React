@@ -57,7 +57,7 @@ const hoverVariants = {
     boxShadow: "0px 0px 8px rgb(255,255,255)",
     transition: {
       duration: 0.25,
-      yoyo: Infinity
+      repeat: Infinity
     }
   },
 };
@@ -84,7 +84,7 @@ const Base = () => {
       <BaseContainer className="base container"
         // initial={{ x: '100vw' }}
         // animate={{ x: 0 }}
-        // transition={{ type: 'spring', delay: 0.5 }}
+        transition={{ type: 'spring', delay: 0.5 }}
         variants={containerVariants}
         initial="hidden"
         animate="visible"

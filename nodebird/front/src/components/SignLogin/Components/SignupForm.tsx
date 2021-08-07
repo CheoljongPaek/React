@@ -1,34 +1,34 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Container, SignLoginBox, LoginInputs, Title, InputGroup1, InputGroup2, FindPW } from '../styles';
-import { Route } from 'react-router-dom';
+import { InputGroup1, FindPW } from '../styles';
 
 const SignupForm = () => {
-
+  console.log('SignupForm');
+  
   return (
     <>      
       <div className="login-form">
         <div className="sign-in-htm">
-          <InputGroup1 className="group">
-            <label htmlFor="user" className="label">Username</label>
-            <input id="user" type="text" className="input" />
-          </InputGroup1>
-          <InputGroup1 className="group">
-            <label htmlFor="pass" className="label">Password</label>
-            <input id="pass" type="password" className="input" data-type="password" />
-          </InputGroup1>
-          <InputGroup2 className="group">
-            <input id="check" type="checkbox" className="check" />
-            <label htmlFor="check">
-              <span className="icon" />
-              SignupFormSignupFormSignupFormSignupForm
-            </label>
-          </InputGroup2>
-          <InputGroup1 className="group">
-            <input type="submit" className="button" value="LogIn" />
-          </InputGroup1>
-          <div className="hr"></div>
-          <FindPW className="foot-lnk">
+          <form>
+            <InputGroup1>
+              <label htmlFor="user" className="label">Username</label>
+              <input id="user" type="text" className="input" />
+            </InputGroup1>
+            <InputGroup1>
+              <label htmlFor="pass" className="label">Password</label>
+              <input id="pass" type="password" autoComplete="off" className="input" data-type="password" />
+            </InputGroup1>
+            <InputGroup1>
+              <label htmlFor="passCheck" className="label">Repeat Password</label>
+              <input id="passCheck" type="password" autoComplete="off" className="input" data-type="password" />
+            </InputGroup1>
+            <InputGroup1>
+              <label htmlFor="eamil" className="label">Email Address</label>
+              <input type="email" className="input" />
+            </InputGroup1>
+            <InputGroup1>
+              <button type="submit" className="button">Sign Up</button>
+            </InputGroup1>
+          </form>
+          <FindPW className="findpwinsignup">
             <a href="#forgot">Forgot Password?</a>
           </FindPW>
         </div>

@@ -1,7 +1,5 @@
-import React, { memo, useCallback, useLayoutEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, SVGMotionProps, useCycle, useMotionValue, useTransform, useViewportScroll } from 'framer-motion';
-import MenuStyle from "@styles/global/menu"
-import Navigation from '@components/Navigation';
+import React, { memo} from "react";
+import { AnimatePresence, motion, SVGMotionProps } from 'framer-motion';
 import { Btn } from '../Menu/styles';
 // import useDimensions from "react-use-dimensions";
 const Path = (props: JSX.IntrinsicAttributes & SVGMotionProps<SVGPathElement> & React.RefAttributes<SVGPathElement>) => {
@@ -25,16 +23,9 @@ interface ToggleProps {
 
 
 const ModalBtn = ({ show, toggle }: ToggleProps) => {
-  console.log('hmm', show);
-  
-  const stopPropagation = useCallback((e) => {
-    e.stopPropagation();
-  }, []);
-
   return (
     <>
       <AnimatePresence exitBeforeEnter>
-        {/* <div onClick={stopPropagation}> */}
           <Btn onClick={toggle}>
             <svg width="23" height="23" viewBox="0 0 23 23">
               <Path
@@ -67,7 +58,6 @@ const ModalBtn = ({ show, toggle }: ToggleProps) => {
               />
             </svg>
           </Btn>
-        {/* </div> */}
       </AnimatePresence>
     </>
   );

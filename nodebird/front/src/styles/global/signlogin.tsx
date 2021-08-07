@@ -1,8 +1,6 @@
 import { Global, css } from '@emotion/react'
 
 const style = css`
-  /* fonts */
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
   html {
     height: 100%;
   }

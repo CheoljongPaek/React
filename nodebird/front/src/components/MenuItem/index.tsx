@@ -71,7 +71,7 @@ const MenuItem = ({ itemHeight, i }: ItemProps) => {
       whileTap={{ scale: 0.95 }}
     >
       {(i % 5 !== 0) || <Fa icon="check" size="3x" style={iconStyle}/>}
-      <Link to = {`/menu/${title.toLowerCase()}/main`}>
+      <Link to = {title === "SignLogin" ? `/menu/${title.toLowerCase()}/login` : `/menu/${title.toLowerCase()}`}>
         <div className="text-placeholder" style={style}>{index + title}</div>
       </Link>
     </Item>

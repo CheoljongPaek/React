@@ -1,25 +1,19 @@
 import React from 'react';
 import SignloginStyle from "@styles/global/signlogin";
 import { Route, Switch, useLocation } from 'react-router';
-import LoginPage from './Loginpage';
-import SignUppage from './Signuppage';
+import SignLoginPage from './SignLoginpage';
 
 
-const SignLogin = () => {
+const SignLoginRoutes = () => {
 
   return (
     <>
       <SignloginStyle/>
       <Switch>
-        <Route path="/menu/signlogin/:hmm">
-          <LoginPage />
-        </Route>
-        {/* <Route path="/menu/signlogin/signup">
-          <SignUppage />
-        </Route> */}
+        <Route path="/menu/signlogin/:type" render={() => <SignLoginPage />} />
       </Switch>
     </>
   )
 };
 
-export default SignLogin
+export default SignLoginRoutes;

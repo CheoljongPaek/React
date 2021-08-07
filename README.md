@@ -329,3 +329,6 @@
   propagation...
   다음은 하얀원: 왜 2200 백그라운드 유지?
   circleeffect를 backdrop와 비교해 위치지정.
+# Day 40
+  : rerendering 문제 해결중.
+  : static 파일은 서버랑 연결해서 적용해보자.

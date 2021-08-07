@@ -2,35 +2,35 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, SignLoginBox, LoginInputs, Title, InputGroup1, InputGroup2, FindPW } from '../styles';
 import { Route } from 'react-router-dom';
+import { useCallback } from 'react';
 
 const LoginForm = () => {
+  console.log('LoginForm');
+  // const [email, ]
+  const onSubmit = useCallback(() => {
 
+  }, []);
   return (
     <>      
       <div className="login-form">
         <div className="sign-in-htm">
-          <InputGroup1 className="group">
-            <label htmlFor="user" className="label">Username</label>
-            <input id="user" type="text" className="input" />
-          </InputGroup1>
-          <InputGroup1 className="group">
-            <label htmlFor="pass" className="label">Password</label>
-            <input id="pass" type="password" className="input" data-type="password" />
-          </InputGroup1>
-          <InputGroup2 className="group">
-            <input id="check" type="checkbox" className="check" />
-            <label htmlFor="check">
-              <span className="icon" />
-              Keep me Logged in
-            </label>
-          </InputGroup2>
-          <InputGroup1 className="group">
-            <input type="submit" className="button" value="LogIn" />
-          </InputGroup1>
-          <div className="hr"></div>
-          <FindPW className="foot-lnk">
-            <a href="#forgot">Forgot Password?</a>
-          </FindPW>
+          <form onSubmit={onSubmit}>
+            <InputGroup1 className="group">
+              <label htmlFor="email" className="label">Email</label>
+              <input id="email" type="text" className="input" />
+            </InputGroup1>
+            <InputGroup1 className="group">
+              <label htmlFor="pass" className="label">Password</label>
+              <input id="pass" type="password" autoComplete="on" className="input" data-type="password" />
+            </InputGroup1>
+            <InputGroup1 className="group">
+              <button type="submit" className="button">LogIn</button>
+            </InputGroup1>
+            <div className="hr"></div>
+            <FindPW className="findpwinlogin">
+              <a href="#forgot">Forgot Password?</a>
+            </FindPW>
+          </form>
         </div>
       </div>
     </>
