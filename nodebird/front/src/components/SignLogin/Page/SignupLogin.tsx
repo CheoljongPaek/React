@@ -1,20 +1,10 @@
 import React, { useState } from 'react';
 import { Link, Route, Switch, useLocation, useParams, NavLink } from 'react-router-dom';
-import { Container, SignLoginBox, LoginInputs, Title, InputGroup1, InputGroup2, FindPW } from './styles';
-import LoginForm from './Components/LoginForm';
-import SignupForm from './Components/SignupForm';
+import { Container, SignLoginBox, LoginInputs, Title, InputGroup1, InputGroup2, FindPW } from '../styles';
+import LoginForm from '../Components/LoginForm';
+import SignupForm from '../Components/SignupForm';
 
-const LoginPage = () => {
-  const [isLoginPage, setIsLoginPage] = useState(true);
-  console.log('loginpage');
-  const b: {type: string} = useParams();
-
-  // if (b.type === "login" && isLoginPage === false) {
-  //   setIsLoginPage(true);
-  // } else if (b.type === "signup" && isLoginPage === true) {
-  //   setIsLoginPage(false);
-  // } ////////////여기가 리렌더링 발생장소!
-  //component={SignupForm}
+const SignupLogin = () => {
 
   return (
     <>
@@ -39,4 +29,4 @@ const LoginPage = () => {
   )
 };
 //최적화 memo
-export default LoginPage;
+export default SignupLogin;

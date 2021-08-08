@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import { Link } from 'react-router-dom';
 import { Btn, HomeContainer, HomeTitle } from './styles';
 import { motion } from 'framer-motion';
+import Loader from './Loader';
 
 const btnVariants = {
   hover: {
@@ -64,6 +65,7 @@ const Home = () => {
             Create Your Pizza
           </Btn>
         </Link>
+        <Loader />
       </HomeContainer>
     </>
   );

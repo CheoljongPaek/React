@@ -1,7 +1,8 @@
 import React from 'react';
 import SignloginStyle from "@styles/global/signlogin";
 import { Route, Switch, useLocation } from 'react-router';
-import SignLoginPage from './SignLoginpage';
+import SignupLogin from './Page/SignupLogin';
+import Colorpicker from './Page/Colorpicker';
 
 
 const SignLoginRoutes = () => {
@@ -10,7 +11,8 @@ const SignLoginRoutes = () => {
     <>
       <SignloginStyle/>
       <Switch>
-        <Route path="/menu/signlogin/:type" render={() => <SignLoginPage />} />
+        <Route path="/menu/signlogin/colorpicker" render={() => <Colorpicker />} />
+        <Route path="/menu/signlogin/:type" render={() => <SignupLogin />} />
       </Switch>
     </>
   )

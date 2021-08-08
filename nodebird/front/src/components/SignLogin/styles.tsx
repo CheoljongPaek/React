@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
+import colorfulplace from '@images/colorfulplace.jpg'
 
 export const Container = styled.div`
   width: 100vw;
@@ -13,6 +14,10 @@ export const Title = styled.div`
   font-size: 2em;
 `
 
+const rand1_0_100 = Math.floor(Math.random()* 100);
+const rand2_0_100 = Math.floor(Math.random()* 100);
+//32 66
+//57 17
 export const SignLoginBox = styled(motion.div)`
   width:100%;
   display: flex;
@@ -20,7 +25,7 @@ export const SignLoginBox = styled(motion.div)`
   max-width:525px;
   min-height:670px;
   position:relative;
-  background:url('https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg') no-repeat center;
+  background:url(${colorfulplace}) no-repeat ${rand1_0_100}% ${rand2_0_100}%;;
   box-shadow: 0 12px 15px 0 rgba(0,0,0,.24), 0 17px 50px 0 rgba(0,0,0,.19);
 `;
 
@@ -30,7 +35,7 @@ export const LoginInputs = styled(motion.div)`
   height: 100%;
   position: absolute;
   padding: 90px 70px 50px 70px;
-  background: rgba(40,57,101,.90);
+  background: rgba(40,57,101,.50);
   & > a {
     text-transform: uppercase;
     font-size: 22px;
@@ -73,6 +78,10 @@ export const InputGroup1 = styled.div`
     box-sizing: border-box;
     margin-bottom: 15px;
   }
+`
+
+export const SubmitBtn = styled.div`
+  border-bottom: 2px solid rgba(255,255,255,0.2);
   .button {
     text-transform: uppercase;
     display: block;
@@ -101,15 +110,13 @@ export const InputGroup2 = styled.div`
 export const FindPW = styled.div`
   &.findpwinlogin {
     color: #aaa;
-    border-top: 2px solid rgba(255,255,255,0.2);
-    padding-top: 50px;
+    padding-top: 30px;
     max-width: 450px;
     margin: 0 auto;
     text-align: center;    
   }
   &.findpwinsignup {
     color: #aaa;
-    border-top: 2px solid rgba(255,255,255,0.2);
     padding-top: 30px;
     max-width: 450px;
     margin: 0 auto;
@@ -121,4 +128,14 @@ export const FindPW = styled.div`
     color: #6a6f8c;
     font-size: 16px;
   }
+`
+
+export const Error = styled(motion.div)`
+  
+`
+
+export const ErrorContainer = styled(motion.div)`
+  padding-top: 10px;
+  font-size: 16px;
+  text-align: center;  
 `

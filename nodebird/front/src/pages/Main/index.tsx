@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, LinkContainer, Page } from './styles';
+// import { Container, LinkContainer, Page } from './styles';
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
 
@@ -17,7 +17,7 @@ const Main = () => {
 
   return (
     <>
-      <Container>
+      {/* <Container>
         <LinkContainer>
           <Bada/>
           <Link to="#t1" id="t1">
@@ -51,7 +51,7 @@ const Main = () => {
         <Page id="p5">
           <section><Fa icon="plus-circle" /><span className="title">PlusCircle</span></section>
         </Page>
-      </Container>
+      </Container> */}
     </>
   )
 };
