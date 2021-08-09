@@ -22,7 +22,6 @@ const style = css`
   }
 
   a {
-    font-family: 'open sans', 'lato', 'helvetica', sans-serif;
     text-decoration: none;
   }
 `

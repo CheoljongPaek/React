@@ -330,5 +330,9 @@
   다음은 하얀원: 왜 2200 백그라운드 유지?
   circleeffect를 backdrop와 비교해 위치지정.
 # Day 40
-  : rerendering 문제 해결중.
-  : static 파일은 서버랑 연결해서 적용해보자.
+  : rerendering 문제 해결중. => 해결
+  : static 파일은 서버랑 연결해서 적용해보자. -> 해결
+# Day 41
+  : overflow scroll 해결해서 box크기가 뷰포인트 넘게하기.
+    -> 부모인Container의 width height를 %로 변경
+  : react color 적용하기.

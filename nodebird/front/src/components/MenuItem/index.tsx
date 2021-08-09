@@ -58,11 +58,22 @@ const MenuItem = ({ itemHeight, i }: ItemProps) => {
 
   if (i === 1) {
     title += "WhoAmI";
-  } else if(i === 6) {
+  } else if (i === 6) {
     title += "SignLogin";
+  } else if (i === 7) {
+    title += "ColorPicker";
+  } else if (i === 8) {
+    title += "Diary";
   }
 
-  
+  let urlpath = "";
+  if (title === "SignLogin") {
+    urlpath = `/menu/${title.toLowerCase()}/login`;
+  } else if (title === "ColorPicker") {
+    urlpath = `/menu/signlogin/${title.toLowerCase()}`;
+  } else {
+    urlpath = `/menu/${title.toLowerCase()}`;
+  }
   return (
     <Item
       id={`MenuItem${i}`}
@@ -71,7 +82,7 @@ const MenuItem = ({ itemHeight, i }: ItemProps) => {
       whileTap={{ scale: 0.95 }}
     >
       {(i % 5 !== 0) || <Fa icon="check" size="3x" style={iconStyle}/>}
-      <Link to = {title === "SignLogin" ? `/menu/${title.toLowerCase()}/login` : `/menu/${title.toLowerCase()}`}>
+      <Link to = {urlpath}>
         <div className="text-placeholder" style={style}>{index + title}</div>
       </Link>
     </Item>

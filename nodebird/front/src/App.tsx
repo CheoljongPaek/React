@@ -11,6 +11,7 @@ import { SampleProvider } from '@contextapi/menuapi';
 import { SampleProvider as SignloginProvider } from '@contextapi/signloginapi';
 import Menu from '@components/Menu';
 import SignLoginRoutes from '@components/SignLogin/routes';
+import DiaryRoutes from '@components/Diary/routes'
 
 library.add(fab, fas);
 
@@ -42,6 +43,11 @@ function App() {
             <SignloginProvider>
               <SignLoginRoutes />
             </SignloginProvider>} 
+        />
+        <Route 
+          path="/menu/diary"
+          render={(props) => 
+            <DiaryRoutes />}
         />
       </Switch>
     </div>
