@@ -336,3 +336,8 @@
   : overflow scroll 해결해서 box크기가 뷰포인트 넘게하기.
     -> 부모인Container의 width height를 %로 변경
   : react color 적용하기.
+# Day 42
+  : material-ui 시작.
+    1. Typography
+    : 더이상 h1,h2,p... type 사용할 필요가 없다.
+      Typography 컴포넌트를 커스텀해서 사용.
