@@ -341,3 +341,12 @@
     1. Typography
     : 더이상 h1,h2,p... type 사용할 필요가 없다.
       Typography 컴포넌트를 커스텀해서 사용.
+      default theme에서 default value 확인.
+# Day 43
+  : history.push : history에 이동전경로가 남는다.
+    JSX에서 사용 못한다.
+  : redirect: 이동후에는 이동전 경로가 남지 않는다.
+    JSK에서 사용가능하다.
+  : Grid는 item과 container 역할을 동시에 수행할 수 있다.
+  : Grid는 12colums를 나눠쓴다.
+  

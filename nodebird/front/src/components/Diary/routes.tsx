@@ -8,7 +8,7 @@ import { purple } from '@material-ui/core/colors';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#fefefe'
+      main: '#38b34d'
     },
     secondary: purple
   },
@@ -19,7 +19,7 @@ const theme = createTheme({
     fontWeightMedium: 600,
     fontWeightBold: 700,
   }
-})
+});
 
 const DiaryRoutes = () => {
 
@@ -28,7 +28,7 @@ const DiaryRoutes = () => {
       <ThemeProvider theme={theme}>
         <Switch>
           <Route exact path="/menu/diary" render={() => <Note />} />
-          <Route path="/menu/diary/:type" render={() => <CreateNote />} />
+          <Route exact path="/menu/diary/create" render={() => <CreateNote />} />
         </Switch>
       </ThemeProvider>
     </>

@@ -2,19 +2,23 @@ import React, { useState } from 'react';
 import useChangeField from '@hooks/useChangeField';
 import { Typography, Button, ButtonGroup, Container, makeStyles, TextField, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@material-ui/core';
 import { KeyboardArrowRight } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   field: {
     marginTop: 20,
     marginBottom: 20,
-    display: 'block'
-  }
+    display: 'block',
+    // "& .Mui-focused": {
+    //   color: '#d500f9'
+    // }
+  },
 });
 
 const CreateNote = () => {
   console.log('CreateNote');
   const classes = useStyles();
-
+  const history = useHistory();
   const [title, onChangeTitle, setTitle, titleError, setTitleError] = useChangeField("");
   const [details, onChangeDetails, setDetails, detailsError, setDetailsError] = useChangeField("");
   const [category, setCategory] = useState('todos')
@@ -23,16 +27,20 @@ const CreateNote = () => {
     e.preventDefault();
     setTitleError(false);
     setDetailsError(false);
-
+    console.log(history);
+    
     if (title === '') {
       setTitleError(true);
     }
     if (details === '') {
       setDetailsError(true);
     }
-
     if (title && details) {
-      console.log('Complete Sending: ', title, details, category); 
+      fetch('http://localhost:8000/notes', {
+        method: 'POST',
+        headers: {"Content-type": "application/json"},
+        body: JSON.stringify({ title, details, category })
+      }).then(() => history.push('/menu/diary'))
     }
   };
 
@@ -71,10 +79,10 @@ const CreateNote = () => {
           required
           error={detailsError}
         />
-        <FormControl>
-          <FormLabel focused>Note Category</FormLabel>
+        <FormControl className={classes.field}>
+          <FormLabel>Note Category</FormLabel>
           <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
-            <FormControlLabel disabled={true} value="money" control={<Radio />} label="Money" />          
+            <FormControlLabel value="money" control={<Radio />} label="Money" />          
             <FormControlLabel value="todos" control={<Radio />} label="Todos" />          
             <FormControlLabel value="reminders" control={<Radio />} label="Reminders" />          
             <FormControlLabel value="work" control={<Radio />} label="Work" />          
