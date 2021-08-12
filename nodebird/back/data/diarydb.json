@@ -23,18 +23,6 @@
       "details": "디테일",
       "category": "reminders",
       "id": 4
-    },
-    {
-      "title": "타이틀1",
-      "details": "디테일1",
-      "category": "work",
-      "id": 5
-    },
-    {
-      "title": "타이틀2",
-      "details": "디테일2",
-      "category": "work",
-      "id": 6
     }
   ]
 }
