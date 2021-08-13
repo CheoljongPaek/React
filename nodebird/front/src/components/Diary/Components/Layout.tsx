@@ -1,11 +1,13 @@
 import { ClassNames } from '@emotion/react';
 import { faFileExport } from '@fortawesome/free-solid-svg-icons';
-import { makeStyles, Drawer, Typography, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Avatar, makeStyles, Drawer, Typography, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { AppBar, Toolbar } from '@material-ui/core';
-import { AddCircleOutlined, SubjectOutlined } from '@material-ui/icons';
-import React from 'react';
+import { AddCircleOutlined, SubjectOutlined, FolderOutlined, FolderOpenOutlined } from '@material-ui/icons';
+import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { format } from 'date-fns';
+import { NoteProps } from '../Page/Note';
+import { useEffect } from 'react';
 
 interface LayoutProps {
   children: React.ReactNode
@@ -41,6 +43,9 @@ const useStyles = makeStyles((theme) => {
     toolbar: theme.mixins.toolbar,
     date: {
       flexGrow: 1
+    },
+    avatar: {
+      marginLeft: theme.spacing(2)
     }
   }
 });
@@ -61,6 +66,11 @@ const Layout = ({ children }: LayoutProps) => {
       icon: <AddCircleOutlined color="secondary" />,
       path: '/menu/diary/create'
     },
+    {
+      text: 'Manage Notes',
+      icon: <FolderOutlined color="secondary" />,
+      path: '/menu/diary/manage'
+    }
   ];
   return (
     <div className={classes.root}>
@@ -76,6 +86,7 @@ const Layout = ({ children }: LayoutProps) => {
           <Typography>
             CJPaek
           </Typography>
+          <Avatar className={classes.avatar}/>
         </Toolbar>
       </AppBar>
 

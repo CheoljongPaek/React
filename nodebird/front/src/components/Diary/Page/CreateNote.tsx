@@ -22,6 +22,7 @@ const CreateNote = () => {
   const [title, onChangeTitle, setTitle, titleError, setTitleError] = useChangeField("");
   const [details, onChangeDetails, setDetails, detailsError, setDetailsError] = useChangeField("");
   const [category, setCategory] = useState('todos')
+  const [date, setDate] = useState(new Date());
 
   const handleSubmit = (e:React.ChangeEvent<any>) => {
     e.preventDefault();
@@ -39,7 +40,7 @@ const CreateNote = () => {
       fetch('http://localhost:8000/notes', {
         method: 'POST',
         headers: {"Content-type": "application/json"},
-        body: JSON.stringify({ title, details, category })
+        body: JSON.stringify({ title, details, category, date })
       }).then(() => history.push('/menu/diary'))
     }
   };

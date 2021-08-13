@@ -6,9 +6,9 @@ export interface NoteProps {
   "title": string,
   "details": string,
   "category": string,
-  "id": number
+  "id": number,
+  "date": string
 }
-
 const Note = () => {
   console.log('Note');
   const [notes, setNotes] = useState<NoteProps[]>([]);

@@ -5,6 +5,7 @@ import CreateNote from './Page/CreateNote';
 import { createTheme, ThemeProvider } from '@material-ui/core'
 import { purple } from '@material-ui/core/colors';
 import Layout from './Components/Layout';
+import ManageNote from './Page/ManageNote';
 
 const theme = createTheme({
   palette: {
@@ -31,6 +32,7 @@ const DiaryRoutes = () => {
           <Switch>
             <Route exact path="/menu/diary" render={() => <Note />} />
             <Route exact path="/menu/diary/create" render={() => <CreateNote />} />
+            <Route exact path="/menu/diary/manage" render={() => <ManageNote />} />
           </Switch>
         </Layout>
       </ThemeProvider>
