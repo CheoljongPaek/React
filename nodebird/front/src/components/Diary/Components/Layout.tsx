@@ -1,11 +1,12 @@
 import { ClassNames } from '@emotion/react';
 import { faFileExport } from '@fortawesome/free-solid-svg-icons';
-import { Avatar, makeStyles, Drawer, Typography, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Avatar, makeStyles, Drawer, Typography, List, ListItem, ListItemIcon, ListItemText, Button, Menu } from '@material-ui/core';
 import { AppBar, Toolbar } from '@material-ui/core';
 import { AddCircleOutlined, SubjectOutlined, FolderOutlined, FolderOpenOutlined } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { format } from 'date-fns';
+import PersonInfoMenu from './PersonInfoMenu'
 import { NoteProps } from '../Page/Note';
 import { useEffect } from 'react';
 
@@ -45,7 +46,14 @@ const useStyles = makeStyles((theme) => {
       flexGrow: 1
     },
     avatar: {
-      marginLeft: theme.spacing(2)
+    },
+    button: {
+      minWidth: '40px',
+      padding: '0px',
+      margin: '0px 0px 0px 10px',
+      "& .MuiButton-label": {
+        "justify-content": "flex-end"
+      }
     }
   }
 });
@@ -54,6 +62,11 @@ const Layout = ({ children }: LayoutProps) => {
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {    
+    setAnchorEl(e.currentTarget);
+  };
 
   const menuItems = [
     {
@@ -86,7 +99,17 @@ const Layout = ({ children }: LayoutProps) => {
           <Typography>
             CJPaek
           </Typography>
-          <Avatar className={classes.avatar}/>
+          <Button 
+            className={classes.button}
+            onClick={handleClick}
+          >
+            <Avatar className={classes.avatar} />
+          </Button>
+          <PersonInfoMenu 
+            handleClick={handleClick} 
+            anchorEl={anchorEl} 
+            setAnchorEl={setAnchorEl}
+          />
         </Toolbar>
       </AppBar>
 

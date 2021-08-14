@@ -22,32 +22,32 @@
       "date": "2021-08-13T04:31:18.239Z"
     },
     {
-      "title": "a",
-      "details": "\nLorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cum cumque eveniet maiores excepturi quaerat accusamus quis aliquam. Obcaecati libero quis maxime repudiandae odit cumque debitis et recusandae possimus earum!\nLorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cum cumque eveniet maiores excepturi quaerat accusamus quis aliquam. Obcaecati libero quis maxime repudiandae odit cumque debitis et recusandae possimus earum!\nLorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cum cumque eveniet maiores excepturi quaerat accusamus quis aliquam. Obcaecati libero quis maxime repudiandae odit cumque debitis et recusandae possimus earum!",
-      "category": "todos",
+      "title": "hmm1",
+      "details": "details",
+      "category": "work",
       "id": 5,
-      "date": "2021-08-13T04:31:18.239Z"
+      "date": "2021-08-14T04:31:18.239Z"
     },
     {
-      "title": "b",
-      "details": "\nLorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cum cumque eveniet maiores excepturi quaerat accusamus quis aliquam. Obcaecati libero quis maxime repudiandae odit cumque debitis et recusandae possimus earum!\nLorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cum cumque eveniet maiores excepturi quaerat accusamus quis aliquam. Obcaecati libero quis maxime repudiandae odit cumque debitis et recusandae possimus earum!\n12345Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cum cumque eveniet maiores excepturi quaerat accusamus quis aliquam. Obcaecati libero quis maxime repudiandae odit cumque debitis et recusandae possimus earum!\n\n\n",
+      "title": "hmm3",
+      "details": "details",
       "category": "todos",
       "id": 6,
-      "date": "2021-08-13T04:31:18.239Z"
+      "date": "2021-08-14T04:31:18.239Z"
     },
     {
-      "title": "c",
-      "details": "\nLorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo eum ex, officiis rem nisi facere provident officia doloremque! Commodi necessitatibus doloremque neque non accusamus explicabo consectetur amet exercitationem modi tenetur.\n\n\n\nLorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo eum ex, officiis rem nisi facere provident officia doloremque! Commodi necessitatibus doloremque neque non accusamus explicabo consectetur amet exercitationem modi tenetur.\n\n\n\nLorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo eum ex, officiis rem nisi facere provident officia doloremque! Commodi necessitatibus doloremque neque non accusamus explicabo consectetur amet exercitationem modi tenetur.\n\n\n",
-      "category": "reminders",
+      "title": "test",
+      "details": "details",
+      "category": "todos",
       "id": 7,
-      "date": "2021-08-13T04:31:18.239Z"
+      "date": "2021-08-14T04:31:18.239Z"
     },
     {
-      "title": "my Note!",
-      "details": "blabla!",
+      "title": "test2",
+      "details": "details",
       "category": "work",
       "id": 8,
-      "date": "2021-08-12T04:31:18.239Z"
+      "date": "2021-08-14T04:31:18.239Z"
     },
     {
       "title": "d",
