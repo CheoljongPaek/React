@@ -1,20 +1,19 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import '../src/Locales/i18n';
+import './i18n';
+import { ThemeProvider } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
+import theme from './theme'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Suspense fallback={(<div>Loading</div>)}>
-      <App />
-    </Suspense>
+    <ThemeProvider theme={theme}>
+      {/* <Suspense fallback={(<div>Loading</div>)}> */}
+        {/* <CssBaseline /> */}
+        <App />
+      {/* </Suspense> */}
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

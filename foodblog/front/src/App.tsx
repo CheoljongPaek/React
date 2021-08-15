@@ -1,15 +1,16 @@
 import React from 'react';
-import './App.css';
 import { useTranslation } from 'react-i18next';
+import TopBar from './Component/TopBar/main';
 
 function App() {
-  const { t, i18n } = useTranslation();
-  const handleClick = (lang: string) => {
-    i18n.changeLanguage(lang);
-  }
+  // const { t, i18n } = useTranslation();
+  // const handleClick = (lang: string) => {
+  //   i18n.changeLanguage(lang);
+  // }
   return (
     <div className="App">
-      <nav style={{ width: '100%', padding:'2rem 0', backgroundColor:'gray'}} />
+      <TopBar />
+      {/* <nav style={{ width: '100%', padding:'2rem 0', backgroundColor:'gray'}} />
         <button onClick={() => handleClick('en')}>
           English
         </button>
@@ -20,18 +21,9 @@ function App() {
           Chinese
         </button>
       <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <h1>{t('Thanks.1')}</h1>
+        <h1>{t('Why.1')}</h1>
+      </header> */}
     </div>
   );
 }
