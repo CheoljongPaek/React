@@ -12,7 +12,7 @@ declare module '@material-ui/core/styles' {
       secondary: {
         main: string
       },
-    }
+    },
   }
   // allow configuration using `createTheme`
   interface ThemeOptions {
@@ -21,8 +21,8 @@ declare module '@material-ui/core/styles' {
         main?: string,
         darker?: React.CSSProperties['color']
       },
-      secondary: {
-        main: string
+      secondary?: {
+        main?: string
       }
     }
   }
@@ -33,12 +33,6 @@ declare module '@material-ui/core/styles' {
     darker?: string;
   }
 };
-
-// const theme = createTheme({
-//   status: {
-//     danger: orange[500],
-//   },
-// });
 
 const theme = createTheme({
   palette: {

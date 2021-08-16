@@ -352,4 +352,7 @@
 # Day 45
   : 음식 블로그 제작 시작으로 다국어 지원 라이브러리인
     i18next를 적용중.
-    
+# Day 47
+  : material-ui & emotion & typescript로 css-in-js로 구현중.
+  : 반응형을 위해 material-ui의 breakpoint와 고유 미디어 쿼리 문법 적용.
+  

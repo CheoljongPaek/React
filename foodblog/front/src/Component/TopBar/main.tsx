@@ -29,9 +29,10 @@ const TopBar = () => {
           sx={{
             border: 1,
             minWidth: 300,
-            color: 'secondary.main'
+            bgcolor: 'secondary.main'
 
           }}
+          // bgcolor="secondary.main"
         >hmm</Box>
         {/* <Box sx={{ color: 'text.secondary' }}>primary.main</Box> */}
         <Box color="primary.darker">secondary.main</Box>
@@ -48,6 +49,8 @@ const TopBar = () => {
         {/* <img src="" alt="" /> */}
         <Avatar/>
         <Search />
+        <Button>hmmm</Button>
+        {/* <Testi>afe</Testi> */}
       </HeaderRight>
     </Header>
   )

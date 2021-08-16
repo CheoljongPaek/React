@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import theme from '../../theme';
+import { Button } from '@material-ui/core';
 
 /* main page topbar */
 export const Header = styled.header`
@@ -11,6 +13,12 @@ export const Header = styled.header`
   align-items: center;
   font-family: 'Josefin Sans', sans-serif;
 `;
+
+export const Testi = styled(Button)`
+  ${({theme}) => ` ///////////////////////////왜 theme이 적용이 안 되지...
+  background-color:
+  `}
+`
 
 export const HeaderLeft = styled.div`
   flex-grow: 3;
