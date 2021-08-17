@@ -1,6 +1,6 @@
 import { createTheme } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
-import { ReactText } from 'react';
+import { purple, red } from '@material-ui/core/colors';
+import React from 'react';
 
 declare module '@material-ui/core/styles' {
   interface Theme {
@@ -35,14 +35,22 @@ declare module '@material-ui/core/styles' {
 };
 
 const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   palette: {
     primary: {
       main: '#11cb5f',
       darker: '#de1e2f',
     },
-    secondary: {
-      main: '#0088ff',
-    }
+    secondary: purple,
+    type: "dark"
   }
 });
 

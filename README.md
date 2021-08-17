@@ -355,4 +355,7 @@
 # Day 47
   : material-ui & emotion & typescript로 css-in-js로 구현중.
   : 반응형을 위해 material-ui의 breakpoint와 고유 미디어 쿼리 문법 적용.
+# Day 48
+  : emotion to material-ui.
+  : component 기존 css를 useStyles로 덮어씌움.
   

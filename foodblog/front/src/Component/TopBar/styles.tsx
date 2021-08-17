@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import theme from '../../theme';
-import { Button } from '@material-ui/core';
+import { Button, makeStyles, darken, styled as muistyled } from '@material-ui/core';
 
 /* main page topbar */
 export const Header = styled.header`
@@ -14,19 +13,33 @@ export const Header = styled.header`
   font-family: 'Josefin Sans', sans-serif;
 `;
 
-export const Testi = styled(Button)`
-  ${({theme}) => ` ///////////////////////////왜 theme이 적용이 안 되지...
-  background-color:
-  `}
-`
+export const TestHeader = muistyled('header')(({theme}) => ({
+  width: '100%',
+  height: '50px',
+  backgroundColor: 'white',
+  position: 'sticky',
+  top: '1px',
+  display: 'flex',
+  alignItems: 'center',
+  fontFamily: 'Josefin Sans, sans-serif',
+}));
 
 export const HeaderLeft = styled.div`
   flex-grow: 3;
 `
+export const TestHeaderLeft = muistyled('div')(({theme}) => ({
+  flexGrow: 3,
+  color: theme.palette.primary.main
+}));
 
 export const HeaderCenter = styled.div`
   flex-grow: 6;
 `
+
+export const TestHeaderCenter = muistyled('div')(({theme}) => ({
+  flexGrow: 6,
+  color: theme.palette.primary.main
+}));
 
 export const HeaderRight = styled.div`
   flex-grow: 3;
