@@ -1,53 +1,41 @@
-import styled from '@emotion/styled';
-import { Button, makeStyles, darken, styled as muistyled } from '@material-ui/core';
+import { styled as muistyled, Paper, AppBar } from '@material-ui/core';
 
 /* main page topbar */
-export const Header = styled.header`
-  width: 100%;
-  height: 50px;
-  background-color: white;
-  position: sticky;
-  top: 0;
-  display: flex;
-  align-items: center;
-  font-family: 'Josefin Sans', sans-serif;
-`;
-
-export const TestHeader = muistyled('header')(({theme}) => ({
+export const TopMenu = muistyled(AppBar)(({theme}) => ({
   width: '100%',
   height: '50px',
   backgroundColor: 'white',
   position: 'sticky',
-  top: '1px',
+  top: '0px',
   display: 'flex',
   alignItems: 'center',
   fontFamily: 'Josefin Sans, sans-serif',
 }));
 
-export const HeaderLeft = styled.div`
-  flex-grow: 3;
-`
-export const TestHeaderLeft = muistyled('div')(({theme}) => ({
-  flexGrow: 3,
-  color: theme.palette.primary.main
+export const TopMenuLeft = muistyled('div')(({theme}) => ({
+  // flexGrow: 3,
 }));
 
-export const HeaderCenter = styled.div`
-  flex-grow: 6;
-`
-
-export const TestHeaderCenter = muistyled('div')(({theme}) => ({
-  flexGrow: 6,
-  color: theme.palette.primary.main
+export const TopMenuCenter = muistyled(Paper)(({theme}) => ({
+  // flexGrow: 6,
 }));
 
-export const HeaderRight = styled.div`
-  flex-grow: 3;
-  display: flex;
-  & img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
+export const HList = muistyled('ul')(({theme}) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  listStyle: 'none',
+  '& .listItem': {
+    textTransform: 'uppercase',
+    marginRight: '20px',
+    fontSize: '1.125rem',
+    fontWeight: 300,
+    cursor: 'pointer'
   }
-`
+}));
+
+export const TopMenuRight = muistyled('div')(({theme}) => ({
+  // flexGrow: 3,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
+}));

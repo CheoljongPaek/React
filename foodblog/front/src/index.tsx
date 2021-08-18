@@ -13,7 +13,7 @@ ReactDOM.render(
       <MuiThemeProvider theme={theme}>
         {/* <ThemeProvider theme={theme}> */}
         {/* <Suspense fallback={(<div>Loading</div>)}> */}
-          {/* <CssBaseline /> */}
+          <CssBaseline />
           <App />
         {/* </Suspense> */}
         {/* </ThemeProvider> */}

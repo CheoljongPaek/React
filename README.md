@@ -358,4 +358,21 @@
 # Day 48
   : emotion to material-ui.
   : component 기존 css를 useStyles로 덮어씌움.
-  
+  : breakpoints: https://gist.github.com/gokulkrishh/242e68d1ee94ad05f488 
+    xs: 0,
+    mobile(portrait)
+    !sm: 480,
+    mobile(landscape), tablet 
+    md: 768,
+    tablet, ipad
+    !lg: 1024,
+    labtop,desktop
+    xl: 1280,
+    desktop
+
+@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ }
+@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
+@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+@media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }
