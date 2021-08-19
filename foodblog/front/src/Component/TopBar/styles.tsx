@@ -1,9 +1,9 @@
 import { styled as muistyled, Paper, AppBar } from '@material-ui/core';
+import { Box } from '@material-ui/system';
 
 /* main page topbar */
 export const TopMenu = muistyled(AppBar)(({theme}) => ({
   width: '100%',
-  height: '50px',
   backgroundColor: 'white',
   position: 'sticky',
   top: '0px',
@@ -12,8 +12,10 @@ export const TopMenu = muistyled(AppBar)(({theme}) => ({
   fontFamily: 'Josefin Sans, sans-serif',
 }));
 
-export const TopMenuLeft = muistyled('div')(({theme}) => ({
-  // flexGrow: 3,
+export const TopMenuLeft = muistyled(Box)(({theme}) => ({
+  display: 'flex',
+  width: '100%',
+  justifyContent: 'center'
 }));
 
 export const TopMenuCenter = muistyled(Paper)(({theme}) => ({

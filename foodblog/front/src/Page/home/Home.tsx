@@ -15,10 +15,10 @@ const Home = () => {
       <Header />
       <div className="home">
         <Grid container>
-          <Grid item xs={9}>
+          <Grid item xs={12} md={9}>
             <Posts />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <Sidebar />
           </Grid>
         </Grid>

@@ -1,6 +1,8 @@
-import { makeStyles } from '@material-ui/core';
+import { Box, Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
-import { } from './styles';
+import Post from '../Post/main';
+import { PostsContainer } from './styles';
+import { Box as SystemBox } from '@material-ui/system';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -9,9 +11,62 @@ const useStyles = makeStyles((theme) => ({
 const Posts = () => {
 
   return (
-    <div className="posts">
-      posts
-    </div>
+    <PostsContainer container>
+      <SystemBox 
+        component={Grid} 
+        item 
+        xs={4} 
+        md={4}
+        display={{ xs: 'none', sm: 'block' }}
+      >
+        <Post />
+      </SystemBox>
+      <SystemBox 
+        component={Grid}
+        item 
+        xs={4} 
+        md={4}
+        display={{ xs: 'none', sm: 'block' }}
+      >
+        <Post />
+      </SystemBox>
+      <SystemBox 
+        component={Grid}
+        item 
+        xs={4} 
+        md={4}
+        display={{ xs: 'none', sm: 'block' }}
+      >
+        <Post />
+      </SystemBox>
+      <SystemBox 
+        component={Grid}
+        item 
+        xs={4} 
+        md={4}
+        display={{ xs: 'none', sm: 'block' }}
+      >
+        <Post />
+      </SystemBox>
+      <SystemBox 
+        component={Grid}
+        item 
+        xs={4} 
+        md={4}
+        display={{ xs: 'none', sm: 'block' }}
+      >
+        <Post />
+      </SystemBox>
+      <SystemBox 
+        component={Grid}
+        item 
+        xs={4} 
+        md={4}
+        display={{ xs: 'none', sm: 'block' }}
+      >
+        <Post />
+      </SystemBox>
+    </PostsContainer>
   )
 }
 

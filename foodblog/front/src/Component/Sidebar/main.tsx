@@ -2,7 +2,7 @@ import { Divider, Grid, makeStyles, Typography } from '@material-ui/core';
 import { Email, Facebook, Instagram, Twitter } from '@material-ui/icons';
 import React from 'react';
 import aboutmeImg from './../../images/cat-a1.jpg'
-import { ImgContainer, SidebarContainer, SidebarList } from './styles';
+import { IconContainer, ImgContainer, SidebarContainer, SidebarList } from './styles';
 
 const useStyles = makeStyles((theme) => ({
   snsicon: {
@@ -59,12 +59,12 @@ const Sidebar = () => {
           <Typography className={classes.typography} variant="subtitle2">FOLLOW US</Typography>
         <Divider />
         <div className="sidebarSocial">
-        <div className="iconContainer">
+        <IconContainer>
           <Facebook className={classes.snsicon}/>
           <Twitter className={classes.snsicon}/>
           <Email className={classes.snsicon}/>
           <Instagram className={classes.snsicon}/>
-        </div>
+        </IconContainer>
         </div>
       </div>
     </SidebarContainer>

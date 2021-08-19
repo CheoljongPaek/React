@@ -1,6 +1,6 @@
-import { styled as muistyled, Paper, AppBar } from '@material-ui/core';
-import { flexbox, fontFamily } from '@material-ui/system';
+import { styled as muistyled, Paper, AppBar, Grid } from '@material-ui/core';
 
-/* main page Header */
-export const Sidebar = muistyled('div')(({theme}) => ({
+/* main page Posts */
+export const PostsContainer = muistyled(Grid)(({theme}) => ({
+  // justifyContent: 'space-evenly'
 }));

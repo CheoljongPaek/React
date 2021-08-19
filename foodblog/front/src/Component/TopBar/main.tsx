@@ -7,7 +7,8 @@ const useStyles = makeStyles((theme) => ({
   snsicon: {
     color: '#444',
     fontSize: '1.25rem',
-    marginRight: '10px',
+    marginRight: '5px',
+    marginLeft: '5px',
     cursor: 'pointer'
   },
   searchicon: {
@@ -30,19 +31,15 @@ const TopBar = () => {
   // console.log(theme);
 
   return (
-    <TopMenu>
+    <TopMenu elevation={0}>
       <Grid container>
         <Grid container item xs={3} justifyContent="center" alignContent="center">
           <Hidden smDown={true}>
             <TopMenuLeft>
-              <Paper>
-                <div className="iconContainer">
-                  <Facebook className={classes.snsicon}/>
-                  <Twitter className={classes.snsicon}/>
-                  <Email className={classes.snsicon}/>
-                  <Instagram className={classes.snsicon}/>
-                </div>
-              </Paper>
+              <Facebook className={classes.snsicon}/>
+              <Twitter className={classes.snsicon}/>
+              <Email className={classes.snsicon}/>
+              <Instagram className={classes.snsicon}/>
             </TopMenuLeft>
           </Hidden>
         </Grid>

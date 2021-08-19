@@ -1,8 +1,8 @@
-import { styled as muistyled, Paper, AppBar, Grid } from '@material-ui/core';
+import { styled as muistyled, Paper, AppBar, Grid, Container, Hidden } from '@material-ui/core';
 import { flexbox, fontFamily } from '@material-ui/system';
 
 /* main page sidebar */
-export const SidebarContainer = muistyled('div')(({theme}) => ({
+export const SidebarContainer = muistyled(Hidden)(({theme}) => ({
   backgroundColor: '#F5F5DC',
   padding: '2rem'
 }));
@@ -12,9 +12,6 @@ export const SidebarList = muistyled(Grid)(({theme}) => ({
   "$ .item": {
   }
 }));
-
-
-
 export const ImgContainer = muistyled('div')(({theme}) => ({
   "& img": {
     width: '100%',
@@ -22,3 +19,10 @@ export const ImgContainer = muistyled('div')(({theme}) => ({
     objectFit: 'cover',
   }
 }));
+export const IconContainer = muistyled('div')(({theme}) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: theme.spacing(10),
+  cursor: 'pointer',
+}))

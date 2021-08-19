@@ -3,7 +3,9 @@ import { flexbox, fontFamily } from '@material-ui/system';
 
 /* main page Header */
 export const HeaderContainer = muistyled('div')(({theme}) => ({
-  marginTop: theme.spacing(8),
+  // marginTop: theme.spacing(8),
+  position: 'relative',
+  backgroundColor: 'rgba(170, 97, 79, 0.2)'
 }));
 export const HeaderTitles = muistyled('div')(({theme}) => ({
   display: 'flex',
@@ -11,14 +13,15 @@ export const HeaderTitles = muistyled('div')(({theme}) => ({
   alignItems: 'center',
   fontFamily: 'Lora, serif',
   color: '#444',
+  width: '50%',
   "& .titleSm": {
     position: 'absolute',
-    top: '10%',
-    fontSize: '1.25rem'
+    top: '30%',
+    fontSize: '3.75rem'
   },
   "& .titleLg": {
     position: 'absolute',
-    top: '12%',
+    top: '40%',
     fontSize: '6.25rem'
   },
 }));
@@ -26,8 +29,9 @@ export const HeaderTitles = muistyled('div')(({theme}) => ({
 export const ImgContainer = muistyled('div')(({theme}) => ({
   "& img": {
     width: "100%",
-    height: "30rem",
-    marginTop: '5rem',
+    // height: "100%",
+    height: theme.spacing(60),
+    // marginTop: theme.spacing(10),
     objectFit: 'cover'
   }
 }));

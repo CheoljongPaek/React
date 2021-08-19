@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
 import { ImgContainer, HeaderContainer, HeaderTitles } from './styles';
-import mainImg from './../../images/cooking.jpg'
+import mainImg from './../../images/fooda.jpg'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -18,6 +18,7 @@ const Header = () => {
       <ImgContainer>
         <img className="headerImg" src={mainImg} alt="cooking" />
       </ImgContainer>
+      <div>hmm</div>
     </HeaderContainer>
   )
 }
