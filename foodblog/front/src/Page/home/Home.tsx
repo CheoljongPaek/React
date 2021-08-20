@@ -15,7 +15,7 @@ const Home = () => {
       <Header />
       <div className="home">
         <Grid container>
-          <Grid item xs={12} md={9}>
+          <Grid item xs={12} md={12}>
             <Posts />
           </Grid>
           <Grid item xs={12} md={3}>

@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
 
   return (
-    <HeaderContainer>
+    <HeaderContainer elevation={6}>
       <HeaderTitles>
         <span className="titleSm">Food</span>
         <span className="titleLg">Blog</span>
@@ -18,7 +18,7 @@ const Header = () => {
       <ImgContainer>
         <img className="headerImg" src={mainImg} alt="cooking" />
       </ImgContainer>
-      <div>hmm</div>
+      {/* <div>hmm</div> */}
     </HeaderContainer>
   )
 }
