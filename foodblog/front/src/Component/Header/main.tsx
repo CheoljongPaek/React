@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
 
   return (
-    <HeaderContainer elevation={6}>
+    <HeaderContainer elevation={0}>
       <HeaderTitles>
         <span className="titleSm">Food</span>
         <span className="titleLg">Blog</span>

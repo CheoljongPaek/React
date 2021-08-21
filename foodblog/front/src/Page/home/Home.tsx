@@ -1,5 +1,6 @@
 import { Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
+import CenterNav from '../../Component/CenterNav/main';
 import Header from '../../Component/Header/main';
 import Posts from '../../Component/Posts/main';
 import Sidebar from '../../Component/Sidebar/main';
@@ -14,6 +15,7 @@ const Home = () => {
     <>
       <Header />
       <div className="home">
+        {/* <CenterNav/> */}
         <Grid container>
           <Grid item xs={12} md={12}>
             <Posts />

@@ -2,6 +2,7 @@ import React from 'react';
 import { TopMenu } from './styles';
 import { Facebook, Twitter, Email, Instagram, Search, Menu as MenuIcon, Mail, Notifications, AccountCircle, More, MoreVert } from '@material-ui/icons';
 import { Avatar, makeStyles, Menu, Toolbar, IconButton, Typography, InputBase, Icon, Badge, alpha, MenuItem } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   serach: {
@@ -51,12 +52,14 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    color: '#ffffffe3',
   },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    cursor: 'pointer',
   },
   inputRoot: {
     color: 'inherit'
@@ -79,6 +82,7 @@ const useStyles = makeStyles((theme) => ({
 
 const TopBar = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<HTMLElement>(null);
 
@@ -161,7 +165,14 @@ const TopBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography 
+            className={classes.title} 
+            variant="h6" 
+            noWrap
+            onClick={() => history.push({
+              pathname: "/",
+            })}
+          >
             Food Blog
           </Typography>
           <div className={classes.serach}>

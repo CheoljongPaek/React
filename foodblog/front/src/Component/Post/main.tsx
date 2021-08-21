@@ -1,6 +1,7 @@
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Container, IconButton, makeStyles, Typography } from '@material-ui/core';
 import { ExpandMore as ExpandMoreIcon, Favorite, MoreVert, Share } from '@material-ui/icons';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { ExpandMore } from './styles';
 import img from './../../images/colorfulplace.jpg'
 
@@ -11,15 +12,21 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9,
+    cursor: 'pointer',
   }
 }));
 
 const Post = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const openSinglePost = () => {
+    console.log('openSinglePost');
   };
 
   return (
@@ -39,7 +46,10 @@ const Post = () => {
           title="Title"
           subheader="subheader"
         />
-        <CardMedia 
+        <CardMedia
+          onClick={() => history.push({
+            pathname: "/post",
+          })}
           className={classes.media}
           image={img}
           // src={img}

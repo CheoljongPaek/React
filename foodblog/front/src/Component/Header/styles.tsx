@@ -1,5 +1,4 @@
-import { styled as muistyled, Box, Paper } from '@material-ui/core';
-import { flexbox, fontFamily } from '@material-ui/system';
+import { styled as muistyled, Box, Paper, Container } from '@material-ui/core';
 
 /* main page Header */
 export const HeaderContainer = muistyled(Paper)(({theme}) => ({
@@ -26,12 +25,13 @@ export const HeaderTitles = muistyled('div')(({theme}) => ({
   },
 }));
 
-export const ImgContainer = muistyled(Paper)(({theme}) => ({
+export const ImgContainer = muistyled('div')(({theme}) => ({
   "& img": {
     width: "100%",
     // height: "100%",
     height: theme.spacing(60),
     // marginTop: theme.spacing(10),
-    objectFit: 'cover'
+    objectFit: 'cover',
+    verticalAlign: 'bottom'
   }
 }));
