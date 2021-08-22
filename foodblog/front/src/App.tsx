@@ -4,7 +4,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import CenterNav from './Component/CenterNav/main';
 import TopBar from './Component/TopBar/main';
 import Home from './Page/Home/Home';
-import SectionOne from './Page/SectionOne/SectionOne';
+import Login from './Page/Login/main';
+import Setting from './Page/Setting/main';
+import Signup from './Page/Signup/main';
 import Single from './Page/Single/main';
 import Write from './Page/Write/main';
 
@@ -21,9 +23,11 @@ function App() {
         <div>
           <Switch>
             <Route exact path="/" component={Home}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/signup" component={Signup}/>
             <Route path="/post" component={Single}/>
             <Route path="/write" component={Write}/>
-            <Route path="/abc" component={SectionOne}/>
+            <Route path="/setting" component={Setting}/>
           </Switch>
         </div>
         <CenterNav/>

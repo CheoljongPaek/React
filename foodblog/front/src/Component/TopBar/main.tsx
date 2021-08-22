@@ -205,6 +205,9 @@ const TopBar = () => {
               aria-label="account of current user"
               // onClick={handleProfileMenuOpen}
               color="inherit"
+              onClick={() => history.push({
+                pathname: "/setting",
+              })}
             >
               <AccountCircle />
             </IconButton>

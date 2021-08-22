@@ -12,7 +12,9 @@ export const ImgContainer = muistyled('div')(({theme}) => ({
     height: theme.spacing(60),
     // marginTop: theme.spacing(10),
     objectFit: 'cover',
-    verticalAlign: 'bottom'
+    verticalAlign: 'bottom',
+    borderBottomRightRadius: theme.spacing(10),
+    borderBottomLeftRadius: theme.spacing(10),
   },
 }));
 
@@ -39,4 +41,11 @@ export const MainInfo = muistyled(Typography)(({theme}) => ({
     fontSize: "2rem",
     fontWeight: 'bold',
   }
+}));
+
+export const PostTitle = muistyled('div')(({theme}) => ({
+  fontSize: '2rem',
+  paddingTop: theme.spacing(2),
+  paddingBottom: theme.spacing(2),
+  // lineHeight: '0px',
 }));

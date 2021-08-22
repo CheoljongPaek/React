@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container as BaseContainer, IconButton, makeStyles } from '@material-ui/core';
-import { ContentContainer, EditContainer, ImgContainer, MainInfo, SubContainer, SubInfo } from './styles';
+import { ContentContainer, EditContainer, ImgContainer, MainInfo, PostTitle, SubContainer, SubInfo } from './styles';
 import image from './../../images/cooking.jpg'
 import { DeleteTwoTone, EditTwoTone } from '@material-ui/icons';
 
@@ -19,11 +19,11 @@ const SinglePostContent = () => {
         <ImgContainer>
           <img src={image} alt="img" />
         </ImgContainer>
-        <SubContainer variant="h5">
+        <SubContainer>
           <div className={classes.grow}/>
-          <h1 className="title">
+          <PostTitle>
             Title is Here
-          </h1>
+          </PostTitle>
           <EditContainer className={classes.grow}>
             <IconButton edge="end">
               <EditTwoTone/>

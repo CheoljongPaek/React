@@ -1,5 +1,5 @@
 import { createTheme } from '@material-ui/core/styles';
-import { purple, red } from '@material-ui/core/colors';
+import { grey, purple, red } from '@material-ui/core/colors';
 import React from 'react';
 
 declare module '@material-ui/core/styles' {
@@ -49,7 +49,7 @@ const theme = createTheme({
       main: '#11cb5f',
       darker: '#de1e2f',
     },
-    secondary: purple,
+    secondary: grey,
     type: "light"
   }
 });

@@ -39,12 +39,12 @@ const CenterNav = () => {
           >Post</StyledLink>
           <StyledLink
             component={RouterLink}
-            to="/"
-          >None</StyledLink>
+            to="/signup"
+          >Signup</StyledLink>
           <StyledLink
             component={RouterLink}
-            to="/"
-          >None</StyledLink>
+            to="/login"
+          >Login</StyledLink>
         </Breadcrumbs>
     </div>
   )
