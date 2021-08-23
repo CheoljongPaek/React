@@ -1,11 +1,11 @@
 import { TextField } from '@material-ui/core';
 import { useCallback, useState } from 'react';
 import useInput from '../../hooks/useInput';
-import { SignupContainer, Form, InputContainer } from './styles';
+import { SignupContainer, Form, InputGroup, SubmitBtnContainer } from './styles';
 
 const SignupForm = () => {
   const [email, onChangeEmail] = useInput('');
-  const [nickname, onChangeNickname] = useInput('');
+  const [username, onChangeUsername] = useInput('');
   const [password, ,setPassword] = useInput('');
   const [passwordCheck, , setPasswordCheck] = useInput('');
   const [mismatchError, setMismatchError] = useState(false);
@@ -24,33 +24,29 @@ const SignupForm = () => {
     <>      
       <SignupContainer>
         <Form>
-          <TextField 
-            error={false}
-            label="username"
-          />
-          <InputContainer>
-            <label htmlFor="username" className="label">Username*</label>
-            <input id="username" type="text" className="input" onChange={onChangeNickname} />
-          </InputContainer>
-          <InputContainer>
-            <label htmlFor="eamil" className="label">Email Address*</label>
-            <input type="email" className="input" value={email} onChange={onChangeEmail} />
-          </InputContainer>
-          <InputContainer>
-            <label htmlFor="pass" className="label">Password*</label>
-            <input id="pass" type="password" autoComplete="off" className="input" data-type="password" value={password} onChange={onChangePassword} />
-          </InputContainer>
-          <InputContainer>
-            <label htmlFor="passCheck" className="label">Confirm Password*</label>
-            <input id="passCheck" type="password" autoComplete="off" className="input" data-type="password" value={passwordCheck} onChange={onChangePasswordCheck}/>
-          </InputContainer>
-          <div>
+          <InputGroup>
+            <input id="username" placeholder="Username" type="text" value={username} onChange={onChangeUsername} />
+            <label htmlFor="username">Username</label>
+          </InputGroup>
+          <InputGroup>
+            <input id="email" placeholder="Email" type="email" value={email} onChange={onChangeEmail} />
+            <label htmlFor="email">Email Address</label>
+          </InputGroup>
+          <InputGroup>
+            <input id="pass" placeholder="Password" type="password" autoComplete="off" data-type="password" value={password} onChange={onChangePassword} />
+            <label htmlFor="pass">Password</label>
+          </InputGroup>
+          <InputGroup>
+            <input id="passCheck" placeholder="PassCheck" type="password" autoComplete="off" data-type="password" value={passwordCheck} onChange={onChangePasswordCheck}/>
+            <label htmlFor="passCheck">Confirm Password</label>
+          </InputGroup>
+          <SubmitBtnContainer>
             <button type="submit" className="button">Sign Up</button>
-          </div>
+          </SubmitBtnContainer>
         </Form>
         <div className="ErrorContainer">
           {mismatchError && <div>❌Password and confirm password does not match</div>}
-          {!nickname && <div>First, please insert your nickname</div>}
+          {!username && <div>First, please insert your nickname</div>}
         </div>
         <div className="findpwinsignup">
           <a href="#forgot">Forgot Password?</a>
