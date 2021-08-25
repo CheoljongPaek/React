@@ -15,21 +15,30 @@ function App() {
   // const handleClick = (lang: string) => {
   //   i18n.changeLanguage(lang);
   // }
+  const user = false;
   return (
     <div className="App">
       <Router>
         <TopBar />
         {/* <Home /> */}
-        <div>
+        {/* <div> */}
           <Switch>
             <Route exact path="/" component={Home}/>
-            <Route path="/login" component={Login}/>
-            <Route path="/signup" component={Signup}/>
-            <Route path="/post" component={Single}/>
-            <Route path="/write" component={Write}/>
-            <Route path="/setting" component={Setting}/>
+            <Route path="/login">
+              {user ? <Home /> : <Login />}
+            </Route>
+            <Route path="/signup">
+              {user ? <Home /> : <Signup />}
+            </Route>
+            <Route path="/write">
+              {user ? <Write /> : <Signup />}
+            </Route>
+            <Route path="/setting">
+              {user ? <Setting /> : <Signup />}
+            </Route>
+            <Route path="/post/:postId" component={Single}/>
           </Switch>
-        </div>
+        {/* </div> */}
         <CenterNav/>
       </Router>
       {/* <nav style={{ width: '100%', padding:'2rem 0', backgroundColor:'gray'}} />

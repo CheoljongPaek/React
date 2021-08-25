@@ -371,3 +371,17 @@
     desktop
 # Day 51
   : 포스팅 create 부분을 마크다운 + 이미지 업로드 + 지도 업로드.
+# Day 53
+  : index.html에 기본 css 지정해서 사용하자.
+# Day 54
+  : 모바일에서 제거할 컴포넌트는 class를 사용해서 간편하게 진행하자.
+    ```
+      removeInMobile: {
+        [theme.breakpoints.down('xs')]: {
+          display: 'none',
+        },
+      },
+    ```
+  : topbar 모바일시 food blog disply none하고 subtitle 홈 아이콘으로. 링크도.
+# Day 55
+  : 

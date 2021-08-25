@@ -15,7 +15,7 @@ export const StyledLink = muistyled(Link)(({theme}) => {
     borderRadius: '16px',
     width: theme.spacing(10),
     fontWeight: 'normal',
-    cursor: 'default',
+    cursor: 'pointer',
     listStyle: 'none',
     display: 'inline-flex',
     fontSize: '0.875rem',
@@ -32,5 +32,4 @@ export const StyledLink = muistyled(Link)(({theme}) => {
     '&:visited': {
     }
   };
-  
 });

@@ -1,8 +1,8 @@
 import React from 'react';
-import { TopMenu } from './styles';
-import { Facebook, Twitter, Email, Instagram, Search, Menu as MenuIcon, Mail, Notifications, AccountCircle, More, MoreVert } from '@material-ui/icons';
+import { LogoutBtn, SignupBtn, StyledLink, TopMenu } from './styles';
+import { Facebook, Twitter, Email, Instagram, Search, Menu as MenuIcon, Mail, Notifications, AccountCircle, MoreVert, ExitToApp } from '@material-ui/icons';
 import { Avatar, makeStyles, Menu, Toolbar, IconButton, Typography, InputBase, Icon, Badge, alpha, MenuItem } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   serach: {
@@ -54,12 +54,15 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     color: '#ffffffe3',
   },
-  title: {
+  MainTitle: {
     display: 'none',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'block',
     },
     cursor: 'pointer',
+  },
+  SubTitle: {
+    
   },
   inputRoot: {
     color: 'inherit'
@@ -77,7 +80,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       minHeight: theme.spacing(6)
     },
-  }
+  },
+  removeInMobile: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
+  },
 }));
 
 const TopBar = () => {
@@ -88,6 +96,8 @@ const TopBar = () => {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const user = false;
 
   const handleMobileMenuOpen = (e: React.MouseEvent<HTMLElement>): void => {
     setMobileMoreAnchorEl(e.currentTarget)
@@ -152,6 +162,21 @@ const TopBar = () => {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+      {user && (
+        // <div>
+          <MenuItem onClick={handleProfileMenuOpen}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <ExitToApp />
+            </IconButton>
+            <p>Logout</p>
+          </MenuItem>
+        // </div>
+      )}
     </Menu>
   )
   
@@ -166,7 +191,7 @@ const TopBar = () => {
             <MenuIcon />
           </IconButton>
           <Typography 
-            className={classes.title} 
+            className={classes.MainTitle} 
             variant="h6" 
             noWrap
             onClick={() => history.push({
@@ -189,6 +214,7 @@ const TopBar = () => {
             />
           </div>
           <div className={classes.grow} />
+          {user? 
           <div className={classes.sectionDesktop}>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -199,6 +225,9 @@ const TopBar = () => {
               <Badge badgeContent={11} color="secondary">
                 <Notifications />
               </Badge>
+            </IconButton>
+            <IconButton color="inherit">
+              <ExitToApp />
             </IconButton>
             <IconButton
               edge="end"
@@ -211,7 +240,21 @@ const TopBar = () => {
             >
               <AccountCircle />
             </IconButton>
-          </div>
+          </div> 
+          : 
+          <>
+            <RouterLink to="/login">
+              <LogoutBtn>login</LogoutBtn>
+            </RouterLink>
+            <RouterLink to="/signup">
+              <SignupBtn className={classes.removeInMobile}>signup</SignupBtn>
+            </RouterLink>
+            {/* <LogoutBtn>login</LogoutBtn> */}
+            {/* <SignupBtn className={classes.removeInMobile}>signup</SignupBtn> */}
+
+          </>
+          }
+          {user &&
           <div className={classes.sectionMobile}>
             <IconButton
               onClick={handleMobileMenuOpen}
@@ -219,6 +262,7 @@ const TopBar = () => {
               <MoreVert />
             </IconButton>
           </div>
+          }
         </Toolbar>
       </TopMenu>
       {renderMobileMenu}

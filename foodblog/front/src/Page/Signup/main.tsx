@@ -25,7 +25,7 @@ const SignupForm = () => {
       <SignupContainer>
         <Form>
           <InputGroup>
-            <input id="username" placeholder="Username" type="text" value={username} onChange={onChangeUsername} />
+            <input id="username" autoComplete="off" placeholder="Username" type="text" value={username} onChange={onChangeUsername} />
             <label htmlFor="username">Username</label>
           </InputGroup>
           <InputGroup>

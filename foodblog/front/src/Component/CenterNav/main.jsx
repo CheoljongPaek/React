@@ -11,11 +11,17 @@ function handleClick(event) {
 
 const useStyles = makeStyles((theme) => ({
   breadcrumbsContainer: {
-    margin: theme.spacing(2)
+    margin: `${theme.spacing(2)}px 0`,
+    width: '100%',
+    height: '100%',
+    maxHeight: '20px',
+    bottom: 0,
+    position: 'absolute',
+    whiteSpace: 'nowrap',
   },
   breadcrumbs: {
     "& .MuiBreadcrumbs-ol": {
-      justifyContent: 'center'
+      justifyContent: 'center',
     }
   }
 }));
