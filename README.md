@@ -383,5 +383,7 @@
       },
     ```
   : topbar 모바일시 food blog disply none하고 subtitle 홈 아이콘으로. 링크도.
-# Day 55
-  : 
+  : Done!
+# Day 55 DataBase
+  : https://www.youtube.com/watch?v=7S_tz1z_5bA
+  Database is a collection of data stored in a format that can easily be accessed. DBMS: Database Management System.

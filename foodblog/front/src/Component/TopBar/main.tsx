@@ -1,6 +1,6 @@
 import React from 'react';
 import { LogoutBtn, SignupBtn, StyledLink, TopMenu } from './styles';
-import { Facebook, Twitter, Email, Instagram, Search, Menu as MenuIcon, Mail, Notifications, AccountCircle, MoreVert, ExitToApp } from '@material-ui/icons';
+import { Facebook, Twitter, Email, Instagram, Search, Menu as MenuIcon, Mail, Notifications, AccountCircle, MoreVert, ExitToApp, HomeRounded } from '@material-ui/icons';
 import { Avatar, makeStyles, Menu, Toolbar, IconButton, Typography, InputBase, Icon, Badge, alpha, MenuItem } from '@material-ui/core';
 import { useHistory, Link as RouterLink } from 'react-router-dom';
 
@@ -12,10 +12,10 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
     marginRight: theme.spacing(2),
-    marginLeft: 0,
+    marginLeft: theme.spacing(2),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
+      marginLeft: theme.spacing(2),
       width: 'auto',
     },
   },
@@ -27,13 +27,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  headerce: {
-    // color: '#000000',
-    [theme.breakpoints.up("sm")]: {
-      marginTop: theme.spacing(1),
-      // backgroundColor: "#aaaa00"
-    }
   },
   sectionDesktop: {
     display: 'none',
@@ -51,18 +44,29 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(0),
     color: '#ffffffe3',
+    [theme.breakpoints.up('md')]: {
+      marginRight: theme.spacing(2),
+    },
   },
   MainTitle: {
     display: 'none',
+    color: '#ffffffe3',
     [theme.breakpoints.up('md')]: {
       display: 'block',
     },
     cursor: 'pointer',
   },
   SubTitle: {
-    
+    display: 'block',
+    height: '1.5rem',
+    color: '#ffffffe3',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+    cursor: 'pointer',
+    // margin: theme.spacing(1.5, 1.5, 1.5, 1.5)
   },
   inputRoot: {
     color: 'inherit'
@@ -178,7 +182,7 @@ const TopBar = () => {
         // </div>
       )}
     </Menu>
-  )
+  );
   
   return (
     <div id="topMenuContainer" className={classes.grow}>
@@ -200,6 +204,19 @@ const TopBar = () => {
           >
             Food Blog
           </Typography>
+          <IconButton
+            edge="start"
+            // className={classes.SubTitle}
+          >
+            <div 
+              className={classes.SubTitle} 
+              onClick={() => history.push({
+                pathname: "/",
+              })}
+            >
+              <HomeRounded />
+            </div>
+          </IconButton>
           <div className={classes.serach}>
             <div className={classes.searchIcon}>
               <Search />

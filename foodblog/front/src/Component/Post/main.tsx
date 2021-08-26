@@ -16,17 +16,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Post = () => {
+const Post = ({ setIsOpened }: {setIsOpened: React.Dispatch<React.SetStateAction<boolean>>}) => {
   const classes = useStyles();
   const history = useHistory();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
-  };
-
-  const openSinglePost = () => {
-    console.log('openSinglePost');
+    setIsOpened(!expanded);
   };
 
   return (
