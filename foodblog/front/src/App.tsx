@@ -40,6 +40,10 @@ function App() {
           </Switch>
         {/* </div> */}
         <CenterNav/>
+        <form action="../../post" method="post" 
+              className="form">
+          <button type="submit">Connected?</button>
+        </form>
       </Router>
       {/* <nav style={{ width: '100%', padding:'2rem 0', backgroundColor:'gray'}} />
         <button onClick={() => handleClick('en')}>
