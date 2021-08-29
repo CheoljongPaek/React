@@ -14,13 +14,24 @@
 import express from 'express';
 
 const app = express();
+// const PORT = process.env.PORT || 3000;
+
+app.set('port', process.env.PORT || 3000);
   
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+app.get("/Life", (req, res) => {
+  res.send("Life!");
+});
+
+app.post("/api/post", (req, res) => {
+  console.log("Connected to React!");
+  res.redirect("/");
+});
   
-const PORT = process.env.PORT || 8080;
   
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
+app.listen(app.get('port'), () => {
+  console.log(`Server started on port ${app.get('port')}`);
 });

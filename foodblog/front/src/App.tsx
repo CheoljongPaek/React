@@ -40,7 +40,7 @@ function App() {
           </Switch>
         {/* </div> */}
         <CenterNav/>
-        <form action="../../post" method="post" 
+        <form action="http://localhost:8080/api/post" method="post" 
               className="form">
           <button type="submit">Connected?</button>
         </form>
