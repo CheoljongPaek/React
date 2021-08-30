@@ -389,4 +389,6 @@
   Database is a collection of data stored in a format that can easily be accessed. DBMS: Database Management System.
 # Day 57 Express Setting
   : Nodemon & Typescript needs to use ts-node as connection.
+# Day 57
+  : sequelize-cli typescript 하기.
   
