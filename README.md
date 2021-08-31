@@ -391,4 +391,5 @@
   : Nodemon & Typescript needs to use ts-node as connection.
 # Day 57
   : sequelize-cli typescript 하기.
-  
+# Day 58
+  : 서버에서 API GET 하기.
