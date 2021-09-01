@@ -16,6 +16,7 @@
     "@types/react": "^17.0.17",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.8",
+    "axios": "^0.21.1",
     "date-fns": "^2.23.0",
     "i18next": "^20.4.0",
     "i18next-browser-languagedetector": "^6.1.2",

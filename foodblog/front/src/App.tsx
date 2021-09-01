@@ -9,13 +9,27 @@ import Setting from './Page/Setting/main';
 import Signup from './Page/Signup/main';
 import Single from './Page/Single/main';
 import Write from './Page/Write/main';
+import axios from 'axios';
 
 function App() {
   // const { t, i18n } = useTranslation();
   // const handleClick = (lang: string) => {
   //   i18n.changeLanguage(lang);
   // }
+  const [weather, setWeather] = React.useState("Not yet gotten");
+  const [time, setTime] = React.useState("Not yet gotten");
+
   const user = false;
+
+  React.useEffect(() => {
+    axios
+      .get("/getWeatherNewYork")
+      .then(response => {
+        setWeather(response.data["temperature"])
+        setTime(response.data["observation_time"])
+      })  
+  }, []);
+
   return (
     <div className="App">
       <Router>
@@ -40,10 +54,11 @@ function App() {
           </Switch>
         {/* </div> */}
         <CenterNav/>
-        <form action="http://localhost:8001/api/post" method="post" 
-              className="form">
-          <button type="submit">Connected?</button>
-        </form>
+        <div>
+          <button>Get weather in New Work</button>
+          <h1>The weather in toronto is: {weather}</h1>
+          <h1>The time in toronto is: {time}</h1>
+        </div>
       </Router>
       {/* <nav style={{ width: '100%', padding:'2rem 0', backgroundColor:'gray'}} />
         <button onClick={() => handleClick('en')}>

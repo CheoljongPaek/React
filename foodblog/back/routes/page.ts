@@ -32,7 +32,7 @@ router.get('/getWeatherNewYork', (req, res, next) => {
     .get("http://api.weatherstack.com/current?access_key=c0c42a3f80ddb26bafe41fe5761db771&query=New%20York")
     // .then(response => {console.log(response);})
     .then(response => {
-      res.json(response.data);
+      res.json(response.data["current"]);
       // console.log(response);
     })
     .catch(error => {console.log(error);})

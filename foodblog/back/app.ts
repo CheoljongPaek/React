@@ -8,10 +8,16 @@ import 'dotenv/config';
 // import pageRouter from '../routes/page'
 const pageRouter = require('./routes/page');
 
+/* func Start */
+
+/* func End */
+
 const app = express();
 app.set('port', process.env.PORT || 8001);
 app.set('view engine', 'html');
 // nunjucks
+// app.get('/favicon.ico', (req, res) => res.status(204));
+app.get('/favicon.ico', (req, res) => res.status(204).end())
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '/public')));

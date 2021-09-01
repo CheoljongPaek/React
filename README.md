@@ -392,4 +392,6 @@
 # Day 57
   : sequelize-cli typescript 하기.
 # Day 58
-  : 서버에서 API GET 하기.
+  : 서버에서 API GET 하기. - 포스트맨 사용
+# Day 59
+  : 데이터베이스 완료. 내일은 1.시퀄라이즈 구조 분석 2.스키마 생성.
