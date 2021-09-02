@@ -23,7 +23,7 @@ const SignupForm = () => {
   return (
     <>      
       <SignupContainer>
-        <Form>
+        <Form action="/auth/signup" method="post">
           <InputGroup>
             <input id="username" autoComplete="off" placeholder="Username" type="text" value={username} onChange={onChangeUsername} />
             <label htmlFor="username">Username</label>

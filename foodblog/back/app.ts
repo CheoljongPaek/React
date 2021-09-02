@@ -7,6 +7,7 @@ import 'dotenv/config';
 
 // import pageRouter from '../routes/page'
 const pageRouter = require('./routes/page');
+const { sequelize } = require('./models');
 
 /* func Start */
 
@@ -17,6 +18,13 @@ app.set('port', process.env.PORT || 8001);
 app.set('view engine', 'html');
 // nunjucks
 // app.get('/favicon.ico', (req, res) => res.status(204));
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log('데이터베이스 연결 성공');
+  })
+  .catch((err:Error) => {
+    console.error(err);
+  });
 app.get('/favicon.ico', (req, res) => res.status(204).end())
 
 app.use(morgan('dev'));
