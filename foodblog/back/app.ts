@@ -7,7 +7,12 @@ import 'dotenv/config';
 
 // import pageRouter from '../routes/page'
 const pageRouter = require('./routes/page');
+// const { sequelize } = require('./models/index.js');
 const { sequelize } = require('./models');
+// import * from './models/'
+
+//못가져 오는 거 같으니 path 확인할 것.
+//models export 다시 하기.
 
 /* func Start */
 
