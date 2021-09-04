@@ -399,3 +399,7 @@
   : 테이블 관계 정의, 패스포트 정의.
 # Day 61
   : tsconfig의 module resolution 이해 필요.
+--------------------
+# Day 62
+  : sequelize ts로 호환 별로니 typeorm으로 변경.
+  
