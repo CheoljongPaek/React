@@ -10,6 +10,7 @@ export default {
     path: path.join(__dirname, './migrations'),
     pattern: /^[\w-]+\d+\.[tj]s$/
   },
+  password: 'Ajtnlaka55!',
   entities: [Post],
   dbName: 'lireddit',
   type: 'mysql',

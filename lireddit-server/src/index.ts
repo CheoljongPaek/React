@@ -5,11 +5,18 @@ import microConfig from './mikro-orm.config';
 
 const main = async () => {
   const orm = await MikroORM.init(microConfig);
+  //automatically generate migration. do not have to 
+  //`npx mikro-orm migration:create --run`
+  await orm.getMigrator().up;
 
-  const post = orm.em.create(Post, {title: 'my first post'})
-  await orm.em.persistAndFlush(post);
-  console.log('--------------sql 2 -------------');
-  await orm.em.nativeInsert(Post, {title: 'my first post 2'})
+  // const generator = orm.getSchemaGenerator();
+  // await generator.updateSchema();
+
+  // const post = orm.em.create(Post, {title: 'my first post'})
+  // await orm.em.persistAndFlush(post);
+  // const posts = await orm.em.find(Post, {});
+  console.log(Post);
+  
 };
 
 main().catch(err => {

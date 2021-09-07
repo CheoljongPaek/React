@@ -1,8 +1,11 @@
 # Full Stack
-
+> Typescript
+## Back
+1. node run setup
+2. orm db setup: mysql, mikro-orm
+3. server setup: express, apollo, graphql
 ## Front
 
-## Back
 
 ## Day 1 ## #node run setup
 
@@ -20,7 +23,7 @@
 > terminal 1: `"watch": "tsc -w"` to detect every change and compile it.
 > terminal 2: `"dev": "nodemon dist/index.js"` to show every change in compiled file.
 
-## Day 2,3 ### orm db setup
+## Day 2,3,4 ### orm db setup
 
 8. `"@mikro-orm/cli": "^4.5.9",
     "@mikro-orm/core": "^4.5.9",
@@ -37,7 +40,35 @@ use the Promise object as orm.
         "./dist/mikro-orm.config.js"
         ]
     }`
-to set the order of conflig file load in package.json.
-10. build *./src/mikro-orm.config.ts* so that module will be placed on a parameter of `MikroORM.init(..here..)`.
-> ## migrations in database 
-> 
+to set the order of config file load in package.json.
+10. build *./src/mikro-orm.config.ts* so that module will be placed on there as *here* of a parameter of `MikroORM.init(..here..)`.
+11. TS: typing of other module of function is possible like this.
+`export default {
+  migrations: {
+    path: path.join(__dirname, './migrations'),
+    pattern: /^[\w-]+\d+\.[tj]s$/
+  },
+  entities: [Post],
+  dbName: 'lireddit',
+  type: 'mysql',
+  debug: !__prod__,
+} as Parameters<typeof MikroORM.init>[0];`
+> create absolute path by using path.join and __dirname.
+
+12. make a initial migration in database `npx mikro-orm migration:create --initial`.
+> The migrations table is usded to keep track of already executed migrations.
+> Therefore, use `--initial` flag first, and then use `npx mikro-orm migration:create --run`. 
+> Intead of the command, use the below code.
+` const main = async () => {
+  const orm = await MikroORM.init(microConfig);
+  await orm.getMigrator().up; `
+> use `orm.getMigrator().up`.
+
+13. I solved the problem(12 does not work) might be happend because mysql needs password. I used Mikro-ORM's SchemaGenerator to initialize table.
+`const generator = orm.getSchemaGenerator();
+ await generator.updateSchema();
+`
+> `updateSchema` creates a table or updates it based on *./entities/Post.ts*.
+
+## Day 5 ### server setup
+1. *yarn add express apollo-server-express graphql type-graphql*
