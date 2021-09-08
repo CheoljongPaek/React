@@ -3,8 +3,6 @@ import { __prod__ } from './constants';
 import { Post } from './entities/Post';
 import path from 'path';
 
-console.log("dirname: ", __dirname);
-
 export default {
   migrations: {
     path: path.join(__dirname, './migrations'),
@@ -16,12 +14,3 @@ export default {
   type: 'mysql',
   debug: !__prod__,
 } as Parameters<typeof MikroORM.init>[0];
-
-
-
-// export default {
-//   entities: [Post],
-//   dbName: 'lireddit',
-//   type: 'mysql',
-//   debug: !__prod__,
-// } as Parameters<typeof MikroORM.init>[0];

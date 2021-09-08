@@ -7,7 +7,7 @@
 ## Front
 
 
-## Day 1 ## #node run setup
+## Day 1 node run setup
 
 1. *yarn* is used to block the possibility to install packages in duplicate which can be problematic if there are many files.
 2. *types/node* is a type information for built-in node fuction.
@@ -23,27 +23,37 @@
 > terminal 1: `"watch": "tsc -w"` to detect every change and compile it.
 > terminal 2: `"dev": "nodemon dist/index.js"` to show every change in compiled file.
 
-## Day 2,3,4 ### orm db setup
+## Day 2,3,4 orm db setup
+### Class Models(Entity) -> (*ORM*) -> Migrations -> Database
+### *ORM* library produces migrations files and applies them in db.
+### First, build class models
+### Second, Apply ORM to the models to migrate them.
 
-8. `"@mikro-orm/cli": "^4.5.9",
+8. ```javascript
+    "@mikro-orm/cli": "^4.5.9",
     "@mikro-orm/core": "^4.5.9",
     "@mikro-orm/migrations": "^4.5.9",
     "@mikro-orm/postgresql": "^4.5.9",
-    "pg": "^8.7.1"`
+    "pg": "^8.7.1"
+   ```
 is similar with sequelize.
+**Manually, I made db in mysql db.**
 `MikroORM.init({...})` returns Promise with my entities and migrations.
 use the Promise object as orm.
-9. `"mikro-orm": {
-        "useTsNode": true,
-        "configPaths": [
-        "./src/mikro-orm.config.ts",
-        "./dist/mikro-orm.config.js"
-        ]
-    }`
+9. ```javascript
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+    "./src/mikro-orm.config.ts",
+    "./dist/mikro-orm.config.js"
+    ]
+  }
+   ```
 to set the order of config file load in package.json.
 10. build *./src/mikro-orm.config.ts* so that module will be placed on there as *here* of a parameter of `MikroORM.init(..here..)`.
 11. TS: typing of other module of function is possible like this.
-`export default {
+```javascript
+export default {
   migrations: {
     path: path.join(__dirname, './migrations'),
     pattern: /^[\w-]+\d+\.[tj]s$/
@@ -52,16 +62,19 @@ to set the order of config file load in package.json.
   dbName: 'lireddit',
   type: 'mysql',
   debug: !__prod__,
-} as Parameters<typeof MikroORM.init>[0];`
+} as Parameters<typeof MikroORM.init>[0];
+```
 > create absolute path by using path.join and __dirname.
 
 12. make a initial migration in database `npx mikro-orm migration:create --initial`.
 > The migrations table is usded to keep track of already executed migrations.
 > Therefore, use `--initial` flag first, and then use `npx mikro-orm migration:create --run`. 
 > Intead of the command, use the below code.
-` const main = async () => {
-  const orm = await MikroORM.init(microConfig);
-  await orm.getMigrator().up; `
+>```javascript
+>const main = async () => {
+>const orm = await MikroORM.init(microConfig);
+>await orm.getMigrator().up; 
+>```
 > use `orm.getMigrator().up`.
 
 13. I solved the problem(12 does not work) might be happend because mysql needs password. I used Mikro-ORM's SchemaGenerator to initialize table.
@@ -69,6 +82,8 @@ to set the order of config file load in package.json.
  await generator.updateSchema();
 `
 > `updateSchema` creates a table or updates it based on *./entities/Post.ts*.
+> https://stackoverflow.com/questions/66959888/i-want-to-insert-with-mikro-orm-but-it-dont-find-my-table-c-tablenotfoundexce/67220373#67220373
 
-## Day 5 ### server setup
+## Day 5,6 server setup
 1. *yarn add express apollo-server-express graphql type-graphql*
+2. *yarn add -D @types/express*
