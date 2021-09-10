@@ -85,5 +85,24 @@ export default {
 > https://stackoverflow.com/questions/66959888/i-want-to-insert-with-mikro-orm-but-it-dont-find-my-table-c-tablenotfoundexce/67220373#67220373
 
 ## Day 5,6 server setup
-1. *yarn add express apollo-server-express graphql type-graphql*
-2. *yarn add -D @types/express*
+### use graphal and type-graphql instead of REST.
+### use apollo-server instead of express.
+14. *yarn add express apollo-server-express graphql type-graphql*
+15. *yarn add -D @types/express*
+> First, creates express application.
+`const app = express();`
+> Second, creates ApolloServer object.
+need to pass graphql schema in the object, so use *buildSchema* function from type-graphql.
+```javascript
+schema: await buildSchema({
+  resolvers: [HelloResolver],
+  validate: false
+});
+```
+> Third, combine ApollServer with express.
+`apolloServer.applyMiddleware({ app });`
+## Day 7 server + db setup
+### combine graphql resolvers with mikroORM.
+16. create new resolver *post* returning array of entity *Post*.
+17. I did not create type for the entity, so use type-graphql decorators to the entity.
+18. add argument **context** to ApolloServer. The argument is useful for passing things that any resolver might need like authentication scope and *database* connections.
