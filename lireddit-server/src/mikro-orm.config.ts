@@ -1,7 +1,8 @@
 import { MikroORM } from '@mikro-orm/core';
 import { __prod__ } from './constants';
-import { Post } from './entities/Post';
 import path from 'path';
+import { Post } from './entities/Post';
+import { User } from './entities/User';
 
 export default {
   migrations: {
@@ -9,7 +10,7 @@ export default {
     pattern: /^[\w-]+\d+\.[tj]s$/
   },
   password: 'Ajtnlaka55!',
-  entities: [Post],
+  entities: [Post, User],
   dbName: 'lireddit',
   type: 'mysql',
   debug: !__prod__,

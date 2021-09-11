@@ -10,16 +10,23 @@ import { PostResolver } from './resolvers/post';
 
 const main = async () => {
   const orm = await MikroORM.init(microConfig);
-  await orm.getMigrator().up;
+  const migrator = orm.getMigrator();
+  // await migrator.createMigration();
+  await migrator.up();
 
   const app = express();
+
+  // const generator = orm.getSchemaGenerator();
+  // await generator.updateSchema();
   
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       resolvers: [HelloResolver, PostResolver],
       validate: false
     }),
-    context: () => ({})
+    context: () => ({
+      em: orm.em
+    })
   });
 
   await apolloServer.start();

@@ -101,8 +101,53 @@ schema: await buildSchema({
 ```
 > Third, combine ApollServer with express.
 `apolloServer.applyMiddleware({ app });`
-## Day 7 server + db setup
+## Day 7 server + db setup for Post
 ### combine graphql resolvers with mikroORM.
 16. create new resolver *post* returning array of entity *Post*.
 17. I did not create type for the entity, so use type-graphql decorators to the entity.
 18. add argument **context** to ApolloServer. The argument is useful for passing things that any resolver might need like authentication scope and *database* connections.
+```javascript
+  const apolloServer = new ApolloServer({
+    schema: await buildSchema({
+      resolvers: [HelloResolver, PostResolver],
+      validate: false
+    }),
+    context: () => ({
+      em: orm.em
+    })
+  });
+```
+19. I can use the context in *resolvers*.
+```javascript
+@Resolver()
+export class PostResolver {
+  @Query(() => [Post])
+  posts(@Ctx() ctx: MyContext): Promise<Post[]> {
+    return ctx.em.find(Post, {});
+  }
+}
+```
+
+## Day 8 server + db setup for User
+### combine graphql resolvers with mikroORM.
+20. create *User.ts* entity. 
+21. add the new entity in *mikro-orm.config.ts* configuration file.
+... 여기까지만해도 db 생성하네... migration은 왜 하는거지? 진도 더 나가보기.
+
+
+22. call `"create:migration": "mikro-orm migration:create"` for migration.
+> `orm.getMigrator().up;` will automatically run the lastest version of migration files.
+
+
+
+
+Q. 'password' property is not used. so remove it from field?
+```javascript
+  @Field()
+  @Property({ type: 'text', unique: true })
+  username!: string;
+
+  // @Field()
+  @Property({ type: 'text' })
+  password!: string;
+```
