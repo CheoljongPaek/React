@@ -128,15 +128,34 @@ export class PostResolver {
 }
 ```
 
-## Day 8 server + db setup for User
+## Day 8 server + db setup for User(register, login)
 ### combine graphql resolvers with mikroORM.
 20. create *User.ts* entity. 
 21. add the new entity in *mikro-orm.config.ts* configuration file.
 ... 여기까지만해도 db 생성하네... migration은 왜 하는거지? 진도 더 나가보기.
-
-
+... 마이그레이션 할 때마다 생성되니 그 전 버전으로 돌아갈 수 있는 백업같은?
 22. call `"create:migration": "mikro-orm migration:create"` for migration.
 > `orm.getMigrator().up;` will automatically run the lastest version of migration files.
+23. create *user.ts* resolver : *register, login*
+```javascript
+  @Mutation(() => User)
+```
+Assign a return type of the function.
+
+```javascript
+ @Field(() => [Error], {nullable: true})
+```
+to use nullable, fill the type in necessity. 
+
+```javascript
+class UserResponse {
+  @Field(() => [FieldError], {nullable: true})
+  errors?: FieldError[];
+  @Field(() => User, {nullable: true})
+  user?: User;
+}
+```
+
 
 
 
