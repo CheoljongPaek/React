@@ -128,7 +128,7 @@ export class PostResolver {
 }
 ```
 
-## Day 8 server + db setup for User(register, login)
+## Day 8,9 server + db setup for User(register, login)
 ### combine graphql resolvers with mikroORM.
 20. create *User.ts* entity. 
 21. add the new entity in *mikro-orm.config.ts* configuration file.
@@ -136,7 +136,8 @@ export class PostResolver {
 ... 마이그레이션 할 때마다 생성되니 그 전 버전으로 돌아갈 수 있는 백업같은?
 22. call `"create:migration": "mikro-orm migration:create"` for migration.
 > `orm.getMigrator().up;` will automatically run the lastest version of migration files.
-23. create *user.ts* resolver : *register, login*
+
+23. create *user.ts* resolver: *register, login, ...*
 ```javascript
   @Mutation(() => User)
 ```
@@ -147,6 +148,7 @@ Assign a return type of the function.
 ```
 to use nullable, fill the type in necessity. 
 
+24. error handling
 ```javascript
 class UserResponse {
   @Field(() => [FieldError], {nullable: true})
@@ -155,10 +157,6 @@ class UserResponse {
   user?: User;
 }
 ```
-
-
-
-
 
 Q. 'password' property is not used. so remove it from field?
 ```javascript
@@ -170,3 +168,15 @@ Q. 'password' property is not used. so remove it from field?
   @Property({ type: 'text' })
   password!: string;
 ```
+
+## Day 10 cookie/session for User(register, login)
+### store a cookie to user's browser/ use session for authentication to keep track everyhing.
+25. *yarn add express-session*
+> 1: it stores some data on the user.
+> 2: we can choose where the data is stored through additional modules.
+26. *yarn add redis connect-redis express-session*
+> redis is NOSQL formed with key-value
+> mongodb is also NOSQL, but is formed with document.
+> https://brunch.co.kr/@skykamja24/575
+> https://meetup.toast.com/posts/224
+> usually use for caching.

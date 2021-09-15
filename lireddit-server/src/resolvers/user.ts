@@ -29,35 +29,79 @@ class UserResponse {
  
 @Resolver()
 export class UserResolver {
-  @Mutation(() => User)
+  @Mutation(() => UserResponse)
   async register(
     @Arg('options') options: UsernamePasswordInput,
     @Ctx() ctx: MyContext
-  ) {
+  ): Promise<UserResponse> {
+    if (options.username.length <= 2) {
+      return {
+        errors: [{
+          field: 'username',
+          message: 'username must be greater than 2'
+        }]
+      }
+    }
+
+    if (options.password.length <= 2) {
+      return {
+        errors: [{
+          field: 'password',
+          message: 'password must be greater than 2'
+        }]
+      }
+    }
     const hashedPassword = await argon2.hash(options.password);
     const user = ctx.em.create(User, {
       username: options.username,
       password: hashedPassword
     });
-    await ctx.em.persistAndFlush(user);
-    return user;
+    try {
+      await ctx.em.persistAndFlush(user);
+    } catch(err) {
+      if ((err as Error).name === 'UniqueConstraintViolationException') {
+        return {
+          errors: [
+            {
+              field: 'username',
+              message: 'username already taken'
+            },
+          ]
+        }
+      }
+    }
+    return {
+      user
+    };
   }
 
-  @Mutation(() => User)
+  @Mutation(() => UserResponse)
   async login(
     @Arg('options') options: UsernamePasswordInput,
-    @Ctx() ctx: MyContext
+    @Ctx() ctx: MyContext 
   ): Promise<UserResponse> {
     const user = await ctx.em.findOne(User, {username: options.username});
     if (!user) {
       return {
-        errors: [{
-          field: 'username',
-          message: "that username doesn't exist",
-        }]
+        errors: [
+          {
+            field: 'username',
+            message: "that username doesn't exist",
+          },
+        ]
       }
     }
     const valid = await argon2.verify(user.password, options.password);
+    if (!valid) {
+      return {
+        errors: [
+          {
+            field: 'password',
+            message: 'incorrect password'
+          },
+        ]
+      }
+    }
     return {
       user
     };
