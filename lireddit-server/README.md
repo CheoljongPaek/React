@@ -180,3 +180,21 @@ Q. 'password' property is not used. so remove it from field?
 > https://brunch.co.kr/@skykamja24/575
 > https://meetup.toast.com/posts/224
 > usually use for caching.
+> use *ubuntu* and type *sudo service redis-server stop/start/restart*
+type: *yarn add -D @types/redis @types/express-session @types/connect-redis*
+27. place session middleware before apolloServer because I will use session middleware inside apolloServer.
+28. After setting cookie session, build context like below one.
+```javascript
+  const apolloServer = new ApolloServer({
+    schema: await buildSchema({
+      resolvers: [HelloResolver, PostResolver, UserResolver],
+      validate: false
+    }),
+    context: ({ req, res }): MyContext => ({
+      em: orm.em,
+      req,
+      res
+    })
+  });
+```
+29. 
