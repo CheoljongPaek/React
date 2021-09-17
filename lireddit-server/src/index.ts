@@ -4,6 +4,9 @@ import { __prod__ } from './constants';
 import microConfig from './mikro-orm.config';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express'
+import {
+  ApolloServerPluginLandingPageGraphQLPlayground
+} from "apollo-server-core";
 import { buildSchema } from 'type-graphql';
 import { HelloResolver } from './resolvers/hello';
 import { PostResolver } from './resolvers/post';
@@ -29,7 +32,7 @@ const main = async () => {
 
   app.use(
     session({
-      name: 'qid',
+      name: 'qidd',
       store: new RedisStore({
         client: redisClient,
         disableTouch: true,
@@ -55,7 +58,10 @@ const main = async () => {
       em: orm.em,
       req,
       res
-    })
+    }),
+    plugins: [
+      ApolloServerPluginLandingPageGraphQLPlayground
+    ],
   });
 
   await apolloServer.start();
