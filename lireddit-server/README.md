@@ -2,10 +2,10 @@
 > Typescript
 ## Back
 1. node run setup
-2. orm db setup: mysql, mikro-orm
+2. orm db setup: mysql, mikro-orm, redis
 3. server setup: express, apollo, graphql
 ## Front
-
+1. nextjs typescript
 
 ## Day 1 node run setup
 
@@ -169,8 +169,17 @@ Q. 'password' property is not used. so remove it from field?
   password!: string;
 ```
 
-## Day 10 cookie/session for User(register, login)
+## Day 10~14 cookie/session for User(register, login)
 ### store a cookie to user's browser/ use session for authentication to keep track everyhing.
+> `ctx.req.session.userId = user.id;`
+> **(1) Store in redis**
+> `{userId: 1}` -> send that to redis.
+> sess:wAfewfWfe -> {userId: 1} as key -> data
+> **(2) Cookie**
+> express-session middleware will set a cookie on my browser with *signed* key(aljefklajeflkejf) with `secret: 'berich'`
+> whenever user makes a request, the signed key is sent to server.
+> in server, the signed key -> again unsigned(sess:wAfewfWfe).
+> make a request to redis with the unsigned key, and get data {userId: 1}
 25. *yarn add express-session*
 > 1: it stores some data on the user.
 > 2: we can choose where the data is stored through additional modules.
@@ -197,4 +206,11 @@ type: *yarn add -D @types/redis @types/express-session @types/connect-redis*
     })
   });
 ```
-29. 
+29. auto-login after register.
+after register, add `ctx.req.session.userId = user.id;`
+## Day 15 front start!
+### nextjs: the file *name* in pages folder is automatically used for route.
+### chakra-ui: https://chakra-ui.com/docs/getting-started
+*yarn create next-app --example with-chakra-ui with-chakra-ui-app*
+*config typescriptreact.json* snippets.
+1. ### register page

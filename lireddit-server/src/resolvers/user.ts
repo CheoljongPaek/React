@@ -33,6 +33,8 @@ export class UserResolver {
   async me(
     @Ctx() ctx: MyContext
   ) {
+    console.log("session: ", ctx.req.session);
+    
     if (!ctx.req.session.userId) {
       return null
     }
@@ -81,6 +83,12 @@ export class UserResolver {
         }
       }
     }
+
+    // store user id session
+    // this will set a cookie on the user
+    // keep them logged in
+    ctx.req.session.userId = user.id;
+
     return {
       user
     };
