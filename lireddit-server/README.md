@@ -213,4 +213,7 @@ after register, add `ctx.req.session.userId = user.id;`
 ### chakra-ui: https://chakra-ui.com/docs/getting-started
 *yarn create next-app --example with-chakra-ui with-chakra-ui-app*
 *config typescriptreact.json* snippets.
-1. ### register page
+### register page
+
+### connect front - back
+*yarn add ural graphql*
