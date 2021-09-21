@@ -216,4 +216,41 @@ after register, add `ctx.req.session.userId = user.id;`
 ### register page
 
 ### connect front - back
-*yarn add ural graphql*
+30. *yarn add urql graphql*
+*urql* is for graphql_client, sending graphql request to our API.
+```javascript
+// The *client* manages all of our graphql requests and results.
+const client = createClient({
+  url: 'http://localhost:4000/graphql',
+  fetchOptions: {
+    credentials: "include"
+  }
+});
+function MyApp({ Component, pageProps }) {
+  return (
+    <Provider value={client}>
+      ...
+    </Provider>
+  )
+}
+
+export default MyApp
+```
+To make use of *client* in React, we will have to provide it via the context api. In my case, it is provided with the help of the *Provider* export.
+Now every component and element inside and under the *Provider* can use GraphQL queries that will be sent to our API.
+
+31. To avoid CORS Error, add cors middleware in server file.
+```javascript
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
+
+apolloServer.applyMiddleware({
+  app,
+  cors: false,
+});
+```
+
+32. *yarn add -D @graphql-codegen/cli*: generate hooks for types of graphql schema.
+*yarn graphql-codegen init*: auto-setup
