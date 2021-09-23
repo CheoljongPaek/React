@@ -7,6 +7,9 @@ import Inputfield from '../components/InputField';
 import { Button } from '@chakra-ui/button';
 import { Box } from '@chakra-ui/layout';
 import { useMutation } from 'urql';
+import { useRegisterMutation } from '../generated/graphql';
+import { toErrorMap } from '../utils/toErrorMap';
+import { useRouter } from 'next/dist/client/router';
 
 interface registerProps {
 
@@ -28,14 +31,21 @@ const REGISTER_MUT = `
 `
 
 const Register: React.FC<registerProps> = ({}) => {
-  const [,register] = useMutation(REGISTER_MUT);
-  
+  const router = useRouter();
+  const [,register] = useRegisterMutation();
   return (
     <Wrapper variant="small">
       <Formik 
         initialValues={{ username: "", password: "" }}
-        onSubmit={async (values) => {
+        onSubmit={async (values, {setErrors}) => {
           const response = await register(values);
+          console.log(response);
+          if (response.data?.register.errors) {
+            setErrors(toErrorMap(response.data.register.errors));
+          } else if (response.data?.register.user) {
+            // worked, so navigate other renderPage.
+            router.push("/");
+          }
         }}  
       >
         {(props) => (

@@ -254,3 +254,5 @@ apolloServer.applyMiddleware({
 
 32. *yarn add -D @graphql-codegen/cli*: generate hooks for types of graphql schema.
 *yarn graphql-codegen init*: auto-setup
+33. check codegen.yml configuration file. yarn add `typescript-urql` revise a plugin to `typescript-urql`.
+34. use the generated **all of the types of api + types generated from *.graphql file**.
