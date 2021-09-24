@@ -6,8 +6,7 @@ import Wrapper from '../components/Wrapper';
 import Inputfield from '../components/InputField';
 import { Button } from '@chakra-ui/button';
 import { Box } from '@chakra-ui/layout';
-import { useMutation } from 'urql';
-import { useRegisterMutation } from '../generated/graphql';
+import { useLoginMutation } from '../generated/graphql';
 import { toErrorMap } from '../utils/toErrorMap';
 import { useRouter } from 'next/dist/client/router';
 
@@ -15,34 +14,19 @@ interface registerProps {
 
 }
 
-const REGISTER_MUT = `
-  mutation Register($username: String!, $password:String!) {
-    register(options: { username: $username, password: $password }) {
-      errors {
-        field
-        message
-      }
-      user {
-        id
-        username
-      }
-    }
-  }
-`
-
-const Register: React.FC<registerProps> = ({}) => {
+const Login: React.FC<{}> = ({}) => {
   const router = useRouter();
-  const [,register] = useRegisterMutation();
+  const [,login] = useLoginMutation();
   
   return (
     <Wrapper variant="small">
       <Formik 
         initialValues={{ username: "", password: "" }}
         onSubmit={async (values, {setErrors}) => {
-          const response = await register(values);          
-          if (response.data?.register.errors) {
-            setErrors(toErrorMap(response.data.register.errors));
-          } else if (response.data?.register.user) {
+          const response = await login({ options: values });          
+          if (response.data?.login.errors) {
+            setErrors(toErrorMap(response.data.login.errors));
+          } else if (response.data?.login.user) {
             // worked, so navigate other renderPage.
             router.push("/");
           }
@@ -65,7 +49,7 @@ const Register: React.FC<registerProps> = ({}) => {
               colorScheme="teal"
               isLoading={props.isSubmitting}
             >
-              register
+              login
             </Button>
           </Form>
         )}
@@ -75,4 +59,4 @@ const Register: React.FC<registerProps> = ({}) => {
 }
 
 
-export default Register
+export default Login;

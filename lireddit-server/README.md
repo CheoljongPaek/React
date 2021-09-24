@@ -256,3 +256,21 @@ apolloServer.applyMiddleware({
 *yarn graphql-codegen init*: auto-setup
 33. check codegen.yml configuration file. yarn add `typescript-urql` revise a plugin to `typescript-urql`.
 34. use the generated **all of the types of api + types generated from *.graphql file**.
+35. login page according to 32~34.
+36. In '/' router, display who the current user is.
+```javascript In navigation component
+import React from 'react'
+import { Link } from '@chakra-ui/layout';
+import NextLink from "next/link";
+
+const Navbar: React.FC<NavBarProps> = ({}) => {
+  return (
+  ...
+    <NextLink href="/login">
+      <Link mr={2}>login</Link>
+    </NextLink>
+  ...
+  );
+}
+```
+Use NextLink function in next. Wrap the fuction to Link component.
