@@ -274,3 +274,10 @@ const Navbar: React.FC<NavBarProps> = ({}) => {
 }
 ```
 Use NextLink function in next. Wrap the fuction to Link component.
+
+37. Problem: caused by Orable is caching the *me* request. Therefore, after logining, it did not make a network request. It just took the data from caching.
+- Login: Should update cache and set our user's login.
+- Register: Should update cache when a user registers.
+> From server-side, session ID is stored in the client as a cookie,
+> session Data is stored in the db I set. 
+To solve it, use *exchnage* in urql. it sends a request to my server and update the new request if the request differs from the existing one.
