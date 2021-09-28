@@ -294,3 +294,13 @@ function betterupdateQuery<Result, Query>(
   return cache.updateQuery(qi, (data) => fn(result, data as any) as any);
 }
 ```
+
+38. Integrate the common fragment in graphql files.
+`user { id username }` to
+`user { ...RegularUser }`
+```graphql
+fragment RegularUser on User {
+  id
+  username
+}
+```
