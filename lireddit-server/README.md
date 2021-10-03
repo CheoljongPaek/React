@@ -304,3 +304,19 @@ fragment RegularUser on User {
   username
 }
 ```
+
+39. Add a mutation to a server, test it through apollo-server, and generate its codes in client.
+
+To destroy session and clear cookie in client, in server:
+```javascript
+return new Promise(resolve => ctx.req.session.destroy(err => {
+  ctx.res.clearCookie(COOKIE_NAME);
+  ...
+}))
+```
+
+However, when I click a logout button, the cookie is successfully removed, but the page does not reload. The expected page is shown after refresh.
+Therefore, I used updateQuery(#37) again.
+
+40. refactor urql client for optional ssd with urql.
+> import { withUrqlClient } from 'next-urql';
