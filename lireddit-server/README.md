@@ -320,3 +320,10 @@ Therefore, I used updateQuery(#37) again.
 
 40. refactor urql client for optional ssd with urql.
 > import { withUrqlClient } from 'next-urql';
+In main page, I want to show my posts with SEO, so I chose ssr.
+
+41. make a util fucntion to check *whether the script is being run in a web-page insed a web-browser or not(server)*
+`export const isServer = () => typeof window === 'undefined';`
+The reason why I did #41: NavBar component is on index ssr page, so everytime the current user query function is requested on next-js server. 
+
+42. nodemailer in server

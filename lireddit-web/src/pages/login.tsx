@@ -1,7 +1,5 @@
 import React from 'react'
 import {Form, Formik} from 'formik'
-import { FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/form-control';
-import { Input } from '@chakra-ui/input';
 import Wrapper from '../components/Wrapper';
 import Inputfield from '../components/InputField';
 import { Button } from '@chakra-ui/button';
@@ -9,10 +7,8 @@ import { Box } from '@chakra-ui/layout';
 import { useLoginMutation } from '../generated/graphql';
 import { toErrorMap } from '../utils/toErrorMap';
 import { useRouter } from 'next/dist/client/router';
-
-interface registerProps {
-
-}
+import { createUrqlClient } from '../utils/createUrqlClient';
+import { withUrqlClient } from 'next-urql';
 
 const Login: React.FC<{}> = ({}) => {
   const router = useRouter();
@@ -59,4 +55,4 @@ const Login: React.FC<{}> = ({}) => {
 }
 
 
-export default Login;
+export default withUrqlClient(createUrqlClient)(Login);
