@@ -67,7 +67,7 @@ export default {
 > create absolute path by using path.join and __dirname.
 
 12. make a initial migration in database `npx mikro-orm migration:create --initial`.
-> The migrations table is usded to keep track of already executed migrations.
+> The migrations table is used to keep track of already executed migrations.
 > Therefore, use `--initial` flag first, and then use `npx mikro-orm migration:create --run`. 
 > Intead of the command, use the below code.
 >```javascript
@@ -326,4 +326,6 @@ In main page, I want to show my posts with SEO, so I chose ssr.
 `export const isServer = () => typeof window === 'undefined';`
 The reason why I did #41: NavBar component is on index ssr page, so everytime the current user query function is requested on next-js server. 
 
-42. nodemailer in server
+42. nodemailer in server for users forgotten password.
+43. Add email column to field on User table.
+> edit both backend & frontend

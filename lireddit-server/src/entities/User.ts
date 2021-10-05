@@ -18,8 +18,12 @@ export class User {
   updateAt = new Date();
 
   @Field()
-  @Property({ length: 30 })
+  @Property({ type: 'text', length: 30, unique: true })
   username!: string;
+
+  @Field()
+  @Property({ type: 'text', length: 50, unique: true })
+  email!: string;
 
   // @Field()
   @Property({ type: 'text' })
