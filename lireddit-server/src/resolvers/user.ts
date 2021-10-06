@@ -2,9 +2,11 @@ import { User } from '../entities/User';
 import { MyContext } from '../types';
 import { Arg, Ctx, Field, Mutation, ObjectType, Query, Resolver } from 'type-graphql';
 import argon2 from 'argon2';
-import { COOKIE_NAME } from '../constants';
+import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from '../constants';
 import { UsernamePasswordInput } from './UsernamePasswordInput';
 import { validateRegister } from '../utils/validateRegister';
+import { sendEmail } from '../utils/sendEmail';
+import { v4 } from 'uuid';
 
 @ObjectType()
 class FieldError {
@@ -24,16 +26,33 @@ class UserResponse {
  
 @Resolver()
 export class UserResolver {
-  /*
   @Mutation(() => Boolean)
   async forgotPassword(
     @Arg('email') email: string,
     @Ctx() ctx: MyContext
   ) {
-    // const user = await ctx.em.findOne(User, { email });
+    const user = await ctx.em.findOne(User, { email });
+    if (!user) {
+      //the email is not in the db
+      return true;
+    }
+
+    const token = v4();
+
+    await ctx.redis.set(
+      FORGET_PASSWORD_PREFIX + token, 
+      user.id, 
+      'ex', 
+      1000 * 60 * 60 * 24 * 3
+    ); // 3days
+
+    await sendEmail(
+      email, 
+      `<a href="http://localhost:3000/change-password/${token}">reset password</a>`
+    );
     return true;
   }
-  */
+  
 
   @Query(() => User, {nullable: true})
   async me(
@@ -55,7 +74,7 @@ export class UserResolver {
   ): Promise<UserResponse> {
     const errors = validateRegister(options);
     if (errors) {
-      return {errors};
+      return { errors };
     }
     const hashedPassword = await argon2.hash(options.password);
     const user = ctx.em.create(User, {
@@ -106,7 +125,7 @@ export class UserResolver {
       return {
         errors: [
           {
-            field: 'username',
+            field: 'usernameOrEmail',
             message: "that username doesn't exist",
           },
         ]
