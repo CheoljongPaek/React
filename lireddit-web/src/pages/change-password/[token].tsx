@@ -6,22 +6,33 @@ import router from 'next/dist/client/router';
 import React from 'react';
 import Inputfield from '../../components/InputField';
 import Wrapper from '../../components/Wrapper';
+import { useChangePasswordMutation } from '../../generated/graphql';
 import { toErrorMap } from '../../utils/toErrorMap';
 import login from '../login';
 
 const ChangePassword: NextPage<{token: string}> = ({token}) => {
+  const [, changePassword] = useChangePasswordMutation()
   return (
     <Wrapper variant="small">
       <Formik 
         initialValues={{ newPassword: '' }}
         onSubmit={async (values, {setErrors}) => {
-          // const response = await login(values);          
-          // if (response.data?.login.errors) {
-          //   setErrors(toErrorMap(response.data.login.errors));
-          // } else if (response.data?.login.user) {
-          //   // worked, so navigate other renderPage.
-          //   router.push("/");
-          // }
+          const response = await changePassword({
+            newPassword: values.newPassword,
+            token,
+          });          
+          if (response.data?.changePassword.errors) {
+            const errorMap = toErrorMap(response.data.changePassword.errors);
+            console.log('errorMap: ', errorMap);
+            
+            if ('token' in errorMap) {
+
+            }
+            setErrors(errorMap);
+          } else if (response.data?.changePassword.user) {
+            // worked, so navigate other renderPage.
+            router.push("/");
+          }
         }}  
       >
         {(props) => (
