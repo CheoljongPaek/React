@@ -43,7 +43,10 @@ export class UserResolver {
       };
     }
 
-    const userId = await ctx.redis.get(FORGET_PASSWORD_PREFIX+token);
+    const key = FORGET_PASSWORD_PREFIX + token;
+    const userId = await ctx.redis.get(key);
+    console.log('userId: ', userId);
+    
     if (!userId) {
       return {
         errors: [
@@ -70,6 +73,8 @@ export class UserResolver {
 
     user.password = await argon2.hash(newPassword);
     await ctx.em.persistAndFlush(user);
+
+    await ctx.redis.del(key);
 
     // log in user after change password
     ctx.req.session.userId = user.id;
