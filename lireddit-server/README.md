@@ -337,3 +337,12 @@ The expiration date of password reset email is 3 days.
 > http://localhost:3000/change-password/${token}
 In frontend, make files `pages/change-password/[token].tsx`
 In the `[token].tsx`, I can use 'token' by getInitialProps function.
+
+## Modeling Entity Relationship with typeorm
+> Use Typeorm instead of mikro-orm
+46. Post-User relationship setting.
+**Find function** 
+> Basically, `Post.findOne({ where: { email } })`
+> If primary key, `Post.findOne(id)` is possible option.
+**Create function**
+> `Post.create({ title }).save();` need to be saved.

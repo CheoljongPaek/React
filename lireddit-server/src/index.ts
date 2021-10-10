@@ -1,7 +1,6 @@
-import { MikroORM } from '@mikro-orm/core'
+import "reflect-metadata";
 import { COOKIE_NAME, __prod__ } from './constants';
-// import { Post } from './entities/Post';
-import microConfig from './mikro-orm.config';
+import { createConnection } from 'typeorm'
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express'
 import {
@@ -16,21 +15,22 @@ import session from 'express-session';
 import connectRedis from 'connect-redis'
 import { MyContext } from './types';
 import cors from 'cors'
-// import { User } from './entities/User';
-// import { sendEmail } from './utils/sendEmail';
+import { User } from './entities/User';
+import { Post } from './entities/Post';
 
 const main = async () => {
   // sendEmail('bob@bob.com', 'hello there');
-  const orm = await MikroORM.init(microConfig);
-  // await orm.em.nativeDelete(User, {})
-  // const migrator = orm.getMigrator();
-  // await migrator.createMigration();
-  // await migrator.up();
+  const conn = await createConnection({
+    type: 'mysql',
+    database: 'lireddit2',
+    username: 'mysql',
+    password: 'test',
+    logging: true,
+    synchronize: true,
+    entities: [Post, User]
+  });
 
   const app = express();
-
-  // const generator = orm.getSchemaGenerator();
-  // await generator.updateSchema();
   
   const RedisStore = connectRedis(session);
   const redis = new Redis();
@@ -64,7 +64,6 @@ const main = async () => {
       validate: false
     }),
     context: ({ req, res }): MyContext => ({
-      em: orm.em,
       req,
       res,
       redis

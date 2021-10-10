@@ -58,7 +58,8 @@ export class UserResolver {
       }
     }
 
-    const user = await ctx.em.findOne(User, { id: parseInt(userId) });
+    const userIdNum = parseInt(userId)
+    const user = await User.findOne(userIdNum);
 
     if (!user) {
       return {
@@ -71,8 +72,12 @@ export class UserResolver {
       };
     }
 
-    user.password = await argon2.hash(newPassword);
-    await ctx.em.persistAndFlush(user);
+    User.update(
+      { id: userIdNum },
+      {
+        password: await argon2.hash(newPassword)
+      }
+    );
 
     await ctx.redis.del(key);
 
@@ -87,7 +92,7 @@ export class UserResolver {
     @Arg('email') email: string,
     @Ctx() ctx: MyContext
   ) {
-    const user = await ctx.em.findOne(User, { email });
+    const user = await User.findOne({ where: { email } })
     if (!user) {
       //the email is not in the db
       return true;
@@ -114,12 +119,10 @@ export class UserResolver {
   async me(
     @Ctx() ctx: MyContext
   ) {
-    console.log("session: ", ctx.req.session);
-    
     if (!ctx.req.session.userId) {
       return null
     }
-    const user = await ctx.em.findOne(User, { id: ctx.req.session.userId });
+    const user = await User.findOne(ctx.req.session.userId);
     return user
   }
   
