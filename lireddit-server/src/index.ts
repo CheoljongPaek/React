@@ -19,12 +19,11 @@ import { User } from './entities/User';
 import { Post } from './entities/Post';
 
 const main = async () => {
-  // sendEmail('bob@bob.com', 'hello there');
   const conn = await createConnection({
-    type: 'mysql',
+    type: 'postgres',
     database: 'lireddit2',
-    username: 'mysql',
-    password: 'test',
+    username: 'postgres',
+    password: 'Ajtnlaka55!',
     logging: true,
     synchronize: true,
     entities: [Post, User]

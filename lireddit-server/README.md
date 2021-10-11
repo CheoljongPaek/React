@@ -346,3 +346,26 @@ In the `[token].tsx`, I can use 'token' by getInitialProps function.
 > If primary key, `Post.findOne(id)` is possible option.
 **Create function**
 > `Post.create({ title }).save();` need to be saved.
+
+47. QueryBuilder and Entity sysytem are compatible.
+`await User.create({...}).save()` is the same as
+```javascript
+await getConnection()
+        .createQueryBuilder()
+        .insert()
+        .into(User)
+        .values({
+          username: options.username,
+          email: options.email,
+          password: hashedPassword
+        })
+        .returning('*')
+        .execute();
+```
+
+## Type-orm middleware in server
+48. isAuth.ts/middleware for authentication.
+> use decorator on mutation or query
+> `@UseMiddleware(isAuth)`
+Handle the authentic error in frontend too.
+>

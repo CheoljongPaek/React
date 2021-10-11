@@ -7,6 +7,7 @@ import { UsernamePasswordInput } from './UsernamePasswordInput';
 import { validateRegister } from '../utils/validateRegister';
 import { sendEmail } from '../utils/sendEmail';
 import { v4 } from 'uuid';
+import { getConnection } from 'typeorm';
 
 @ObjectType()
 class FieldError {
@@ -136,17 +137,22 @@ export class UserResolver {
       return { errors };
     }
     const hashedPassword = await argon2.hash(options.password);
-    const user = ctx.em.create(User, {
-      username: options.username,
-      email: options.email,
-      password: hashedPassword,
-      createdAt: new Date(),
-      updateAt: new Date(),
-    });
+    let user;
     try {
-      await ctx.em.persistAndFlush(user);
+      const result = await getConnection()
+        .createQueryBuilder()
+        .insert()
+        .into(User)
+        .values({
+          username: options.username,
+          email: options.email,
+          password: hashedPassword
+        })
+        .returning('*')
+        .execute();
+      user = result.raw[0];
     } catch(err) {
-      if ((err as Error).name === 'UniqueConstraintViolationException') {
+      if (err.code === "23505") {
         return {
           errors: [
             {
@@ -161,7 +167,7 @@ export class UserResolver {
     // store user id session
     // this will set a cookie on the user
     // keep them logged in
-    ctx.req.session.userId = user.id;
+    ctx.req.session.userId = user?.id;
 
     return {
       user
@@ -174,12 +180,11 @@ export class UserResolver {
     @Arg("password") password: string, 
     @Ctx() ctx: MyContext 
   ): Promise<UserResponse> {
-    const user = await ctx.em.findOne(
-      User,
+    const user = await User.findOne(
       usernameOrEmail.includes('@')
-      ? { email: usernameOrEmail }
-      : { username: usernameOrEmail }
-      );
+      ? { where: { email: usernameOrEmail } }
+      : { where: { username: usernameOrEmail } }
+    );
     if (!user) {
       return {
         errors: [
