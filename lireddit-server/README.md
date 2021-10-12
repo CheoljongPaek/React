@@ -368,4 +368,19 @@ await getConnection()
 > use decorator on mutation or query
 > `@UseMiddleware(isAuth)`
 Handle the authentic error in frontend too.
->
+49. error control
+In the case of 'client - server => error', handle all of the errors in createUrqlClient.ts file.
+## Router Management
+50. **useRouter** in next/router is used for replace/.../push.
+How to contorl below query params in login page.
+`router.replace("/login?next=" + router.pathname);`
+`const router = useRouter()` is global.
+In login page,
+```javascript
+  if (typeof router.query.next === "string") {
+    router.push(router.query.next);
+  } else {
+    // worked        
+    router.push("/");
+  }
+```

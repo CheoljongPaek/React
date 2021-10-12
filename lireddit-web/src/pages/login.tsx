@@ -6,7 +6,7 @@ import { Button } from '@chakra-ui/button';
 import { Box, Flex, Link } from '@chakra-ui/layout';
 import { useLoginMutation } from '../generated/graphql';
 import { toErrorMap } from '../utils/toErrorMap';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 import { createUrqlClient } from '../utils/createUrqlClient';
 import { withUrqlClient } from 'next-urql';
 import NextLink from 'next/link';
@@ -15,6 +15,7 @@ import NextLink from 'next/link';
 const Login: React.FC<{}> = ({}) => {
   const router = useRouter();
   const [,login] = useLoginMutation();
+  console.log(router);
   
   return (
     <Wrapper variant="small">
@@ -25,8 +26,12 @@ const Login: React.FC<{}> = ({}) => {
           if (response.data?.login.errors) {
             setErrors(toErrorMap(response.data.login.errors));
           } else if (response.data?.login.user) {
-            // worked, so navigate other renderPage.
-            router.push("/");
+            if (typeof router.query.next === "string") {
+              router.push(router.query.next);
+            } else {
+              // worked        
+              router.push("/");
+            }
           }
         }}  
       >

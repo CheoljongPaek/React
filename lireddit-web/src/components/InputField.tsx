@@ -16,9 +16,7 @@ interface InputFieldProps {
 //2. '' => false, 'abcdef' => true
 const Inputfield: React.FC<InputFieldProps> = ({ 
   label,
-  placeholder,
   textarea,
-  type,
   ...props 
 }) => {
   const [field, meta, helpers] = useField(props);
