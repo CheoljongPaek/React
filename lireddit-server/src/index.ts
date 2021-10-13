@@ -17,6 +17,7 @@ import { MyContext } from './types';
 import cors from 'cors'
 import { User } from './entities/User';
 import { Post } from './entities/Post';
+import path from 'path';
 
 const main = async () => {
   const conn = await createConnection({
@@ -26,8 +27,11 @@ const main = async () => {
     password: 'Ajtnlaka55!',
     logging: true,
     synchronize: true,
-    entities: [Post, User]
+    entities: [Post, User],
+    // migrations: [path.join(__dirname, "./migrations/*")],
   });
+
+  // await conn.runMigrations();
 
   const app = express();
   
