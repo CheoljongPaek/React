@@ -31,12 +31,25 @@ export const cursorPagination = (): Resolver => {
   //return resolver through 'urql/exchange-graphcache'
   return (_parent, fieldArgs, cache, info) => {
     const { parentKey: entityKey, fieldName } = info;
+    // fieldName = posts, entityKey = Query
+    
     const allFields = cache.inspectFields(entityKey);
+    console.log('allFields: ', allFields);
+    
     const fieldInfos = allFields.filter((info) => info.fieldName === fieldName);
+    
     const size = fieldInfos.length;
     if (size === 0) {
       return undefined;
     }
+
+    const result = [] as string[];
+    fieldInfos.forEach(fi => {
+      const data = cache.resolve(entityKey, fi.fieldKey) as string[];
+      console.log(data);
+      result.push(...data);
+    });
+    return result
 
     // const visited = new Set();
     // let result: NullArray<string> = [];
@@ -151,5 +164,9 @@ export const createUrqlClient = (ssrExchange: any) => ({
           }
         }
       }
-    }), errorExchange, ssrExchange, fetchExchange]
+    }), 
+    errorExchange,
+    ssrExchange, 
+    fetchExchange
+  ]
 })
