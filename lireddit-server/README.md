@@ -388,4 +388,15 @@ In login page,
 51. `https://mockaroo.com/` servers dummy data builders.
 52. use typeorm migration and build the data in db.
 >`npx typeorm migration:create -n FakePosts`
-## Pagination
+## Pagination  
+```javascript
+cacheExchange({
+  resolvers: {
+    Query: {
+      posts: cursorPagination(),
+    },
+  },
+})
+```  
+1. The exchange runs whenever the query runs.
+2. We can alter how the query looks.

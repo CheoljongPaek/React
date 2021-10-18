@@ -1,4 +1,4 @@
-import { dedupExchange, fetchExchange } from '@urql/core';
+import { dedupExchange, fetchExchange, stringifyVariables } from '@urql/core';
 import { cacheExchange, Resolver } from '@urql/exchange-graphcache';
 import { LogoutMutation, MeQuery, MeDocument, LoginMutation, RegisterMutation } from '../generated/graphql';
 import { betterupdateQuery } from './betterupdateQuery';
@@ -34,74 +34,30 @@ export const cursorPagination = (): Resolver => {
     // fieldName = posts, entityKey = Query
     
     const allFields = cache.inspectFields(entityKey);
-    console.log('allFields: ', allFields);
+    // allFields:  [
+    //   {
+    //     fieldKey: 'posts({"limit":10})',
+    //     fieldName: 'posts',
+    //     arguments: { limit: 10 }
+    //   }
+    // ]
     
     const fieldInfos = allFields.filter((info) => info.fieldName === fieldName);
-    
     const size = fieldInfos.length;
     if (size === 0) {
       return undefined;
     }
 
-    const result = [] as string[];
+    const fieldKey = `${fieldName}(${stringifyVariables(fieldArgs)})`;
+    const isItInTheCache = cache.resolve(entityKey, fieldKey);
+
+    info.partial = !isItInTheCache;
+    const results = [] as string[];
     fieldInfos.forEach(fi => {
       const data = cache.resolve(entityKey, fi.fieldKey) as string[];
-      console.log(data);
-      result.push(...data);
+      results.push(...data);
     });
-    return result
-
-    // const visited = new Set();
-    // let result: NullArray<string> = [];
-    // let prevOffset: number | null = null;
-
-    // for (let i = 0; i < size; i++) {
-    //   const { fieldKey, arguments: args } = fieldInfos[i];
-    //   if (args === null || !compareArgs(fieldArgs, args)) {
-    //     continue;
-    //   }
-
-    //   const links = cache.resolve(entityKey, fieldKey) as string[];
-    //   const currentOffset = args[cursorArgument];
-
-    //   if (
-    //     links === null ||
-    //     links.length === 0 ||
-    //     typeof currentOffset !== 'number'
-    //   ) {
-    //     continue;
-    //   }
-
-    //   const tempResult: NullArray<string> = [];
-
-    //   for (let j = 0; j < links.length; j++) {
-    //     const link = links[j];
-    //     if (visited.has(link)) continue;
-    //     tempResult.push(link);
-    //     visited.add(link);
-    //   }
-
-    //   if (
-    //     (!prevOffset || currentOffset > prevOffset) ===
-    //     (mergeMode === 'after')
-    //   ) {
-    //     result = [...result, ...tempResult];
-    //   } else {
-    //     result = [...tempResult, ...result];
-    //   }
-
-    //   prevOffset = currentOffset;
-    // }
-
-    // const hasCurrentPage = cache.resolve(entityKey, fieldName, fieldArgs);
-    // if (hasCurrentPage) {
-    //   return result;
-    // } else if (!(info as any).store.schema) {
-    //   return undefined;
-    // } else {
-    //   info.partial = true;
-    //   return result;
-    // }
+    return results
   };
 };
 

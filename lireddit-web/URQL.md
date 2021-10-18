@@ -208,7 +208,7 @@ urql follows serveral steps
 ## The Exchanges  
 The three exchanges automatically applies to a Client.  
 - dedupExchange: deduplicates pending operations.
-- cacheExchange
+- **cacheExchange**
 - fetchExchange: sends an operation to the API using fetch and adds results to the output stream.  
  
 Plus, some of the exchanges are available.  
@@ -218,5 +218,41 @@ Plus, some of the exchanges are available.
 <br>
 
 # Graphcache  
+urql provides *Document Cache* as the default.  
+For more complex, `yarn add @urql/exchange-graphcache`.  
+The **cacheExchange** in the package replaces default of *@urql/core*.  
+## Document Cache of Core  
+Each request is unique because it has its key and exactly one cached result.  
+Document Caching avoids sending the same requests to a API repeatedly by caching the result of each query.  
+
+1. send a mutation containing the same type that another query results have.
+2. The query result is removed from the cache.
+
+## Normalized Caching
+For more complicated case, there are two configuration options; **resolvers and updates**.  
+### Manually Resolving Entities.
+
+### Manual cache updates.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
