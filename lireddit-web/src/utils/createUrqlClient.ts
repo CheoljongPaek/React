@@ -25,7 +25,7 @@ export interface PaginationParams {
   limitArgument?: string;
   mergeMode?: MergeMode;
 }
-
+/*
 export const cursorPagination = (): Resolver => {
 
   //return resolver through 'urql/exchange-graphcache'
@@ -34,6 +34,8 @@ export const cursorPagination = (): Resolver => {
     // fieldName = posts, entityKey = Query
     
     const allFields = cache.inspectFields(entityKey);
+    console.log("allFields: ", allFields);
+    
     // allFields:  [
     //   {
     //     fieldKey: 'posts({"limit":10})',
@@ -54,12 +56,40 @@ export const cursorPagination = (): Resolver => {
     info.partial = !isItInTheCache;
     const results = [] as string[];
     fieldInfos.forEach(fi => {
-      const data = cache.resolve(entityKey, fi.fieldKey) as string[];
-      results.push(...data);
+      const data = cache.resolve(entityKey, fi.fieldKey) as string;
+      console.log('data: ', data);
+      
+      results.push(data);
     });
-    return results
+    console.log('results: ', results);
+    
+    return {
+      hasMore: true,
+      posts: results
+    }
   };
 };
+*/
+// const dummy = {
+//   id: 306,
+//   title: 'Recoil',
+//   text: 'Proin',
+//   points: 0,
+//   creatorId: 1,
+//   createdAt: "2021-10-09T22:57:19.000Z",
+//   updateAt: "2021-10-14T13:12:04.193Z"
+// };
+export const cursorPagination = (): Resolver => {
+  return (parent, fieldArgs, cache, info) => {
+    const {} = info;
+    const posts = parent.posts;
+    console.log(posts);
+    
+    return {
+      posts
+    }
+  }
+}
 
 export const createUrqlClient = (ssrExchange: any) => ({
   url: 'http://localhost:4000/graphql',

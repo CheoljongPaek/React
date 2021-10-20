@@ -36,7 +36,7 @@ export class PostResolver {
   ): Promise<PaginatedPosts> {
     const realLimit = Math.min(50, limit);
     const realLimitPlusOne = realLimit + 1;
-
+    
     const qb = getConnection()
       .getRepository(Post)
       .createQueryBuilder("p")
@@ -48,9 +48,7 @@ export class PostResolver {
     };
 
     const posts = await qb.getMany();
-    console.log("posts.length: ", posts.length);
-    console.log("realLimitPlusOne: ", realLimitPlusOne);
-    
+    // console.log("posts: ", posts);
     
     return { 
       posts: posts.slice(0, realLimit), 
