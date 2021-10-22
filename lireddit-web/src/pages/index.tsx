@@ -8,12 +8,11 @@ import { Button } from '@chakra-ui/button';
 import { useState } from 'react';
 
 const Index = () => {
-  const [variables, setVariables] = useState({ limit: 10, cursor: null as null | string })
-  const [{data, fetching}] = usePostsQuery({
+  const [variables, setVariables] = useState({ limit: 33, cursor: null as null | string })
+  const [{data, fetching, ...others}] = usePostsQuery({
     variables
   });
-  console.log("fetching: ", fetching);
-  console.log("data: ", data);
+  // console.log(fetching, 'others: ', others);
   
   if (!fetching && !data) {
     return <div>you got query failed for some reason</div>

@@ -398,5 +398,10 @@ cacheExchange({
   },
 })
 ```  
-1. The exchange runs whenever the query runs.
-2. We can alter how the query looks.
+The exchange runs whenever the query runs.  
+We can alter how the query looks.  
+
+`const key = cache.resolve(info.parentKey, fi.fieldKey) as string;`  
+info.parentKey is **"Query"** and fi.fieldKey is **"posts({"limit":10})"**.  
+> "Query", .posts(limit: 10) → "Post:1"
+> key = Query.posts({"limit":10})

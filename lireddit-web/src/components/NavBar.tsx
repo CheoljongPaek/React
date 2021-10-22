@@ -16,7 +16,7 @@ const Navbar: React.FC<NavBarProps> = ({}) => {
   });
   let body = null;
 
-  console.log("data: ", data);
+  // console.log("data: ", data);
   
 
   if (fetching) {

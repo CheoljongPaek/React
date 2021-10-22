@@ -25,68 +25,44 @@ export interface PaginationParams {
   limitArgument?: string;
   mergeMode?: MergeMode;
 }
-/*
-export const cursorPagination = (): Resolver => {
 
-  //return resolver through 'urql/exchange-graphcache'
+const cursorPagination = (): Resolver => {
   return (_parent, fieldArgs, cache, info) => {
-    const { parentKey: entityKey, fieldName } = info;
-    // fieldName = posts, entityKey = Query
+    const allFields = cache.inspectFields(info.parentKey)
+    const fieldInfos = allFields.filter((afield) => afield.fieldName === info.fieldName);
+    console.log("fieldInfos: ", fieldInfos);
     
-    const allFields = cache.inspectFields(entityKey);
-    console.log("allFields: ", allFields);
-    
-    // allFields:  [
-    //   {
-    //     fieldKey: 'posts({"limit":10})',
-    //     fieldName: 'posts',
-    //     arguments: { limit: 10 }
-    //   }
-    // ]
-    
-    const fieldInfos = allFields.filter((info) => info.fieldName === fieldName);
     const size = fieldInfos.length;
     if (size === 0) {
       return undefined;
     }
-
-    const fieldKey = `${fieldName}(${stringifyVariables(fieldArgs)})`;
-    const isItInTheCache = cache.resolve(entityKey, fieldKey);
-
+    const fieldKey = `${info.fieldName}(${stringifyVariables(fieldArgs)})`;
+    const isItInTheCache = cache.resolve(
+      cache.resolve(info.parentKey, fieldKey) as string,
+      "posts"
+    )
+    
+    let hasMore = true;
     info.partial = !isItInTheCache;
-    const results = [] as string[];
-    fieldInfos.forEach(fi => {
-      const data = cache.resolve(entityKey, fi.fieldKey) as string;
-      console.log('data: ', data);
+    const results: string[] = [];
+    fieldInfos.forEach((fi) => {
+      const key = cache.resolve(info.parentKey, fi.fieldKey) as string;      
+      //Query, posts({"limit":10})
+      //"Query", .posts(limit: 10) → "Posts:1"
+      //key = Query.posts({"limit":10})
+      const data = cache.resolve(key, "posts") as string[];
+      const _hasMore = cache.resolve(key, 'hasMore');
+      if (!_hasMore) {
+        hasMore = _hasMore as boolean;
+      }
+      results.push(...data);
       
-      results.push(data);
-    });
-    console.log('results: ', results);
+    })
     
     return {
-      hasMore: true,
+      __typename: "PaginatedPosts",
+      hasMore,
       posts: results
-    }
-  };
-};
-*/
-// const dummy = {
-//   id: 306,
-//   title: 'Recoil',
-//   text: 'Proin',
-//   points: 0,
-//   creatorId: 1,
-//   createdAt: "2021-10-09T22:57:19.000Z",
-//   updateAt: "2021-10-14T13:12:04.193Z"
-// };
-export const cursorPagination = (): Resolver => {
-  return (parent, fieldArgs, cache, info) => {
-    const {} = info;
-    const posts = parent.posts;
-    console.log(posts);
-    
-    return {
-      posts
     }
   }
 }
@@ -99,6 +75,9 @@ export const createUrqlClient = (ssrExchange: any) => ({
   exchanges: [
     dedupExchange, 
     cacheExchange({
+      keys: {
+        PaginatedPosts: () => null,
+      },
       resolvers: {
         Query: {
           posts: cursorPagination(),
