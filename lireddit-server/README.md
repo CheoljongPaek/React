@@ -405,3 +405,28 @@ We can alter how the query looks.
 info.parentKey is **"Query"** and fi.fieldKey is **"posts({"limit":10})"**.  
 > "Query", .posts(limit: 10) → "Post:1"
 > key = Query.posts({"limit":10})
+## GraphQL Fetching Relationships  
+53. Many-one and one-Many for Many-Many relationships between user and post.  
+Make a new entity called Updoot. It is a join table with user and post.
+
+54. I want to show a user's email to only the user.  
+For field resolve of User entity,  
+```javascript
+@Resolver(User)
+export class UserResolver {
+
+  @FieldResolver(() => String)
+  email(@Root() user: User, @Ctx() ctx: MyContext) {
+    if (ctx.req.session.userId === user.id) {
+      return user.email
+    }
+    // current user cannot see others email.
+    return "";
+  }
+  //queries and mutations
+}
+```  
+55. On the client, update! posts in client without refresh through urql updates. 
+> Belows causes all queries using these listing fields to be **refetched**.
+> `cache.invalidate(key, field.fieldKey)`
+> `cache.invalidate(key, field.fieldName, field.arguments)`  

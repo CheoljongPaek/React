@@ -4,15 +4,17 @@ import Layout from '../components/Layout';
 import { usePostsQuery } from '../generated/graphql';
 import { createUrqlClient } from '../utils/createUrqlClient';
 import NextLink from 'next/link';
-import { Button } from '@chakra-ui/button';
+import { Button, IconButton } from '@chakra-ui/button';
 import { useState } from 'react';
+import Icon from '@chakra-ui/icon';
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
+import Updootsection from '../components/UpdootSection';
 
 const Index = () => {
-  const [variables, setVariables] = useState({ limit: 33, cursor: null as null | string })
+  const [variables, setVariables] = useState({ limit: 15, cursor: null as null | string })
   const [{data, fetching, ...others}] = usePostsQuery({
     variables
   });
-  // console.log(fetching, 'others: ', others);
   
   if (!fetching && !data) {
     return <div>you got query failed for some reason</div>
@@ -33,10 +35,14 @@ const Index = () => {
         <Stack spacing={8}>
           {data!.posts.posts.map(p => 
             <>
-              <Box key={p.id} p={5} shadow="md" borderWidth="1px">
-                <Heading fontSize="xl">{p.title}</Heading>
-                <Text mt={4}>{p.textSnippet}</Text>
-              </Box>
+              <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
+                <Updootsection post={p} />
+                <Box>
+                  <Heading fontSize="xl">{p.title}</Heading>
+                  <Text>posted by {p.creator.username}</Text>
+                  <Text mt={4}>{p.textSnippet}</Text>
+                </Box>
+              </Flex>
             </>
           )}
         </Stack>
