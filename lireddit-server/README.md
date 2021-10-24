@@ -430,3 +430,5 @@ export class UserResolver {
 > Belows causes all queries using these listing fields to be **refetched**.
 > `cache.invalidate(key, field.fieldKey)`
 > `cache.invalidate(key, field.fieldName, field.arguments)`  
+56. For vote-system, we need to update cache after voting.  
+*readFragment* and *writeFragment* method allows data in the cache to be updated.  

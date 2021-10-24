@@ -9,7 +9,6 @@ interface UpdootSectionProps {
 
 const Updootsection: React.FC<UpdootSectionProps> = ({post}) => {
   const [{fetching, operation}, vote] = useVoteMutation();
-  console.log(operation?.variables?.value)
   
   return (
     <Flex 
@@ -26,8 +25,7 @@ const Updootsection: React.FC<UpdootSectionProps> = ({post}) => {
           })
         }}
         isLoading = {
-          fetching &&
-          operation?.variables?.value === 1
+          fetching
         }
         aria-label="updoot post" 
         icon={<ChevronUpIcon />}
@@ -41,8 +39,7 @@ const Updootsection: React.FC<UpdootSectionProps> = ({post}) => {
           })
         }}
         isLoading = {
-          fetching &&
-          operation?.variables?.value === -1
+          fetching
         }
         aria-label="downdoot post" 
         icon={<ChevronDownIcon />}

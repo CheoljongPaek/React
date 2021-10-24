@@ -1,6 +1,6 @@
-import { dedupExchange, fetchExchange, stringifyVariables } from '@urql/core';
+import { dedupExchange, fetchExchange, gql, stringifyVariables } from '@urql/core';
 import { cacheExchange, Resolver } from '@urql/exchange-graphcache';
-import { LogoutMutation, MeQuery, MeDocument, LoginMutation, RegisterMutation } from '../generated/graphql';
+import { LogoutMutation, MeQuery, MeDocument, LoginMutation, RegisterMutation, VoteMutation, VoteMutationVariables } from '../generated/graphql';
 import { betterupdateQuery } from './betterupdateQuery';
 import { pipe, tap } from 'wonka';
 import { Exchange } from 'urql';
@@ -85,6 +85,31 @@ export const createUrqlClient = (ssrExchange: any) => ({
       },
       updates: {
         Mutation: {
+          vote: (_result, args, cache, info) => {
+            const { postId, value } = args as VoteMutationVariables;
+            const data = cache.readFragment(
+              gql`
+                fragment _ on Post {
+                  id
+                  points
+                }
+              `,
+              { id: postId }
+            );
+            console.log('data: ', data);
+            
+            if (data) {
+              const newPoints = data.points + value;
+              cache.writeFragment(
+                gql`
+                  fragment __ on Post {
+                    points
+                  }
+                `,
+                { id: postId, points: newPoints }
+              )
+            }
+          },
           createPost: (_result, args, cache, info) => {
             const key = "Query"
             const fields = cache
@@ -92,7 +117,7 @@ export const createUrqlClient = (ssrExchange: any) => ({
               .filter(field => field.fieldName === "posts")
               .forEach(field => {
                 cache.invalidate(key, field.fieldName, field.arguments)
-              });          
+              });                        
           },
           logout: (_result, args, cache, info) => {
             betterupdateQuery<LogoutMutation, MeQuery>(
