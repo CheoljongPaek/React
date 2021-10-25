@@ -87,22 +87,31 @@ export class PostResolver {
       replacements.push(new Date(parseInt(cursor)));
     }
     const posts = await getConnection().query(`
-      select p.*,
-      json_build_object(
-        'id', u.id,
-        'username', u.username,
-        'email', u.email,
-        'createdAt', u."createdAt",
-        'updateAt', u."updateAt"
-        ) creator
+      select p.*
       from post p
-      inner join public.user u on p."creatorId" = u.id
-      ${cursor ? `where p."createdAt" < $2` : ''}
+      ${cursor ? `where p."createdAt" < $2` : ""}
       order by p."createdAt" DESC
       limit $1
     `, replacements);
-
-    // console.log("posts: ", posts);
+    // const posts = await getConnection().query(`
+    //   select p.*,
+    //   json_build_object(
+    //     'id', u.id,
+    //     'username', u.username,
+    //     'email', u.email,
+    //     'createdAt', u."createdAt",
+    //     'updateAt', u."updateAt"
+    //     ) creator,
+    //   ${ctx.req.session.userId
+    //     ? '(select value from updoot where "userId" = $2 and "postId" = p.id) "voteStatus"'
+    //     : 'null as "voteStatus"'
+    //   }
+    //   from post p
+    //   inner join public.user u on u.id = p."creatorId"
+    //   ${cursor ? `where p."createdAt" < $3` : ""}
+    //   order by p."createdAt" DESC
+    //   limit $1
+    // `, replacements);
     
     return { 
       posts: posts.slice(0, realLimit), 
