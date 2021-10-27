@@ -78,21 +78,33 @@ export class PostResolver {
   async posts(
     @Arg("limit", () => Int) limit: number,
     @Arg("cursor", () => String, { nullable: true }) cursor: string | null,
+    @Ctx() { req }: MyContext
   ): Promise<PaginatedPosts> {
     const realLimit = Math.min(50, limit);
     const realLimitPlusOne = realLimit + 1;
-
+    console.log('ctx.req.session.userId of post query: ', req.session.userId);
+    
+    // const replacements: any[] = [realLimitPlusOne, ctx.req.session.userId];
     const replacements: any[] = [realLimitPlusOne];
     if (cursor) {
       replacements.push(new Date(parseInt(cursor)));
     }
     const posts = await getConnection().query(`
-      select p.*
+      select p.*,
+      json_build_object(
+        'id', u.id,
+        'username', u.username,
+        'email', u.email,
+        'createdAt', u."createdAt",
+        'updateAt', u."updateAt"
+        ) creator
       from post p
-      ${cursor ? `where p."createdAt" < $2` : ""}
+      inner join public.user u on u.id = p."creatorId"
+      ${cursor ? `where p."createdAt" < $2`: ""}
       order by p."createdAt" DESC
       limit $1
     `, replacements);
+    
     // const posts = await getConnection().query(`
     //   select p.*,
     //   json_build_object(
@@ -132,6 +144,7 @@ export class PostResolver {
     @Arg('input') input: PostInput,
     @Ctx() ctx: MyContext 
   ): Promise<Post> {
+    console.log('ctx.req.session.userId of create post: ', ctx.req.session.userId);
     return Post.create({
       ...input,
       creatorId: ctx.req.session.userId,

@@ -10,11 +10,13 @@ import Updootsection from '../components/UpdootSection';
 
 const Index = () => {
   const [variables, setVariables] = useState({ limit: 15, cursor: null as null | string })
-  const [{data, fetching, ...others}] = usePostsQuery({
+  const [{data, fetching, error}] = usePostsQuery({
     variables
   });
-  console.log(fetching);
-  console.log(data);
+  // console.log(fetching);
+  // console.log(data);
+  // console.log('error', error);
+  
   
   if (!fetching && !data) {
     return <div>you got query failed for some reason</div>

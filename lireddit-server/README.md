@@ -432,3 +432,44 @@ export class UserResolver {
 > `cache.invalidate(key, field.fieldName, field.arguments)`  
 56. For vote-system, we need to update cache after voting.  
 *readFragment* and *writeFragment* method allows data in the cache to be updated.  
+57. typeorm problem-solve  
+In the entity, there are two kinds of fields.  
+- 1. assign type-graphql / not typeorm  
+meaning that it is in a grapql server, not in db.  
+- 2. assign both type-graphql and typeorm  
+meaning that it is in both grapql server and db.  
+> Problem is here when I need to return a data retrieved from db.  
+> **1 type**: I need to add more object to fit the type.  
+```javascript
+const posts = await getConnection().query(`
+  select p.*,
+  json_build_object(
+    'id', u.id,
+    'username', u.username,
+    'email', u.email,
+    'createdAt', u."createdAt",
+    'updateAt', u."updateAt"
+    ) creator
+  from post p
+  inner join public.user u on u.id = p."creatorId"
+  ${cursor ? `where p."createdAt" < $2`: ""}
+  order by p."createdAt" DESC
+  limit $1
+`, replacements);
+```  
+Look the **json_build_object(...) creator**  
+the creator field is in grapql-sever, not in db, so I needed to make new object to fit return type.  
+```javascript
+return { 
+  posts: posts.slice(0, realLimit), 
+  hasMore: posts.length === realLimitPlusOne,
+};
+```  
+The above is **query resolver's return** . This return type fits the below.
+```javascript
+@Query(() => PaginatedPosts)
+async posts(
+  @Arg("limit", () => Int) limit: number,
+  @Arg("cursor", () => String, { nullable: true }) cursor: string | null,
+): Promise<PaginatedPosts>
+```  

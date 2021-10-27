@@ -111,6 +111,8 @@ export const createUrqlClient = (ssrExchange: any) => ({
             }
           },
           createPost: (_result, args, cache, info) => {
+            console.log('create!!');
+            
             const key = "Query"
             const fields = cache
               .inspectFields(key)

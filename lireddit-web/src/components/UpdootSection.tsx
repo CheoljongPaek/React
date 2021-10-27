@@ -19,6 +19,9 @@ const Updootsection: React.FC<UpdootSectionProps> = ({post}) => {
     >
       <IconButton 
         onClick={() => {
+          if (post.voteStatus === 1) {
+            return;
+          }
           vote({
             value: 1,
             postId: parseInt(post.id)
@@ -27,12 +30,16 @@ const Updootsection: React.FC<UpdootSectionProps> = ({post}) => {
         isLoading = {
           fetching
         }
+        colorScheme={post.voteStatus === 1 ? "green" : undefined}
         aria-label="updoot post" 
         icon={<ChevronUpIcon />}
       />
       {post.points}
       <IconButton 
         onClick={() => {
+          if (post.voteStatus === -1) {
+            return;
+          }
           vote({
             value: -1,
             postId: parseInt(post.id)
@@ -41,6 +48,7 @@ const Updootsection: React.FC<UpdootSectionProps> = ({post}) => {
         isLoading = {
           fetching
         }
+        colorScheme={post.voteStatus === -1 ? "red" : undefined}
         aria-label="downdoot post" 
         icon={<ChevronDownIcon />}
       />
