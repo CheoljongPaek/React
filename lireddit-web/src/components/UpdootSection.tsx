@@ -1,6 +1,6 @@
 import { ChevronUpIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { Flex, IconButton } from '@chakra-ui/react';
-import React from 'react'
+import React, { useState } from 'react'
 import { PostSnippetFragment, PostsQuery, useVoteMutation } from '../generated/graphql';
 
 interface UpdootSectionProps {
@@ -8,7 +8,11 @@ interface UpdootSectionProps {
 }
 
 const Updootsection: React.FC<UpdootSectionProps> = ({post}) => {
-  const [{fetching, operation}, vote] = useVoteMutation();
+  const [loadingState, setLoadingState] = useState<
+    "updoot-loading" | "downdoot-loading" | "not-loading"
+  >("not-loading");
+  const [{}, vote] = useVoteMutation();
+  console.log(`${post.id}: ${post.voteStatus}`);
   
   return (
     <Flex 
@@ -18,17 +22,19 @@ const Updootsection: React.FC<UpdootSectionProps> = ({post}) => {
       mr={4}
     >
       <IconButton 
-        onClick={() => {
+        onClick={async () => {
+          setLoadingState("updoot-loading");
           if (post.voteStatus === 1) {
             return;
-          }
-          vote({
+          };
+          await vote({
             value: 1,
             postId: parseInt(post.id)
-          })
+          });
+          setLoadingState("not-loading");
         }}
         isLoading = {
-          fetching
+          loadingState === "updoot-loading"
         }
         colorScheme={post.voteStatus === 1 ? "green" : undefined}
         aria-label="updoot post" 
@@ -36,17 +42,19 @@ const Updootsection: React.FC<UpdootSectionProps> = ({post}) => {
       />
       {post.points}
       <IconButton 
-        onClick={() => {
+        onClick={async() => {
+          setLoadingState("downdoot-loading");
           if (post.voteStatus === -1) {
             return;
-          }
-          vote({
+          };
+          await vote({
             value: -1,
             postId: parseInt(post.id)
-          })
+          });
+          setLoadingState("not-loading");
         }}
         isLoading = {
-          fetching
+          loadingState === "downdoot-loading"
         }
         colorScheme={post.voteStatus === -1 ? "red" : undefined}
         aria-label="downdoot post" 
