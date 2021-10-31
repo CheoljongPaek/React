@@ -471,3 +471,31 @@ async posts(
   @Arg("cursor", () => String, { nullable: true }) cursor: string | null,
 ): Promise<PaginatedPosts>
 ```  
+58. problem occured by ssr  
+- ssr: **(browser -(cookie)-> next.js)** -> graphql api  
+- csr: **(browser -(cookie)-> graphql api)**  
+ssr does not send cookie to graphql api directly.  
+The reload in '/' router is ssr, so it does not retrieve the id and votestatus from graphql api.  
+```javascript
+export const createUrqlClient = (ssrExchange: any, ctx: any) => { 
+  let cookie = '';
+  if (isServer()) {
+    cookie = ctx.req.headers.cookie;
+  }
+  
+  return {
+    url: 'http://localhost:4000/graphql',
+    fetchOptions: {
+      credentials: "include" as const,
+      headers: cookie ? {
+        cookie
+      }: undefined
+    },
+......
+```  
+Now in ssr,  
+- Browser sends a cookie   
+- Next.js includes the cookie in a header  
+- The cookie is sent to graphql api  
+- The graphql api has cookie  
+- it tells id and what we vote on any post.

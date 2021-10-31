@@ -12,7 +12,8 @@ const Updootsection: React.FC<UpdootSectionProps> = ({post}) => {
     "updoot-loading" | "downdoot-loading" | "not-loading"
   >("not-loading");
   const [{}, vote] = useVoteMutation();
-  console.log(`${post.id}: ${post.voteStatus}`);
+  // console.log(`${post.id}: ${post.voteStatus}`);
+  // console.log(post);
   
   return (
     <Flex 

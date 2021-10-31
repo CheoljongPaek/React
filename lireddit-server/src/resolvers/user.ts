@@ -33,7 +33,7 @@ export class UserResolver {
     if (ctx.req.session.userId === user.id) {
       return user.email
     }
-    // current user cannot see others email.
+    // current user cannot see others' emails.
     return "";
   }
 
