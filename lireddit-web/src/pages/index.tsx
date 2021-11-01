@@ -7,7 +7,7 @@ import NextLink from 'next/link';
 import { Button, IconButton } from '@chakra-ui/button';
 import { useState } from 'react';
 import Updootsection from '../components/UpdootSection';
-import { DeleteIcon } from '@chakra-ui/icons'
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 
 const Index = () => {
   const [variables, setVariables] = useState({ limit: 15, cursor: null as null | string })
@@ -27,8 +27,8 @@ const Index = () => {
         <div>loading...</div>
        ) : (
         <Stack spacing={8}>
-          {data!.posts.posts.map(p => 
-            <>
+          {data!.posts.posts.map((p) => 
+          !p ? null: (
               <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
                 <Updootsection post={p} />
                 <Box>
@@ -41,20 +41,36 @@ const Index = () => {
                   <Text mt={4}>{p.textSnippet}</Text>
                 </Box>
                 <Flex ml="auto" alignItems="flex-end">
-                  <IconButton 
-                    ml="auto"
-                    icon={<DeleteIcon/>} 
-                    colorScheme="red"
-                    aria-label="Delete Post" 
-                    onClick={() => {
-                      deletePost({
-                        id: parseInt(p.id)
-                      });
-                    }}
-                  />
+                  <Flex mr="1">
+                    <IconButton 
+                      ml="auto"
+                      icon={<DeleteIcon/>} 
+                      colorScheme="red"
+                      aria-label="Delete Post" 
+                      onClick={() => {
+                        deletePost({
+                          id: parseInt(p.id)
+                        });
+                      }}
+                    />
+                  </Flex>
+                  <Flex>
+                    <NextLink 
+                      href='/post/edit/[id]' 
+                      as={`/post/edit/${p.id}`}
+                    >
+                      <IconButton
+                        as={Link} 
+                        ml="auto"
+                        icon={<EditIcon/>} 
+                        colorScheme="linkedin"
+                        aria-label="Update Post" 
+                      />
+                    </NextLink>
+                  </Flex>
                 </Flex>
               </Flex>
-            </>
+            )
           )}
         </Stack>
        )}
