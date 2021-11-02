@@ -8,21 +8,26 @@ import Inputfield from '../../../components/InputField';
 import Layout from '../../../components/Layout';
 import { usePostQuery, useUpdatePostMutation } from '../../../generated/graphql';
 import { createUrqlClient } from '../../../utils/createUrqlClient';
-import createPost from '../../create-post';
+import { useGetIntId } from '../../../utils/useGetIntId';
 
 const EditPost = ({}) => {
   const router = useRouter();
-  const IntId = 
-    typeof router.query.id === 'string'
-    ? parseInt(router.query.id)
-    : -1;
-  const [{data, fetching, error}] = usePostQuery({
-    
+  const intId = useGetIntId();
+  const [{ data, fetching }] = usePostQuery({
+    pause: intId === -1,
     variables: {
-      id: IntId
+      id: intId
     }
   });
   const [, updatePost] = useUpdatePostMutation();
+
+  if (fetching) {
+    return (
+      <Layout>
+        <div>loading...</div>
+      </Layout>
+    )
+  };
 
   if (!data?.post) {
     return (
@@ -30,7 +35,7 @@ const EditPost = ({}) => {
         <Box>could not find post</Box>
       </Layout>
     )
-  }
+  };
 
   return (
     <Layout variant='small'>
@@ -38,7 +43,7 @@ const EditPost = ({}) => {
         initialValues={{ title: data.post.title, text: data.post.text}}
         onSubmit={async (values) => {
           await updatePost({
-            id: IntId,
+            id: intId,
             ...values
           })
           router.back();

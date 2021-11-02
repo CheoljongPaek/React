@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Link, Stack, Text } from '@chakra-ui/layout';
 import { withUrqlClient } from 'next-urql';
 import Layout from '../components/Layout';
-import { useDeletePostMutation, usePostsQuery } from '../generated/graphql';
+import { useDeletePostMutation, useMeQuery, usePostsQuery } from '../generated/graphql';
 import { createUrqlClient } from '../utils/createUrqlClient';
 import NextLink from 'next/link';
 import { Button, IconButton } from '@chakra-ui/button';
@@ -11,6 +11,7 @@ import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 
 const Index = () => {
   const [variables, setVariables] = useState({ limit: 15, cursor: null as null | string })
+  const [{ data: meData }] = useMeQuery();
   const [{data, fetching, error}] = usePostsQuery({
     variables
   });
@@ -32,7 +33,7 @@ const Index = () => {
               <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
                 <Updootsection post={p} />
                 <Box>
-                  <NextLink href="/post/[id]" as={`/post/${p.id}`}>
+                  <NextLink href={`/post/${p.id}`}>
                     <Link>
                       <Heading fontSize="xl">{p.title}</Heading>
                     </Link>
@@ -40,7 +41,8 @@ const Index = () => {
                   <Text>posted by {p.creator.username}</Text>
                   <Text mt={4}>{p.textSnippet}</Text>
                 </Box>
-                <Flex ml="auto" alignItems="flex-end">
+                {meData?.me?.id !== p.creator.id ? null :
+                (<Flex ml="auto" alignItems="flex-end">
                   <Flex mr="1">
                     <IconButton 
                       ml="auto"
@@ -56,8 +58,7 @@ const Index = () => {
                   </Flex>
                   <Flex>
                     <NextLink 
-                      href='/post/edit/[id]' 
-                      as={`/post/edit/${p.id}`}
+                      href={`/post/edit/${p.id}`}
                     >
                       <IconButton
                         as={Link} 
@@ -69,6 +70,7 @@ const Index = () => {
                     </NextLink>
                   </Flex>
                 </Flex>
+                )}
               </Flex>
             )
           )}

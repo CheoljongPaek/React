@@ -1,6 +1,6 @@
 import { dedupExchange, fetchExchange, gql, stringifyVariables } from '@urql/core';
 import { cacheExchange, Resolver } from '@urql/exchange-graphcache';
-import { LogoutMutation, MeQuery, MeDocument, LoginMutation, RegisterMutation, VoteMutation, VoteMutationVariables, DeletePostMutationVariables } from '../generated/graphql';
+import { LogoutMutation, MeQuery, MeDocument, LoginMutation, RegisterMutation, VoteMutation, VoteMutationVariables, DeletePostMutationVariables, UpdatePostMutationVariables } from '../generated/graphql';
 import { betterupdateQuery } from './betterupdateQuery';
 import { pipe, tap } from 'wonka';
 import { Exchange } from 'urql';
@@ -71,7 +71,7 @@ const cursorPagination = (): Resolver => {
 export const createUrqlClient = (ssrExchange: any, ctx: any) => { 
   let cookie = '';
   if (isServer()) {
-    cookie = ctx.req.headers.cookie;
+    cookie = ctx?.req?.headers?.cookie;
   }
   
   return {
@@ -96,7 +96,10 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
         updates: {
           Mutation: {
             updatePost: (_result, args, cache, info) => {
-
+              cache.invalidate({
+                __typename: 'Post',
+                id: (args as UpdatePostMutationVariables).id
+              });
             },
             deletePost: (_result, args, cache, info) => {
               cache.invalidate({
