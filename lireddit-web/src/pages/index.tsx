@@ -1,22 +1,20 @@
+import { Button } from '@chakra-ui/button';
 import { Box, Flex, Heading, Link, Stack, Text } from '@chakra-ui/layout';
 import { withUrqlClient } from 'next-urql';
-import Layout from '../components/Layout';
-import { useDeletePostMutation, useMeQuery, usePostsQuery } from '../generated/graphql';
-import { createUrqlClient } from '../utils/createUrqlClient';
 import NextLink from 'next/link';
-import { Button, IconButton } from '@chakra-ui/button';
 import { useState } from 'react';
+import Editdeletepostbtns from '../components/EditDeletePostBtns';
+import Layout from '../components/Layout';
 import Updootsection from '../components/UpdootSection';
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
+import { useMeQuery, usePostsQuery } from '../generated/graphql';
+import { createUrqlClient } from '../utils/createUrqlClient';
 
 const Index = () => {
   const [variables, setVariables] = useState({ limit: 15, cursor: null as null | string })
   const [{ data: meData }] = useMeQuery();
   const [{data, fetching, error}] = usePostsQuery({
     variables
-  });
-  const [,deletePost] = useDeletePostMutation();
-  
+  });  
   
   if (!fetching && !data) {
     return <div>you got query failed for some reason</div>
@@ -41,35 +39,8 @@ const Index = () => {
                   <Text>posted by {p.creator.username}</Text>
                   <Text mt={4}>{p.textSnippet}</Text>
                 </Box>
-                {meData?.me?.id !== p.creator.id ? null :
-                (<Flex ml="auto" alignItems="flex-end">
-                  <Flex mr="1">
-                    <IconButton 
-                      ml="auto"
-                      icon={<DeleteIcon/>} 
-                      colorScheme="red"
-                      aria-label="Delete Post" 
-                      onClick={() => {
-                        deletePost({
-                          id: parseInt(p.id)
-                        });
-                      }}
-                    />
-                  </Flex>
-                  <Flex>
-                    <NextLink 
-                      href={`/post/edit/${p.id}`}
-                    >
-                      <IconButton
-                        as={Link} 
-                        ml="auto"
-                        icon={<EditIcon/>} 
-                        colorScheme="linkedin"
-                        aria-label="Update Post" 
-                      />
-                    </NextLink>
-                  </Flex>
-                </Flex>
+                {meData?.me?.id !== p.creator.id ? null : (
+                  <Editdeletepostbtns id={parseInt(p.id)} creatorId={parseInt(p.creator.id)} />
                 )}
               </Flex>
             )

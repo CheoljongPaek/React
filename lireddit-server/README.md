@@ -499,3 +499,6 @@ Now in ssr,
 - The cookie is sent to graphql api  
 - The graphql api has cookie  
 - it tells id and what we vote on any post.
+
+59. Optimization with data loader.  
+N+1 problem in graphql.
