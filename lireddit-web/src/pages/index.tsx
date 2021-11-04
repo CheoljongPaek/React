@@ -40,7 +40,7 @@ const Index = () => {
                   <Text mt={4}>{p.textSnippet}</Text>
                 </Box>
                 {meData?.me?.id !== p.creator.id ? null : (
-                  <Editdeletepostbtns id={parseInt(p.id)} creatorId={parseInt(p.creator.id)} />
+                  <Editdeletepostbtns id={p.id} creatorId={p.creator.id} />
                 )}
               </Flex>
             )

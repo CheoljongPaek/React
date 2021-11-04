@@ -34,10 +34,21 @@ export class PostResolver {
 
   @FieldResolver(() => User)
   creator(
-    @Root() post: Post
+    @Root() post: Post,
+    @Ctx() ctx: MyContext
   ) {
-    return User.findOne(post.creatorId)
+    // return User.findOne(post.creatorId)
+    return ctx.userLoader.load(post.creatorId)
   }
+
+  // @FieldResolver(() => Int, { nullable: true })
+  // voteStatus(
+  //   @Root() post: Post,
+  //   @Ctx() ctx: MyContext
+  // ) {
+  //   // return User.findOne(post.creatorId)
+  //   return 
+  // }
 
   @Mutation(() => Boolean)
   @UseMiddleware(isAuth)

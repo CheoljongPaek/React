@@ -37,8 +37,8 @@ const Post = ({}) => {
         {data.post.text}
       </Box>
       <Editdeletepostbtns 
-        id={parseInt(data.post.id)} 
-        creatorId={parseInt(data.post.creator.id)} 
+        id={data.post.id} 
+        creatorId={data.post.creator.id} 
       />
     </Layout>
   );

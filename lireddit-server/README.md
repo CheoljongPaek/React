@@ -501,4 +501,5 @@ Now in ssr,
 - it tells id and what we vote on any post.
 
 59. Optimization with data loader.  
-N+1 problem in graphql.
+Use DataLoader to solve N+1 problem in graphql.  
+The library makes N+1 to 1+1.  

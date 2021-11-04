@@ -30,7 +30,7 @@ const Updootsection: React.FC<UpdootSectionProps> = ({post}) => {
           };
           await vote({
             value: 1,
-            postId: parseInt(post.id)
+            postId: post.id
           });
           setLoadingState("not-loading");
         }}
@@ -50,7 +50,7 @@ const Updootsection: React.FC<UpdootSectionProps> = ({post}) => {
           };
           await vote({
             value: -1,
-            postId: parseInt(post.id)
+            postId: post.id
           });
           setLoadingState("not-loading");
         }}

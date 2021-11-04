@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { Redis } from 'ioredis';
+import { createUserLoader } from './utils/createUserLoader';
 
 declare module 'express-session' {
   interface Session {
@@ -10,5 +11,6 @@ declare module 'express-session' {
 export type MyContext = {
   req: Request,
   res: Response,
-  redis: Redis
+  redis: Redis,
+  userLoader: ReturnType<typeof createUserLoader>
 }

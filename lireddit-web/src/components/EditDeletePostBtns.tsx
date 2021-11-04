@@ -17,7 +17,7 @@ const Editdeletepostbtns: React.FC<EditDeletePostBtnsProps> = ({ id, creatorId }
     return null
   }
 
-  if (parseInt(meData?.me?.id) !== creatorId) {
+  if (meData?.me?.id !== creatorId) {
     return null
   }
 
