@@ -41,14 +41,21 @@ export class PostResolver {
     return ctx.userLoader.load(post.creatorId)
   }
 
-  // @FieldResolver(() => Int, { nullable: true })
-  // voteStatus(
-  //   @Root() post: Post,
-  //   @Ctx() ctx: MyContext
-  // ) {
-  //   // return User.findOne(post.creatorId)
-  //   return 
-  // }
+  @FieldResolver(() => Int, { nullable: true })
+  async voteStatus(
+    @Root() post: Post,
+    @Ctx() ctx: MyContext
+  ) { 
+    //Updoot { value: 1, userId: 6, postId: 295 }
+    if (!ctx.req.session.userId) {
+      return null
+    }
+    const updoot = await ctx.updootLoader.load({
+      postId: post.id,
+      userId: ctx.req.session.userId
+    });
+    return updoot ? updoot.value : null;
+  }
 
   @Mutation(() => Boolean)
   @UseMiddleware(isAuth)
@@ -61,7 +68,8 @@ export class PostResolver {
     const realValue = isUpdoot ? 1 : -1;
     const { userId } = ctx.req.session
     const updoot = await Updoot.findOne({where: {postId, userId}});
-
+    // { value: -1, userId: 6, postId: 326 }
+    
     // voted before, but change mind
     if (updoot && updoot.value !== realValue) {
       await getConnection().transaction(async (tm) => {
@@ -96,31 +104,20 @@ export class PostResolver {
   @Query(() => PaginatedPosts)
   async posts(
     @Arg("limit", () => Int) limit: number,
-    @Arg("cursor", () => String, { nullable: true }) cursor: string | null,
-    @Ctx() { req }: MyContext
+    @Arg("cursor", () => String, { nullable: true }) cursor: string | null
   ): Promise<PaginatedPosts> {
     const realLimit = Math.min(50, limit);
     const realLimitPlusOne = realLimit + 1;
     
     const replacements: any[] = [realLimitPlusOne];
 
-    if (req.session.userId) {
-      replacements.push(req.session.userId);
-    }
-
-    let cursorIdx = 3;
     if (cursor) {
       replacements.push(new Date(parseInt(cursor)));
-      cursorIdx = replacements.length;
     }
     const posts = await getConnection().query(`
-      select p.*,
-      ${req.session.userId
-        ? '(select value from updoot where "userId" = $2 and "postId" = p.id) "voteStatus"'
-        : 'null as "voteStatus"'
-      }
+      select p.*
       from post p
-      ${cursor ? `where p."createdAt" < $${cursorIdx}` : ""}
+      ${cursor ? `where p."createdAt" < $2` : ""}
       order by p."createdAt" DESC
       limit $1
     `, replacements);

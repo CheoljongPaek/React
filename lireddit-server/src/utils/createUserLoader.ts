@@ -11,10 +11,29 @@ export const createUserLoader = () => new DataLoader<number, User>(async (userId
   // })
 
   // const sortedUsers = userIds.map((userId) => userIdToUser[userId]);
-  // console.log('users: ', users);
+  console.log('users: ', users);
   // console.log('userIds: ', userIds);
   // console.log('userIdToUser: ', userIdToUser);
   // console.log('sortedUsers: ', sortedUsers);
   // return sortedUsers;
   return users
 });
+
+// users:  [
+//   User {
+//     id: 1,
+//     username: 'ben',
+//     email: 'ben@ben.com',
+//     password: '$argon2i$v=19$m=4096,t=3,p=1$7Y4Q9B6xHfuoJLka0hORtQ$VAIh9OIUlptN/mQ+ndxSSwdx93BKaJ2eBpyUCjhzbAw',
+//     createdAt: 2021-10-11T11:50:10.459Z,
+//     updateAt: 2021-10-11T11:50:10.459Z
+//   },
+//   User {
+//     id: 6,
+//     username: 'bob',
+//     email: 'bob@bob.com',
+//     password: '$argon2i$v=19$m=4096,t=3,p=1$Z/Wvth2Lv/kUM3XRtTZYfQ$fFLTwqXDmFAzYDVSDWZ/TykOFMeMdPl9K3P8RFMNRt4',
+//     createdAt: 2021-10-23T03:59:34.833Z,
+//     updateAt: 2021-10-23T03:59:34.833Z
+//   }
+// ]
