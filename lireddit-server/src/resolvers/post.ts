@@ -69,6 +69,25 @@ export class PostResolver {
     const { userId } = ctx.req.session
     const updoot = await Updoot.findOne({where: {postId, userId}});
     // { value: -1, userId: 6, postId: 326 }
+
+    if (!updoot) {
+      //has never voted before.
+      await getConnection().transaction(async (tm) => {
+        await tm.query(`
+          insert into updoot ("userId", "postId", value)
+          values ($1, $2, $3)
+        `, [userId, postId, realValue]);
+        await tm.query(`
+          update post
+          set points = points + $1
+          where id = $2
+        `, [realValue, postId]);
+      });
+    }
+
+    if (updoot && updoot.value === realValue) {
+      return true;
+    }
     
     // voted before, but change mind
     if (updoot && updoot.value !== realValue) {
@@ -84,20 +103,7 @@ export class PostResolver {
           where id = $2
         `, [2*realValue, postId]);
       })
-    } else if (!updoot) {
-      //has never voted before.
-      await getConnection().transaction(async (tm) => {
-        await tm.query(`
-          insert into updoot ("userId", "postId", value)
-          values ($1, $2, $3)
-        `, [userId, postId, realValue]);
-        await tm.query(`
-          update post
-          set points = points + $1
-          where id = $2
-        `, [realValue, postId]);
-      });
-    }
+    };
     return true;
   }
 
