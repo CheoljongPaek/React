@@ -503,3 +503,6 @@ Now in ssr,
 59. Optimization with data loader.  
 Use DataLoader to solve N+1 problem in graphql.  
 The library makes N+1 to 1+1.  
+
+### urql to Apollo Client and Next Apollo  
+Next Apollo is for csr.

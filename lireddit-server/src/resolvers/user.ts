@@ -195,6 +195,7 @@ export class UserResolver {
       ? { where: { email: usernameOrEmail } }
       : { where: { username: usernameOrEmail } }
     );
+    
     if (!user) {
       return {
         errors: [
@@ -216,9 +217,9 @@ export class UserResolver {
         ]
       }
     }
-
+    
     ctx.req.session.userId = user.id;
-
+    
     return {
       user
     };

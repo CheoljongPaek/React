@@ -1,57 +1,65 @@
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
-import { Flex, IconButton, Link } from '@chakra-ui/react';
-import React from 'react'
-import NextLink from 'next/link'
-import { useDeletePostMutation, useMeQuery } from '../generated/graphql';
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { Flex, IconButton, Link } from "@chakra-ui/react";
+import React from "react";
+import NextLink from "next/link";
+import { useDeletePostMutation, useMeQuery } from "../generated/graphql";
 
 interface EditDeletePostBtnsProps {
   id: number;
   creatorId: number;
 }
 
-const Editdeletepostbtns: React.FC<EditDeletePostBtnsProps> = ({ id, creatorId }) => {
-  const [,deletePost] = useDeletePostMutation();
-  const [{ data: meData }] = useMeQuery();
+const Editdeletepostbtns: React.FC<EditDeletePostBtnsProps> = ({
+  id,
+  creatorId,
+}) => {
+  const [deletePost] = useDeletePostMutation();
+  const { data: meData } = useMeQuery();
 
   if (!meData?.me) {
-    return null
+    return null;
   }
 
   if (meData?.me?.id !== creatorId) {
-    return null
+    return null;
   }
 
-  return  (
+  return (
     <Flex ml="auto" alignItems="flex-end">
       <Flex mr="1">
-        <IconButton 
+        <IconButton
           ml="auto"
-          icon={<DeleteIcon/>} 
+          icon={<DeleteIcon />}
           colorScheme="red"
-          aria-label="Delete Post" 
+          aria-label="Delete Post"
           onClick={() => {
             deletePost({
-              id
+              variables: {
+                id,
+              },
+              update: (cache) => {
+                cache.evict({
+                  // Post:33
+                  id: "Post:" + id,
+                });
+              },
             });
           }}
         />
       </Flex>
       <Flex>
-        <NextLink 
-          href={`/post/edit/${id}`}
-        >
+        <NextLink href={`/post/edit/${id}`}>
           <IconButton
-            as={Link} 
+            as={Link}
             ml="auto"
-            icon={<EditIcon/>} 
+            icon={<EditIcon />}
             colorScheme="linkedin"
-            aria-label="Update Post" 
+            aria-label="Update Post"
           />
         </NextLink>
       </Flex>
     </Flex>
   );
-}
+};
 
-
-export default Editdeletepostbtns
+export default Editdeletepostbtns;

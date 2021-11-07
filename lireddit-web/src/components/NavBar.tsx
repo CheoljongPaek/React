@@ -1,30 +1,34 @@
-import React from 'react'
-import { Box, Flex, Heading, Link } from '@chakra-ui/layout';
+import React from "react";
+import { Box, Flex, Heading, Link } from "@chakra-ui/layout";
 import NextLink from "next/link";
-import { useLogoutMutation, useMeQuery } from '../generated/graphql';
-import { Button } from '@chakra-ui/button';
-import { isServer } from '../utils/isServer';
-import { useRouter } from 'next/router';
+import { useLogoutMutation, useMeQuery } from "../generated/graphql";
+import { Button } from "@chakra-ui/button";
+import { isServer } from "../utils/isServer";
 
-interface NavBarProps {
-
-}
+interface NavBarProps {}
 
 const Navbar: React.FC<NavBarProps> = ({}) => {
-  const router = useRouter();
-  const [{fetching: logoutFetching}, logout] = useLogoutMutation();
-  const [{data, fetching}] = useMeQuery({
-    pause: isServer(),
+  const [logout, { loading: logoutFetching }] = useLogoutMutation();
+  // const apollo = useApolloClient();
+  const { client, data, loading } = useMeQuery({
+    skip: isServer(),
+    fetchPolicy: "network-only",
   });
   let body = null;
+  console.log("me data: ", data);
 
   // console.log("data: ", data);
-  
 
-  if (fetching) {
-    /* fetching */
-    // body = null;
-  } else if (!data?.me) {
+  /* fetching */
+  if (loading) {
+    body = (
+      <>
+        <div>Loading...</div>
+      </>
+    );
+  }
+
+  if (!data?.me) {
     /* Not logged in */
     body = (
       <>
@@ -35,58 +39,43 @@ const Navbar: React.FC<NavBarProps> = ({}) => {
           <Link>register</Link>
         </NextLink>
       </>
-    )
+    );
   } else {
     /* logged in */
     body = (
-      <Flex align='center'>
+      <Flex align="center">
         <NextLink href="/create-post">
-          <Button as={Link} mr={4}>create post</Button>
+          <Button as={Link} mr={4}>
+            create post
+          </Button>
         </NextLink>
-        <Box mr={2}>
-          {data.me.username}
-        </Box>
-        <Button 
+        <Box mr={2}>{data.me.username}</Box>
+        <Button
           onClick={async () => {
             await logout();
-            router.reload();
-          }} 
+            await client.resetStore();
+          }}
           isLoading={logoutFetching}
           variant="link"
         >
           logout
         </Button>
       </Flex>
-    )
+    );
   }
 
   return (
-    <Flex 
-      position="sticky" 
-      top={0} 
-      zIndex={1} 
-      bg='tan' 
-      p={4} 
-      align="center"
-    >
-      <Flex
-        flex={1}
-        align="center"
-        margin="auto"
-        maxW={800}
-      >
-        <NextLink href='/'>
+    <Flex position="sticky" top={0} zIndex={1} bg="tan" p={4} align="center">
+      <Flex flex={1} align="center" margin="auto" maxW={800}>
+        <NextLink href="/">
           <Link>
             <Heading>LiReddit</Heading>
           </Link>
         </NextLink>
-        <Box ml={'auto'}>
-          {body}
-        </Box>
+        <Box ml={"auto"}>{body}</Box>
       </Flex>
     </Flex>
   );
-}
+};
 
-
-export default Navbar
+export default Navbar;

@@ -4306,6 +4306,11 @@ native-url@0.3.4:
   dependencies:
     querystring "^0.2.0"
 
+next-apollo@^5.0.7:
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/next-apollo/-/next-apollo-5.0.7.tgz#1bcdf54120c3830365870c17a4493c354e303e2f"
+  integrity sha512-W+IZDonH1nSOCQGDHp/3GU+ZhXQ7lRi/o5GEdywyVaDBCgG8FOpFp4nymLUylJn88f7mfouD/MvO3Uu5EqwKjA==
+
 next-urql@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/next-urql/-/next-urql-3.2.1.tgz#ad2857c6ef577c36d3f29004d14d19d6cb8be1dc"

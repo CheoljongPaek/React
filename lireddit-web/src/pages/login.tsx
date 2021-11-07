@@ -1,52 +1,61 @@
-import React from 'react'
-import {Form, Formik} from 'formik'
-import Wrapper from '../components/Wrapper';
-import Inputfield from '../components/InputField';
-import { Button } from '@chakra-ui/button';
-import { Box, Flex, Link } from '@chakra-ui/layout';
-import { useLoginMutation } from '../generated/graphql';
-import { toErrorMap } from '../utils/toErrorMap';
-import { useRouter } from 'next/router';
-import { createUrqlClient } from '../utils/createUrqlClient';
-import { withUrqlClient } from 'next-urql';
-import NextLink from 'next/link';
-
+import React from "react";
+import { Form, Formik } from "formik";
+import Wrapper from "../components/Wrapper";
+import Inputfield from "../components/InputField";
+import { Button } from "@chakra-ui/button";
+import { Box, Flex, Link } from "@chakra-ui/layout";
+import { MeDocument, MeQuery, useLoginMutation } from "../generated/graphql";
+import { toErrorMap } from "../utils/toErrorMap";
+import { useRouter } from "next/router";
+import NextLink from "next/link";
+import { withApollo } from "../utils/withApollo";
 
 const Login: React.FC<{}> = ({}) => {
   const router = useRouter();
-  const [,login] = useLoginMutation();
-  console.log(router);
-  
+  const [login] = useLoginMutation();
+
   return (
     <Wrapper variant="small">
-      <Formik 
+      <Formik
         initialValues={{ usernameOrEmail: "", password: "" }}
-        onSubmit={async (values, {setErrors}) => {
-          const response = await login(values);          
+        onSubmit={async (values, { setErrors }) => {
+          const response = await login({
+            variables: values,
+            update: (cache, { data }) => {
+              cache.writeQuery<MeQuery>({
+                query: MeDocument,
+                data: {
+                  __typename: "Query",
+                  me: data?.login.user,
+                },
+              });
+              cache.evict({ fieldName: "posts" });
+            },
+          });
           if (response.data?.login.errors) {
             setErrors(toErrorMap(response.data.login.errors));
           } else if (response.data?.login.user) {
             if (typeof router.query.next === "string") {
               router.push(router.query.next);
             } else {
-              // worked        
+              // worked
               router.push("/");
             }
           }
-        }}  
+        }}
       >
         {(props) => (
           <Form>
-            <Inputfield 
-              name="usernameOrEmail" 
-              placeholder="username or Email" 
+            <Inputfield
+              name="usernameOrEmail"
+              placeholder="username or Email"
               label="username or Email"
               type="text"
             />
             <Box mt={4}>
-              <Inputfield 
-                name="password" 
-                placeholder="password" 
+              <Inputfield
+                name="password"
+                placeholder="password"
                 label="Password"
                 type="password"
               />
@@ -56,9 +65,9 @@ const Login: React.FC<{}> = ({}) => {
                 <Link ml="auto">forgot password?</Link>
               </NextLink>
             </Flex>
-            <Button 
-              mt={4} 
-              type="submit" 
+            <Button
+              mt={4}
+              type="submit"
               colorScheme="teal"
               isLoading={props.isSubmitting}
             >
@@ -69,7 +78,6 @@ const Login: React.FC<{}> = ({}) => {
       </Formik>
     </Wrapper>
   );
-}
+};
 
-
-export default withUrqlClient(createUrqlClient)(Login);
+export default withApollo({ ssr: false })(Login);

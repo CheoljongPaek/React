@@ -1,35 +1,46 @@
-import { Button } from '@chakra-ui/button';
-import { Box, Flex, Heading, Link, Stack, Text } from '@chakra-ui/layout';
-import { withUrqlClient } from 'next-urql';
-import NextLink from 'next/link';
-import { useState } from 'react';
-import Editdeletepostbtns from '../components/EditDeletePostBtns';
-import Layout from '../components/Layout';
-import Updootsection from '../components/UpdootSection';
-import { useMeQuery, usePostsQuery } from '../generated/graphql';
-import { createUrqlClient } from '../utils/createUrqlClient';
+import { Button } from "@chakra-ui/button";
+import { Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/layout";
+import NextLink from "next/link";
+import Editdeletepostbtns from "../components/EditDeletePostBtns";
+import Layout from "../components/Layout";
+import Updootsection from "../components/UpdootSection";
+import { useMeQuery, usePostsQuery } from "../generated/graphql";
+import { withApollo } from "../utils/withApollo";
 
 const Index = () => {
-  const [variables, setVariables] = useState({ limit: 15, cursor: null as null | string })
-  const [{ data: meData }] = useMeQuery();
-  const [{data, fetching, error}] = usePostsQuery({
-    variables
-  });  
-  
-  if (!fetching && !data) {
-    return <div>you got query failed for some reason</div>
-  }  
+  const { data: meData } = useMeQuery();
+  const { data, error, loading, fetchMore, variables } = usePostsQuery({
+    variables: {
+      limit: 15,
+      cursor: null,
+    },
+    notifyOnNetworkStatusChange: true,
+  });
+
+  if (!loading && !data) {
+    return (
+      <div>
+        <div>you got query failed for some reason</div>
+        <div>{error?.message}</div>
+      </div>
+    );
+  }
 
   return (
     <Layout>
-      {!data && fetching ? ( 
+      {!data && loading ? (
         <div>loading...</div>
-       ) : (
+      ) : (
         <Stack spacing={8}>
-          {data!.posts.posts.map((p) => 
-          !p ? null: (
-              <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
-                <Updootsection post={p} />
+          {data!.posts.posts.map((p) =>
+            !p ? null : (
+              <Flex
+                key={p.id + "container"}
+                p={5}
+                shadow="md"
+                borderWidth="1px"
+              >
+                <Updootsection key={p.id + "updoot"} post={p} />
                 <Box>
                   <NextLink href={`/post/${p.id}`}>
                     <Link>
@@ -46,26 +57,29 @@ const Index = () => {
             )
           )}
         </Stack>
-       )}
-       {data && data.posts.hasMore ? (
+      )}
+      {data && data.posts.hasMore ? (
         <Flex>
-          <Button 
-            m="auto" 
+          <Button
+            m="auto"
             my={8}
-            isLoading={fetching}
+            isLoading={loading}
             onClick={() => {
-              setVariables({
-                limit: variables.limit,
-                cursor: data.posts.posts[data.posts.posts.length - 1].createdAt
-              })
+              fetchMore({
+                variables: {
+                  limit: variables?.limit,
+                  cursor:
+                    data.posts.posts[data.posts.posts.length - 1].createdAt,
+                },
+              });
             }}
           >
             load more
           </Button>
         </Flex>
-       ): null}
+      ) : null}
     </Layout>
-  )
-} 
+  );
+};
 
-export default withUrqlClient(createUrqlClient, { ssr: true })(Index);
+export default withApollo({ ssr: true })(Index);
