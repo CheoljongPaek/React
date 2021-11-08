@@ -38,6 +38,7 @@ export class PostResolver {
     @Ctx() ctx: MyContext
   ) {
     // return User.findOne(post.creatorId)
+    
     return ctx.userLoader.load(post.creatorId)
   }
 

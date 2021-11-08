@@ -56,7 +56,6 @@ export class UserResolver {
 
     const key = FORGET_PASSWORD_PREFIX + token;
     const userId = await ctx.redis.get(key);
-    console.log('userId: ', userId);
     
     if (!userId) {
       return {

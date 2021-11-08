@@ -38,4 +38,4 @@ const Post = ({}) => {
   );
 };
 
-export default withApollo({ ssr: false })(Post);
+export default withApollo({ ssr: true })(Post);

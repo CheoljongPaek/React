@@ -3,21 +3,38 @@ import { User } from '../entities/User';
 
 // [1, 2, 3, 4] to
 // [{id: 1, username: 'Tim'},{},{},{}]
-export const createUserLoader = () => new DataLoader<number, User>(async (userIds) => {
-  const users = await User.findByIds(userIds as number[]);
-  // const userIdToUser: Record<string, User> = {};
-  // users.forEach((user) => {
-  //   userIdToUser[user.id] = user;
-  // })
+// export const createUserLoader = () => new DataLoader<number, User>(async (userIds) => {
+//   const users = await User.findByIds(userIds as number[]);
+//   // const userIdToUser: Record<string, User> = {};
+//   // users.forEach((user) => {
+//   //   userIdToUser[user.id] = user;
+//   // })
 
-  // const sortedUsers = userIds.map((userId) => userIdToUser[userId]);
-  console.log('users: ', users);
-  // console.log('userIds: ', userIds);
-  // console.log('userIdToUser: ', userIdToUser);
-  // console.log('sortedUsers: ', sortedUsers);
-  // return sortedUsers;
-  return users
-});
+//   // const sortedUsers = userIds.map((userId) => userIdToUser[userId]);
+//   // console.log('users: ', users);
+//   // console.log('userIds: ', userIds);
+//   // console.log('userIdToUser: ', userIdToUser);
+//   // console.log('sortedUsers: ', sortedUsers);
+//   // return sortedUsers;
+//   return users
+// });
+
+export const createUserLoader = () =>
+  new DataLoader<number, User>(async (userIds) => {
+    const users = await User.findByIds(userIds as number[]);
+    const userIdToUser: Record<number, User> = {};
+    users.forEach((u) => {
+      userIdToUser[u.id] = u;
+    });
+
+    const sortedUsers = userIds.map((userId) => userIdToUser[userId]);
+    // orders matter, so this process makes [1,6,7] -> [7,6,1]
+    // console.log("userIds", userIds);
+    // console.log("users", users);
+    // console.log("userIdToUser", userIdToUser);
+    // console.log("sortedUsers", sortedUsers);
+    return sortedUsers;
+  });
 
 // users:  [
 //   User {
