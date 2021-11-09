@@ -75,5 +75,4 @@ const Register: React.FC<registerProps> = ({}) => {
   );
 };
 
-export default Register;
-// export default withApollo({ ssr: false })(Register);
+export default withApollo({ ssr: false })(Register);

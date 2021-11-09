@@ -64,5 +64,4 @@ const CreatePost: React.FC<{}> = ({}) => {
   );
 };
 
-export default CreatePost;
-// export default withApollo({ ssr: false })(CreatePost);
+export default withApollo({ ssr: false })(CreatePost);
