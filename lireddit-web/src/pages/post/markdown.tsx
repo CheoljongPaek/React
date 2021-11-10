@@ -1,16 +1,27 @@
-import { ApolloProvider } from "@apollo/client";
 import { Box, Heading } from "@chakra-ui/layout";
-import { GetStaticProps } from "next";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 import React from "react";
 import Layout from "../../components/Layout";
-import Wrapper from "../../components/Wrapper";
-import { withApollo } from "../../utils/withApollo";
+import { PostDocument } from "../../generated/graphql";
+import client from "../../utils/apolloClient";
 
-interface markdownProps {
-  posts?: string;
-}
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { data } = await client.query({
+    query: PostDocument,
+    variables: {
+      id: 340,
+    },
+  });
+  return {
+    props: {
+      posts: data?.post?.title,
+    }, // will be passed to the page component as props
+  };
+};
 
-const Markdown: React.FC<markdownProps> = ({ posts }) => {
+const Markdown = ({
+  posts,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout>
       <Heading>MarkDown</Heading>
@@ -18,14 +29,6 @@ const Markdown: React.FC<markdownProps> = ({ posts }) => {
     </Layout>
   );
 };
-
-export async function getStaticProps() {
-  return {
-    props: {
-      posts: "The Posts",
-    }, // will be passed to the page component as props
-  };
-}
 
 // export default withApollo({ ssr: true })(Markdown);
 export default Markdown;
