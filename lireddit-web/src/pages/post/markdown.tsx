@@ -12,6 +12,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
       id: 340,
     },
   });
+
+  console.log("context: ", context.params);
+
   return {
     props: {
       posts: data?.post?.title,
