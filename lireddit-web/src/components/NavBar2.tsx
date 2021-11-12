@@ -1,6 +1,6 @@
 import React from "react";
 import NextLink from "next/link";
-import { Box, Container, Flex, Heading, HStack } from "@chakra-ui/layout";
+import { Box, Container, Flex, Heading, HStack, Link } from "@chakra-ui/layout";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import Logo from "./Logo";
 import { Stack } from "@chakra-ui/react";
@@ -11,6 +11,33 @@ interface NavBar2Props {
   _target?: any;
 }
 
+interface LinkItemProps extends NavBar2Props {}
+
+const LinkItem: React.FC<LinkItemProps> = ({
+  href,
+  path,
+  _target,
+  children,
+  ...props
+}) => {
+  const active = path === href;
+  const inactiveColor = useColorModeValue("gray200", "whiteAlpha.900");
+
+  return (
+    <NextLink href={href} passHref>
+      <Link
+        p={2}
+        bg={active ? "grassTeal" : undefined}
+        color={active ? "#202023" : inactiveColor}
+        _target={_target}
+        {...props}
+      >
+        {children}
+      </Link>
+    </NextLink>
+  );
+};
+
 const Navbar2: React.FC<NavBar2Props> = ({
   href,
   path,
@@ -20,8 +47,8 @@ const Navbar2: React.FC<NavBar2Props> = ({
 }) => {
   return (
     <Box
-      // position="fixed"
       as="nav"
+      position="fixed"
       w="100%"
       bg={useColorModeValue("#ffffff40", "#20202380")}
       css={{ backdropFilter: "blur(10px)" }}
@@ -36,22 +63,23 @@ const Navbar2: React.FC<NavBar2Props> = ({
         align="center"
         justify="space-between"
       >
-        <Flex>
-          <Heading>
+        <Flex align="center" mr={5}>
+          <Heading as="h1" size="lg" letterSpacing={"tighter"}>
             <Logo />
           </Heading>
         </Flex>
         <HStack>
-          <Box w="40px" h="40px" bg="yellow.200">
+          <LinkItem path={path} href="/works">
             Works
-          </Box>
-          <Box w="40px" h="40px" bg="tomato">
+          </LinkItem>
+          <LinkItem path={path} href="/posts">
             Posts
-          </Box>
-          <Box w="40px" h="40px" bg="pink.100">
-            Source
-          </Box>
+          </LinkItem>
+          <LinkItem path={path} href="https://github.com">
+            GitHub
+          </LinkItem>
         </HStack>
+        <Box>Button</Box>
       </Container>
     </Box>
   );
