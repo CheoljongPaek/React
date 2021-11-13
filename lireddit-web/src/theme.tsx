@@ -17,6 +17,15 @@ const styles = {
   }),
 };
 
+const components = {
+  Link: {
+    baseStyle: (props: GlobalStyleProps) => ({
+      color: mode("#3d7aed", "#ff63c3")(props),
+      textUnderlineOffset: 3,
+    }),
+  },
+};
+
 const fonts = { mono: `'Menlo', monospace`, heading: "'M PLUS Rounded 1c'" };
 
 const breakpoints = createBreakpoints({
@@ -66,6 +75,7 @@ const overrides = {
   },
   styles,
   config,
+  components,
 };
 
 // 3. extend the theme

@@ -1,17 +1,38 @@
 import React from "react";
 import NextLink from "next/link";
-import { Box, Container, Flex, Heading, HStack, Link } from "@chakra-ui/layout";
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  HStack,
+  Link,
+  LinkProps,
+} from "@chakra-ui/layout";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import Logo from "./Logo";
-import { Stack } from "@chakra-ui/react";
+import {
+  Button,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Stack,
+} from "@chakra-ui/react";
+import { Url, UrlObject } from "url";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import ThemeToggleButton from "./theme-toggle-button";
 
 interface NavBar2Props {
-  href?: any;
+  href?: UrlObject | string;
   path: any;
   _target?: any;
 }
 
-interface LinkItemProps extends NavBar2Props {}
+interface LinkItemProps extends Omit<LinkProps, "href">, NavBar2Props {
+  href: UrlObject | string;
+}
 
 const LinkItem: React.FC<LinkItemProps> = ({
   href,
@@ -68,18 +89,64 @@ const Navbar2: React.FC<NavBar2Props> = ({
             <Logo />
           </Heading>
         </Flex>
-        <HStack>
+        <Stack
+          direction={{ base: "column", md: "row" }}
+          display={{ base: "none", md: "flex" }}
+          width={{ base: "full", md: "auto" }}
+          alignItems="center"
+          mt={{ base: 4, md: "auto" }}
+          flexGrow={1}
+          spacing="24px"
+        >
           <LinkItem path={path} href="/works">
             Works
           </LinkItem>
           <LinkItem path={path} href="/posts">
             Posts
           </LinkItem>
-          <LinkItem path={path} href="https://github.com">
-            GitHub
+          <LinkItem
+            _target="_blank"
+            path={path}
+            href="https://github.com"
+            display="inline-flex"
+            alignItems="center"
+            pl={2}
+            style={{ gap: 4 }}
+          >
+            <div>Logo</div>
+            <div>GitHub</div>
           </LinkItem>
-        </HStack>
-        <Box>Button</Box>
+        </Stack>
+        <Box flex={1} align="right">
+          <ThemeToggleButton />
+          <Box ml={2} display={{ base: "inline-block", md: "none" }}>
+            <Menu isLazy id="navbar-menu">
+              <MenuButton
+                as={IconButton}
+                icon={<HamburgerIcon />}
+                variant="outline"
+                aria-label="Options"
+              />
+              <MenuList>
+                <NextLink href="/" passHref>
+                  <MenuItem as={Link}>About</MenuItem>
+                </NextLink>
+                <NextLink href="/works" passHref>
+                  <MenuItem as={Link}>Works</MenuItem>
+                </NextLink>
+                <NextLink href="/posts" passHref>
+                  <MenuItem as={Link}>Posts</MenuItem>
+                </NextLink>
+                <MenuItem
+                  as={Link}
+                  href="https://github.com/craftzdog/craftzdog-homepage"
+                >
+                  GitHub
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </Box>
+        </Box>
       </Container>
     </Box>
   );
