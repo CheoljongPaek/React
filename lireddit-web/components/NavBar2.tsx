@@ -23,6 +23,7 @@ import {
 import { Url, UrlObject } from "url";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import ThemeToggleButton from "./theme-toggle-button";
+import { IoLogoGithub } from "react-icons/io5";
 
 interface NavBar2Props {
   href?: UrlObject | string;
@@ -113,7 +114,7 @@ const Navbar2: React.FC<NavBar2Props> = ({
             pl={2}
             style={{ gap: 4 }}
           >
-            <div>Logo</div>
+            <IoLogoGithub />
             <div>GitHub</div>
           </LinkItem>
         </Stack>

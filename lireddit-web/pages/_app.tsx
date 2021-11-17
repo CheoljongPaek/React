@@ -1,23 +1,19 @@
 import { ApolloProvider } from "@apollo/client";
-import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
-import theme from "../theme";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "../lib/theme";
 import client from "../utils/apolloClient";
 import { AppProps } from "next/app";
 import Layout from "../components/layouts/main";
-import "@fontsource/m-plus-rounded-1c";
+import Fonts from "../components/fonts";
+// import "@fontsource/m-plus-rounded-1c";
 
 function MyWeb({ Component, pageProps, router }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <ChakraProvider resetCSS theme={theme}>
-        <ColorModeProvider
-          options={{
-            useSystemColorMode: false,
-          }}
-        >
-          <Layout router={router} />
-          <Component {...pageProps} />
-        </ColorModeProvider>
+        <Fonts />
+        <Layout router={router} />
+        <Component {...pageProps} />
       </ChakraProvider>
     </ApolloProvider>
   );

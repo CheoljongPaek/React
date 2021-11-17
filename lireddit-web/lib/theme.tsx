@@ -2,6 +2,7 @@ import {
   theme as chakraTheme,
   extendTheme,
   ThemeConfig,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import {
   createBreakpoints,
@@ -11,7 +12,7 @@ import {
 
 const styles = {
   global: (props: GlobalStyleProps) => ({
-    body: {
+    "html, body": {
       bg: mode("#f0e7db", "#202023")(props),
     },
   }),
@@ -72,6 +73,7 @@ const overrides = {
       800: "#243B53",
       900: "#102A43",
     },
+    grassTeal: "#88ccca",
   },
   styles,
   config,

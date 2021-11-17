@@ -25,6 +25,7 @@ const LogoBox = styled.span`
 
 const Logo: React.FC<LogoProps> = ({}) => {
   const footPrintImg = `/images/footprint${useColorModeValue("", "-dark")}.png`;
+  // const footPrintImg = `/images/takuya.jpg`;
   return (
     <NextLink href="/">
       <Link>
