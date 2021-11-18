@@ -11,6 +11,8 @@ const StyledDiv = chakra(motion.div, {
   },
 });
 
+console.log(StyledDiv);
+
 // const Section: React.FC<sectionProps> = ({ children, delay = 0 }) => {
 const Section = ({ children, delay = 0 }) => {
   return (
@@ -18,8 +20,8 @@ const Section = ({ children, delay = 0 }) => {
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       mb={6}
-      // transition={{ duration: 0.8, delay }}
-      transition={{ delay }}
+      transition={{ duration: 0.8, delay }}
+      // transition={{ delay }}
     >
       {children}
     </StyledDiv>
