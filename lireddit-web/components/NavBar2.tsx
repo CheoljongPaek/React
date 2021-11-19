@@ -22,7 +22,7 @@ import {
 } from "@chakra-ui/react";
 import { Url, UrlObject } from "url";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import ThemeToggleButton from "./theme-toggle-button";
+import ThemeToggleButton from "./ThemeToggleBtn";
 import { IoLogoGithub } from "react-icons/io5";
 
 interface NavBar2Props {

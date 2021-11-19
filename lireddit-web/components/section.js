@@ -11,7 +11,7 @@ const StyledDiv = chakra(motion.div, {
   },
 });
 
-console.log(StyledDiv);
+// console.log(StyledDiv);
 
 // const Section: React.FC<sectionProps> = ({ children, delay = 0 }) => {
 const Section = ({ children, delay = 0 }) => {

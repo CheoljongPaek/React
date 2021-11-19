@@ -15,6 +15,10 @@ const styles = {
     "html, body": {
       bg: mode("#f0e7db", "#202023")(props),
     },
+    ".grid-item-thumbnail": {
+      // "border-radius": "12px",
+      borderRadius: "12px",
+    },
   }),
 };
 
@@ -24,6 +28,19 @@ const components = {
       color: mode("#3d7aed", "#ff63c3")(props),
       textUnderlineOffset: 3,
     }),
+  },
+  Heading: {
+    variants: {
+      "section-title": {
+        textDecoration: "underline",
+        fontSize: 20,
+        textUnderlineOffset: 6,
+        textDecorationColor: "#525252",
+        textDecorationThickness: 4,
+        marginTop: 3,
+        marginBottom: 4,
+      },
+    },
   },
 };
 

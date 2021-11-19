@@ -27,7 +27,7 @@ const Logo: React.FC<LogoProps> = ({}) => {
   const footPrintImg = `/images/footprint${useColorModeValue("", "-dark")}.png`;
   // const footPrintImg = `/images/takuya.jpg`;
   return (
-    <NextLink href="/">
+    <NextLink href="/newMain">
       <Link>
         <LogoBox>
           <Image src={footPrintImg} width={20} height={20} alt="logo" />
